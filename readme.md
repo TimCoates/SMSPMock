@@ -22,9 +22,11 @@ Motivation was simply an interest in Lambdas and the Serverless Framework, and a
 
 ## Installation and use
 
-Nothing is required to install, simply clone the repo.
-
-You ***MIGHT*** need to run npm install in order to install the necessary node modules.
+Nothing is really required in order to install, simply:
+* Clone the repo `git clone git@github.com:TimCoates/SMSPMock.git`.
+* Run `npm install` in order to install the necessary node modules.
+* Read the ***Dependencies*** section below!!!
+* Deploy...
 
 Deploy as a 'normal' Serverless Framework service, i.e. run `sls deploy` from the project root, and wait a minute or so for the deployment to complete, and list the provided ***endpoints***.
 
@@ -45,7 +47,7 @@ Click ***View logs>>*** to see a record of each request and response which was p
 Running `sls remove` will delete all data from DynamoDB and remove all Lambdas etc, leaving no trace of the service.
 
 ## Dependencies
-Requires an AWS account, and the Account ID to be in a file named ***account.yml*** placed in the project root.
+NB: Requires an AWS account, and the Account ID to be in a file named ***account.yml*** placed in the project root.
 
 Requires an AWS AIM Role named ***LambdaRole*** (though this can be changed at line 12 in serverless.yml)
 
