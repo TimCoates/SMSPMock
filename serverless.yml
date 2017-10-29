@@ -1,0 +1,194 @@
+service: SMSPMock
+
+custom:
+  accountID: ${file(./account.yml):accountID}
+  regionName: ${self:provider.region}
+  stageName: ${self:provider.stage}
+
+provider:
+  name: aws
+  stage: prod
+  runtime: nodejs6.10
+  role: arn:aws:iam::${self:custom.accountID}:role/service-role/LambdaRole
+  region: eu-west-2 # London
+  stackTags:
+    STACK: "${self:service}"
+    REGION: "${self:custom.regionName}"
+  environment:
+    accountID: ${self:custom.accountID}
+    regionName: ${self:provider.region}
+    stageName: ${self:provider.stage}
+
+functions:
+  Homepage:
+    handler: Homepage.entrypoint
+    description: Generates a default Homepage
+    memorySize: 128
+    timeout: 2
+    events:
+      - http:
+          method: get
+          path: /Homepage
+          integration: lambda-proxy
+
+  LoadData:
+    handler: LoadData.entrypoint
+    description: Loads data into DynamoDB to play (test) with
+    memorySize: 512
+    timeout: 30
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: get
+          path: /LoadData
+          integration: lambda-proxy
+
+  Patient:
+    handler: Patient.entrypoint
+    description: Shows a list of all loaded patients
+    memorySize: 128
+    timeout: 2
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: get
+          path: /Patient
+          integration: lambda-proxy
+
+  Logs:
+    handler: Logs.entrypoint
+    description: Shows the message logs
+    memorySize: 128
+    timeout: 2
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: get
+          path: /Logs
+          integration: lambda-proxy
+
+  logdata:
+    handler: logdata.entrypoint
+    description: Returns items from ${self:provider.stage}-pds-messages table, and details of one log entry
+    memorySize: 128
+    timeout: 5
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: get
+          path: /logdata
+          integration: lambda-proxy
+
+  pdsdata:
+    handler: pdsdata.entrypoint
+    description: Returns items from ${self:provider.stage}-pds-data table, and details of one using the URL pattern /pdsdata/1234554321
+    memorySize: 128
+    timeout: 5
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: get
+          path: /pdsdata
+          integration: lambda-proxy
+
+  Service:
+    handler: service.entrypoint
+    description: Code that implements a mock SMSP service
+    memorySize: 128
+    timeout: 4
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: post
+          path: service
+          integration: lambda-proxy
+
+resources:
+  Resources:
+    PdsdataLogGroup:  # Log group for the pdsdata function
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+    LogdataLogGroup: # Log group for the logdata function
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+    ServiceLogGroup: # Log group for the service function
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "3"
+
+    PatientLogGroup: # Log group for the Patient function
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+    LoadDataLogGroup: # Log group for the LoadData function
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+    HomepageLogGroup: # Log group for the Homepage function
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+    LogsLogGroup: # Log group for the Logs function
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+    AwakenQ:  # SNS Topic, where we send wakey wakey messages to other lambdas when homepage is run.
+      Type: AWS::SNS::Topic
+      Properties:
+        DisplayName: "Messages to wake other lambdas"
+        TopicName: ${self:provider.stage}-awaken
+
+    MessageTable:  # DynamoDB table in which we'll log requests and responses...
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.stage}-pds-messages
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TimeToLiveSpecification: 
+          AttributeName: expires
+          Enabled: true
+
+    PDSTable:  # DynamoDB table in which we'll log requests and responses...
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.stage}-pds-data
+        AttributeDefinitions:
+          - AttributeName: nhs_number
+            AttributeType: S
+          - AttributeName: family_name
+            AttributeType: S
+          - AttributeName: dob
+            AttributeType: S
+        KeySchema:
+          - AttributeName: nhs_number
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+        GlobalSecondaryIndexes:
+          - IndexName: name
+            KeySchema: 
+            - AttributeName: family_name
+              KeyType: HASH
+            - AttributeName: dob
+              KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput: 
+              ReadCapacityUnits: 10
+              WriteCapacityUnits: 10

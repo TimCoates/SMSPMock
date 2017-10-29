@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--*****************************************************************************************************************
+* 
+* 	Copyright (c) 2010 NHS Connecting For Health. All rights reserved.
+*   
+*  	Redistribution and use in source and binary forms, with or without
+*  	modification, are permitted provided that the following conditions
+*  	are met:
+*  		1. Redistributions of source code must retain the above copyright
+*     		notice, this list of conditions and the following disclaimer.
+*  		2. Redistributions in binary form must reproduce the above copyright
+*     		notice, this list of conditions and the following disclaimer in the
+*     		documentation and/or other materials provided with the distribution.
+*  		3. All advertising materials mentioning features or use of this software
+*     		must display the following acknowledgement:
+*       This product includes software developed by Health Level Seven.
+*  	THIS SOFTWARE IS PROVIDED BY NHS Connecting For Health. AND CONTRIBUTORS "AS IS" AND
+*  	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+*  	IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+*  	ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+*  	FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+*  	DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+*  	OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+*  	HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+*  	LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+*  	OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+*  	SUCH DAMAGE.
+*
+* CHANGE HISTORY:
+*
+* VERSION   DATE            AUTHOR                                 DESCRIPTION
+* =======   ========== ======================    ===========================================================
+* 1.0            25-03-2001   Interoperability Team               Created this WSDL
+* 1.0.1			07-04-2011	D Murphy, NIC							Fixed soapAction attribute values to correct namespace
+*
+********************************************************************************************************************
+-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:itk="urn:nhs-itk:ns:201005" xmlns:hl7v3="urn:hl7-org:v3" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns="xhtml:NPfIT:PresentationText" name="test" targetNamespace="urn:nhs-itk:ns:201005">
+	<wsdl:types>
+		<xsd:schema targetNamespace="urn:nhs-itk:ns:201005" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:include schemaLocation="../ITKMessageTypes-2010-05.xsd"/>
+			<xsd:include schemaLocation="../distributionEnvelope-v2-0.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="verifyNHSNumberRequest-v1-0">
+		<wsdl:part name="verifyNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+	</wsdl:message>
+		<wsdl:message name="verifyNHSNumberResponse-v1-0">
+		<wsdl:part name="verifyNHSNumberResponse-v1-0" element="itk:DistributionEnvelope"/>
+	</wsdl:message>
+	<wsdl:message name="getNHSNumberRequest-v1-0">
+		<wsdl:part name="getNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+	</wsdl:message>
+	<wsdl:message name="getNHSNumberResponse-v1-0">
+		<wsdl:part name="getNHSNumberResponse-v1-0" element="itk:DistributionEnvelope"/>
+	</wsdl:message>
+	<wsdl:message name="getPatientDetailsByNHSNumberRequest-v1-0">
+		<wsdl:part name="getPatientDetailsByNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+	</wsdl:message>
+	<wsdl:message name="getPatientDetailsResponse-v1-0">
+		<wsdl:part name="getPatientDetailsResponse-v1-0" element="itk:DistributionEnvelope"/>
+	</wsdl:message>
+	<wsdl:message name="getPatientDetailsBySearchRequest-v1-0">
+		<wsdl:part name="getPatientDetailsBySearchRequest-v1-0" element="itk:DistributionEnvelope"/>
+	</wsdl:message>
+	<wsdl:message name="getPatientDetailsRequest-v1-0">
+		<wsdl:part name="getPatientDetailsRequest-v1-0" element="itk:DistributionEnvelope"/>
+	</wsdl:message>
+	<wsdl:message name="faultResponse">
+		<wsdl:part name="faultResponse" element="itk:ToolkitErrorInfo"/>
+	</wsdl:message>
+	<wsdl:portType name="verifyNHSNumber-v1-0_ptt">
+		<wsdl:operation name="verifyNHSNumber-v1-0">
+			<wsdl:input message="itk:verifyNHSNumberRequest-v1-0"/>
+			<wsdl:output message="itk:verifyNHSNumberResponse-v1-0"/>
+			<wsdl:fault name="standardFault" message="itk:faultResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:portType name="getNHSNumber-v1-0_ptt">
+		<wsdl:operation name="getNHSNumber-v1-0">
+			<wsdl:input message="itk:getNHSNumberRequest-v1-0"/>
+			<wsdl:output message="itk:getNHSNumberResponse-v1-0"/>
+			<wsdl:fault name="standardFault" message="itk:faultResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:portType name="getPatientDetailsByNHSNumber-v1-0_ptt">
+		<wsdl:operation name="getPatientDetailsByNHSNumber-v1-0">
+			<wsdl:input message="itk:getPatientDetailsByNHSNumberRequest-v1-0"/>
+			<wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+			<wsdl:fault name="standardFault" message="itk:faultResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:portType name="getPatientDetailsBySearch-v1-0_ptt">
+		<wsdl:operation name="getPatientDetailsBySearch-v1-0">
+			<wsdl:input message="itk:getPatientDetailsBySearchRequest-v1-0"/>
+			<wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+			<wsdl:fault name="standardFault" message="itk:faultResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:portType name="getPatientDetails-v1-0_ptt">
+		<wsdl:operation name="getPatientDetails-v1-0">
+			<wsdl:input message="itk:getPatientDetailsRequest-v1-0"/>
+			<wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+			<wsdl:fault name="standardFault" message="itk:faultResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="verifyNHSNumber-v1-0_pttBinding" type="itk:verifyNHSNumber-v1-0_ptt">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="verifyNHSNumber-v1-0">
+			<soap:operation soapAction="urn:nhs-itk:services:201005:verifyNHSNumber-v1-0" style="document"/>
+			<wsdl:input>
+				<soap:body parts="verifyNHSNumberRequest-v1-0" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="verifyNHSNumberResponse-v1-0" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="standardFault"/>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="getNHSNumber-v1-0_pttBinding" type="itk:getNHSNumber-v1-0_ptt">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getNHSNumber-v1-0">
+			<soap:operation soapAction="urn:nhs-itk:services:201005:getNHSNumber-v1-0" style="document"/>
+			<wsdl:input>
+				<soap:body parts="getNHSNumberRequest-v1-0" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="getNHSNumberResponse-v1-0" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="standardFault"/>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="getPatientDetailsByNHSNumber-v1-0_pttBinding" type="itk:getPatientDetailsByNHSNumber-v1-0_ptt">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getPatientDetailsByNHSNumber-v1-0">
+			<soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0" style="document"/>
+			<wsdl:input>
+				<soap:body parts="getPatientDetailsByNHSNumberRequest-v1-0" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="standardFault"/>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="getPatientDetailsBySearch-v1-0_pttBinding" type="itk:getPatientDetailsBySearch-v1-0_ptt">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getPatientDetailsBySearch-v1-0">
+			<soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0" style="document"/>
+			<wsdl:input>
+				<soap:body parts="getPatientDetailsBySearchRequest-v1-0" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="standardFault"/>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="getPatientDetails-v1-0_pttBinding" type="itk:getPatientDetails-v1-0_ptt">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getPatientDetails-v1-0">
+			<soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetails-v1-0" style="document"/>
+			<wsdl:input>
+				<soap:body parts="getPatientDetailsRequest-v1-0" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="standardFault"/>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="verifyNHSNumber-v1-0">
+		<wsdl:port name="verifyNHSNumber-v1-0_pttPort" binding="itk:verifyNHSNumber-v1-0_pttBinding">
+			<soap:address location="http://server:80/interoperability.toolkit/HL7v3/verifyNHSNumber-v1-0"/>
+		</wsdl:port>
+	</wsdl:service>
+	<wsdl:service name="getNHSNumber-v1-0">
+		<wsdl:port name="getNHSNumber-v1-0_pttPort" binding="itk:getNHSNumber-v1-0_pttBinding">
+			<soap:address location="http://server:80/interoperability.toolkit/HL7v3/getNHSNumber-v1-0"/>
+		</wsdl:port>
+	</wsdl:service>
+	<wsdl:service name="getPatientDetailsByNHSNumber-v1-0">
+		<wsdl:port name="getPatientDetailsByNHSNumber-v1-0_pttPort" binding="itk:getPatientDetailsByNHSNumber-v1-0_pttBinding">
+			<soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsByNHSNumber-v1-0"/>
+		</wsdl:port>
+	</wsdl:service>
+	<wsdl:service name="getPatientDetailsBySearch-v1-0">
+		<wsdl:port name="getPatientDetailsBySearch-v1-0_pttPort" binding="itk:getPatientDetailsBySearch-v1-0_pttBinding">
+			<soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsBySearch-v1-0"/>
+		</wsdl:port>
+	</wsdl:service>
+	<wsdl:service name="getPatientDetails-v1-0">
+		<wsdl:port name="getPatientDetails-v1-0_pttPort" binding="itk:getPatientDetails-v1-0_pttBinding">
+			<soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetails-v1-0"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

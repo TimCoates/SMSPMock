@@ -1,0 +1,18 @@
+{
+  "name": "ndop",
+  "version": "1.0.0",
+  "description": "Lambda functions to run a fake synchronous ndop service.",
+  "main": "start.js",
+  "dependencies": {
+    "async": "^2.5.0",
+    "mustache": "^2.3.0",
+    "uuid": "^3.1.0",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim.Coates@gmail.com",
+  "license": "ISC"
+}

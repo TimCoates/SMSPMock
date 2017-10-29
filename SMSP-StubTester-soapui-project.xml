@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="0949f287-026a-424b-b05d-2dd337fa258d" activeEnvironment="Default" name="SMSP-StubTester" resourceRoot="${projectDir}" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="getPatientDetails-v1-0_pttBinding TestSuite"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Export JUnit Results with test properties" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="&lt;all>"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value="https://eid2pttkh0.execute-api.eu-west-2.amazonaws.com/prod/service"/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" id="98f08268-b1aa-4a28-ad58-0f74c3d25d96" wsaVersion="NONE" name="getPatientDetails-v1-0_pttBinding" type="wsdl" bindingName="{urn:nhs-itk:ns:201005}getPatientDetails-v1-0_pttBinding" soapVersion="1_1" anonymous="optional" definition="Requirements Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl"><con:part><con:url>file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl</con:url><con:content><![CDATA[<!--*****************************************************************************************************************
+* 
+* 	Copyright (c) 2010 NHS Connecting For Health. All rights reserved.
+*   
+*  	Redistribution and use in source and binary forms, with or without
+*  	modification, are permitted provided that the following conditions
+*  	are met:
+*  		1. Redistributions of source code must retain the above copyright
+*     		notice, this list of conditions and the following disclaimer.
+*  		2. Redistributions in binary form must reproduce the above copyright
+*     		notice, this list of conditions and the following disclaimer in the
+*     		documentation and/or other materials provided with the distribution.
+*  		3. All advertising materials mentioning features or use of this software
+*     		must display the following acknowledgement:
+*       This product includes software developed by Health Level Seven.
+*  	THIS SOFTWARE IS PROVIDED BY NHS Connecting For Health. AND CONTRIBUTORS "AS IS" AND
+*  	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+*  	IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+*  	ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+*  	FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+*  	DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+*  	OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+*  	HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+*  	LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+*  	OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+*  	SUCH DAMAGE.
+*
+* CHANGE HISTORY:
+*
+* VERSION   DATE            AUTHOR                                 DESCRIPTION
+* =======   ========== ======================    ===========================================================
+* 1.0            25-03-2001   Interoperability Team               Created this WSDL
+* 1.0.1			07-04-2011	D Murphy, NIC							Fixed soapAction attribute values to correct namespace
+*
+********************************************************************************************************************-->
+<wsdl:definitions name="test" targetNamespace="urn:nhs-itk:ns:201005" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:itk="urn:nhs-itk:ns:201005" xmlns:hl7v3="urn:hl7-org:v3" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns="xhtml:NPfIT:PresentationText">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:nhs-itk:ns:201005" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:include schemaLocation="../ITKMessageTypes-2010-05.xsd"/>
+      <xsd:include schemaLocation="../distributionEnvelope-v2-0.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="verifyNHSNumberRequest-v1-0">
+    <wsdl:part name="verifyNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="verifyNHSNumberResponse-v1-0">
+    <wsdl:part name="verifyNHSNumberResponse-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getNHSNumberRequest-v1-0">
+    <wsdl:part name="getNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getNHSNumberResponse-v1-0">
+    <wsdl:part name="getNHSNumberResponse-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientDetailsByNHSNumberRequest-v1-0">
+    <wsdl:part name="getPatientDetailsByNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientDetailsResponse-v1-0">
+    <wsdl:part name="getPatientDetailsResponse-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientDetailsBySearchRequest-v1-0">
+    <wsdl:part name="getPatientDetailsBySearchRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientDetailsRequest-v1-0">
+    <wsdl:part name="getPatientDetailsRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="faultResponse">
+    <wsdl:part name="faultResponse" element="itk:ToolkitErrorInfo"/>
+  </wsdl:message>
+  <wsdl:portType name="verifyNHSNumber-v1-0_ptt">
+    <wsdl:operation name="verifyNHSNumber-v1-0">
+      <wsdl:input message="itk:verifyNHSNumberRequest-v1-0"/>
+      <wsdl:output message="itk:verifyNHSNumberResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getNHSNumber-v1-0_ptt">
+    <wsdl:operation name="getNHSNumber-v1-0">
+      <wsdl:input message="itk:getNHSNumberRequest-v1-0"/>
+      <wsdl:output message="itk:getNHSNumberResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getPatientDetailsByNHSNumber-v1-0_ptt">
+    <wsdl:operation name="getPatientDetailsByNHSNumber-v1-0">
+      <wsdl:input message="itk:getPatientDetailsByNHSNumberRequest-v1-0"/>
+      <wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getPatientDetailsBySearch-v1-0_ptt">
+    <wsdl:operation name="getPatientDetailsBySearch-v1-0">
+      <wsdl:input message="itk:getPatientDetailsBySearchRequest-v1-0"/>
+      <wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getPatientDetails-v1-0_ptt">
+    <wsdl:operation name="getPatientDetails-v1-0">
+      <wsdl:input message="itk:getPatientDetailsRequest-v1-0"/>
+      <wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="verifyNHSNumber-v1-0_pttBinding" type="itk:verifyNHSNumber-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="verifyNHSNumber-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:verifyNHSNumber-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="verifyNHSNumberRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="verifyNHSNumberResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getNHSNumber-v1-0_pttBinding" type="itk:getNHSNumber-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getNHSNumber-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:getNHSNumber-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="getNHSNumberRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="getNHSNumberResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getPatientDetailsByNHSNumber-v1-0_pttBinding" type="itk:getPatientDetailsByNHSNumber-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getPatientDetailsByNHSNumber-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="getPatientDetailsByNHSNumberRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getPatientDetailsBySearch-v1-0_pttBinding" type="itk:getPatientDetailsBySearch-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getPatientDetailsBySearch-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="getPatientDetailsBySearchRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getPatientDetails-v1-0_pttBinding" type="itk:getPatientDetails-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getPatientDetails-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetails-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="getPatientDetailsRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="verifyNHSNumber-v1-0">
+    <wsdl:port name="verifyNHSNumber-v1-0_pttPort" binding="itk:verifyNHSNumber-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/verifyNHSNumber-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="getNHSNumber-v1-0">
+    <wsdl:port name="getNHSNumber-v1-0_pttPort" binding="itk:getNHSNumber-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/getNHSNumber-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="getPatientDetailsByNHSNumber-v1-0">
+    <wsdl:port name="getPatientDetailsByNHSNumber-v1-0_pttPort" binding="itk:getPatientDetailsByNHSNumber-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsByNHSNumber-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="getPatientDetailsBySearch-v1-0">
+    <wsdl:port name="getPatientDetailsBySearch-v1-0_pttPort" binding="itk:getPatientDetailsBySearch-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsBySearch-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="getPatientDetails-v1-0">
+    <wsdl:port name="getPatientDetails-v1-0_pttPort" binding="itk:getPatientDetails-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetails-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/ITKMessageTypes-2010-05.xsd</con:url><con:content><![CDATA[<!--*****************************************************************************************************************
+*   	Description: Schema containing common ITK message types to be used in ITK WSDL
+* 
+* 	Copyright (c) 2010 NHS Conneccting For Health. All rights reserved.
+*   
+*  	Redistribution and use in source and binary forms, with or without
+*  	modification, are permitted provided that the following conditions
+*  	are met:
+*  		1. Redistributions of source code must retain the above copyright
+*     		notice, this list of conditions and the following disclaimer.
+*  		2. Redistributions in binary form must reproduce the above copyright
+*     		notice, this list of conditions and the following disclaimer in the
+*     		documentation and/or other materials provided with the distribution.
+*  		3. All advertising materials mentioning features or use of this software
+*     		must display the following acknowledgement:
+*       This product includes software developed by Health Level Seven.
+*  	THIS SOFTWARE IS PROVIDED BY NHS Conneccting For Health. AND CONTRIBUTORS "AS IS" AND
+*  	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+*  	IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+*  	ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+*  	FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+*  	DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+*  	OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+*  	HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+*  	LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+*  	OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+*  	SUCH DAMAGE.
+*
+* CHANGE HISTORY:
+*
+* VERSION   DATE       AUTHOR                   LABEL   DESCRIPTION
+* =======   ========== ======================   ======  ===========================================================
+* 1.0       31-03-2010 Cord Oestmann                    Created this XSD
+*
+********************************************************************************************************************-->
+<xsd:schema targetNamespace="urn:nhs-itk:ns:201005" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:itk="urn:nhs-itk:ns:201005" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="ITKDatatypes-2010-05.xsd"/>
+  <xsd:element name="ToolkitErrorInfo" type="itk:ToolkitErrorInfoStruct"/>
+  <xsd:element name="HL7Content" type="xsd:string"/>
+  <xsd:element name="VersionID" type="xsd:string">
+    <!--It is a requirement that the HL7v2 |^ string is base 64 encoded to ensure that XML reserved 
+             characters do not invalidate the structure of the payload.-->
+  </xsd:element>
+  <xsd:element name="SimpleMessageResponse" type="xsd:string"/>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/ITKDatatypes-2010-05.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:nhs-itk:ns:201005" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:itk="urn:nhs-itk:ns:201005" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="ToolkitErrorInfoStruct">
+    <xsd:sequence>
+      <xsd:element name="ErrorID" type="xsd:anyURI"/>
+      <xsd:element name="ErrorCode">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="codeSystem" type="xsd:string" default="2.16.840.1.113883.2.1.3.2.4.17.268"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ErrorText" type="xsd:string"/>
+      <xsd:element name="ErrorDiagnosticText" type="xsd:string" minOccurs="0"/>
+      <xsd:any namespace="##local" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="NHSNumberType">
+    <xsd:restriction base="xsd:string">
+      <xsd:length value="10" fixed="true"/>
+      <xsd:pattern value="[0-9]{10}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="DCRConsentFlagType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Explicit Consent"/>
+      <xsd:enumeration value="Explicit Dissent"/>
+      <xsd:enumeration value="Not Specified"/>
+      <xsd:enumeration value=""/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/distributionEnvelope-v2-0.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="urn:nhs-itk:ns:201005" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:itk="urn:nhs-itk:ns:201005">
+  <!--ITK Distribution Envelope v2.0
+		Damian Murphy (damian.murphy@nhs.net), CfH National Integration Centre
+		16 March 2011-->
+  <xs:element name="DistributionEnvelope" type="itk:distributionEnvelopeType"/>
+  <xs:complexType name="distributionEnvelopeType">
+    <xs:sequence>
+      <xs:element name="header" type="itk:distributionHeaderType"/>
+      <xs:element name="payloads" type="itk:payloadsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="distributionHeaderType">
+    <xs:sequence>
+      <xs:element name="addresslist" type="itk:addressListType" minOccurs="0"/>
+      <xs:element name="auditIdentity" type="itk:auditIdentityType" minOccurs="0"/>
+      <xs:element name="manifest" type="itk:manifestType"/>
+      <xs:element name="senderAddress" type="itk:addressType" minOccurs="0"/>
+      <xs:element name="handlingSpecification" type="itk:handlingType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="trackingid" type="itk:uuid" use="required"/>
+    <xs:attribute name="service" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="handlingType">
+    <xs:sequence>
+      <xs:element name="spec" type="itk:handlingSpecType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="handlingSpecType">
+    <xs:attribute name="key" type="xs:anyURI" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:simpleType name="uuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="addressListType">
+    <xs:sequence>
+      <xs:element name="address" type="itk:addressType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addressType">
+    <xs:attribute name="type" type="xs:string" use="optional" default="2.16.840.1.113883.2.1.3.2.4.18.22"/>
+    <xs:attribute name="uri" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="identityType">
+    <xs:attribute name="type" type="xs:string" use="optional" default="2.16.840.1.113883.2.1.3.2.4.18.27"/>
+    <xs:attribute name="uri" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="manifestType">
+    <xs:sequence>
+      <xs:element name="manifestitem" type="itk:manifestItemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="count" type="xs:integer" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="auditIdentityType">
+    <xs:sequence>
+      <xs:element name="id" type="itk:identityType" maxOccurs="4"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="manifestItemType">
+    <xs:attribute name="id" type="xs:IDREF" use="required"/>
+    <xs:attribute name="mimetype" type="xs:string" use="required"/>
+    <xs:attribute name="profileid" type="xs:anyURI" use="optional"/>
+    <xs:attribute name="metadata" type="xs:boolean" use="optional" default="false"/>
+    <xs:attribute name="compressed" type="xs:boolean" use="optional" default="false"/>
+    <xs:attribute name="base64" type="xs:boolean" use="optional" default="false"/>
+    <xs:attribute name="encrypted" type="xs:boolean" use="optional" default="false"/>
+    <xs:anyAttribute namespace="##targetNamespace"/>
+  </xs:complexType>
+  <xs:complexType name="payloadsType">
+    <xs:sequence>
+      <xs:element name="payload" type="itk:payloadType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="count" type="xs:integer" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="payloadType" mixed="true">
+    <xs:sequence>
+      <xs:any namespace="##any" processContents="lax" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="filename" type="xs:string" use="optional"/>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getPatientDetails-v1-0</con:endpoint></con:endpoints><con:operation id="3ec57ca9-1f71-419e-a51b-49a2da353994" isOneWay="false" action="urn:nhs-itk:services:201005:getPatientDetails-v1-0" name="getPatientDetails-v1-0" bindingOperationName="getPatientDetails-v1-0" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2969d883-04c3-4326-99e9-486a818b33b1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getPatientDetails-v1-0</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:nhs-itk:ns:201005">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DistributionEnvelope>
+         <urn:header trackingid="?" service="?">
+            <!--Optional:-->
+            <urn:addresslist>
+               <!--1 or more repetitions:-->
+               <urn:address type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            </urn:addresslist>
+            <!--Optional:-->
+            <urn:auditIdentity>
+               <!--1 to 4 repetitions:-->
+               <urn:id type="2.16.840.1.113883.2.1.3.2.4.18.27" uri="?"/>
+            </urn:auditIdentity>
+            <urn:manifest count="?">
+               <!--1 or more repetitions:-->
+               <urn:manifestitem id="?" mimetype="?" profileid="?" metadata="false" compressed="false" base64="false" encrypted="false"/>
+            </urn:manifest>
+            <!--Optional:-->
+            <urn:senderAddress type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            <!--Optional:-->
+            <urn:handlingSpecification>
+               <!--1 or more repetitions:-->
+               <urn:spec key="?" value="?"/>
+            </urn:handlingSpecification>
+         </urn:header>
+         <urn:payloads count="?">
+            <!--1 or more repetitions:-->
+            <urn:payload id="?" filename="?">
+               e
+               <!--You may enter ANY elements at this point-->
+               gero
+            </urn:payload>
+         </urn:payloads>
+      </urn:DistributionEnvelope>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:nhs-itk:services:201005:getPatientDetails-v1-0"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="dd3ba5dc-7f7d-4f28-9c88-1aa91adda5e6" wsaVersion="NONE" name="getPatientDetailsBySearch-v1-0_pttBinding" type="wsdl" bindingName="{urn:nhs-itk:ns:201005}getPatientDetailsBySearch-v1-0_pttBinding" soapVersion="1_1" anonymous="optional" definition="Requirements Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsBySearch-v1-0</con:endpoint></con:endpoints><con:operation id="20d6b47a-38ba-443e-855e-5f33c9d046b7" isOneWay="false" action="urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0" name="getPatientDetailsBySearch-v1-0" bindingOperationName="getPatientDetailsBySearch-v1-0" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0755d594-da47-41ce-b325-f1830b0dbfd7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsBySearch-v1-0</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:itk="urn:nhs-itk:ns:201005">
+  <soap:Header>
+    <wsa:MessageID>{{v4uuid}}</wsa:MessageID>
+    <wsa:Action>urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0</wsa:Action>
+    <wsa:To>https://192.168.54.6/smsp/pds</wsa:To>
+    <wsa:From>
+      <wsa:Address>192.168.54.7</wsa:Address>
+    </wsa:From>
+    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+      <wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="D6CD5232-14CF-11DF-9423-1F9A910D4703">
+        <wsu:Created>2016-07-27T11:10:23Z</wsu:Created>
+        <wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>
+      </wsu:Timestamp>
+      <wsse:UsernameToken>
+        <wsse:Username>TKS Server test</wsse:Username>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <itk:DistributionEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <itk:header service="urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0" trackingid="B72F9E96-534C-11E6-ADCA-29C651A3BE6F">
+        <itk:auditIdentity>
+          <itk:id type="1.2.826.0.1285.0.2.0.107" uri="868000003114"/>
+        </itk:auditIdentity>
+        <itk:manifest count="1">
+          <itk:manifestitem id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7" mimetype="text/xml" profileid="urn:nhs-en:profile:getPatientDetailsBySearch-v1-0" base64="false" compressed="false" encrypted="false"/>
+        </itk:manifest>
+        <itk:senderAddress uri="urn:nhs-uk:addressing:ods:rhm:team1:C"/>
+      </itk:header>
+      <itk:payloads count="1">
+        <itk:payload id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7">
+                <getPatientDetailsBySearch-v1-0 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" moodCode="EVN" classCode="CACT">
+                    <id root="{{ guidManifestItem }}"/>
+                    <code codeSystem="2.16.840.1.113883.2.1.3.2.4.17.284" code="getPatientDetailsRequest-v1-0"/>
+                    <queryEvent>
+                        <Person.DateOfBirth>
+                            <value value="20080616"/>
+                            <semanticsText>Person.DateOfBirth</semanticsText>
+                        </Person.DateOfBirth>
+                        <Person.Name>
+                            <value>
+                                <family>HADCROFT</family>
+                            </value>
+                            <semanticsText>Person.Name</semanticsText>
+                        </Person.Name>
+                        <Person.Gender>
+              <value code="2" codeSystem="2.16.840.1.113883.2.1.3.2.4.16.25" />
+              <semanticsText>Person.Gender</semanticsText>
+            </Person.Gender>
+                    </queryEvent>
+                </getPatientDetailsBySearch-v1-0>
+        </itk:payload>
+      </itk:payloads>
+    </itk:DistributionEnvelope>
+  </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="392ddad4-3702-4c9c-8115-8b0adaf9dd3e" wsaVersion="NONE" name="getPatientDetailsByNHSNumber-v1-0_pttBinding" type="wsdl" bindingName="{urn:nhs-itk:ns:201005}getPatientDetailsByNHSNumber-v1-0_pttBinding" soapVersion="1_1" anonymous="optional" definition="Requirements Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsByNHSNumber-v1-0</con:endpoint></con:endpoints><con:operation id="937c5e67-56b3-4ae8-8289-7c1931279b97" isOneWay="false" action="urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0" name="getPatientDetailsByNHSNumber-v1-0" bindingOperationName="getPatientDetailsByNHSNumber-v1-0" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6f777740-29ed-4c78-8608-9a6cb9cdf5bc" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsByNHSNumber-v1-0</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:nhs-itk:ns:201005">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DistributionEnvelope>
+         <urn:header trackingid="?" service="?">
+            <!--Optional:-->
+            <urn:addresslist>
+               <!--1 or more repetitions:-->
+               <urn:address type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            </urn:addresslist>
+            <!--Optional:-->
+            <urn:auditIdentity>
+               <!--1 to 4 repetitions:-->
+               <urn:id type="2.16.840.1.113883.2.1.3.2.4.18.27" uri="?"/>
+            </urn:auditIdentity>
+            <urn:manifest count="?">
+               <!--1 or more repetitions:-->
+               <urn:manifestitem id="?" mimetype="?" profileid="?" metadata="false" compressed="false" base64="false" encrypted="false"/>
+            </urn:manifest>
+            <!--Optional:-->
+            <urn:senderAddress type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            <!--Optional:-->
+            <urn:handlingSpecification>
+               <!--1 or more repetitions:-->
+               <urn:spec key="?" value="?"/>
+            </urn:handlingSpecification>
+         </urn:header>
+         <urn:payloads count="?">
+            <!--1 or more repetitions:-->
+            <urn:payload id="?" filename="?">
+               e
+               <!--You may enter ANY elements at this point-->
+               gero
+            </urn:payload>
+         </urn:payloads>
+      </urn:DistributionEnvelope>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="63c4a286-3064-44c2-a369-d9f71141ecce" wsaVersion="NONE" name="getNHSNumber-v1-0_pttBinding" type="wsdl" bindingName="{urn:nhs-itk:ns:201005}getNHSNumber-v1-0_pttBinding" soapVersion="1_1" anonymous="optional" definition="Requirements Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getNHSNumber-v1-0</con:endpoint></con:endpoints><con:operation id="4718146a-0030-4266-86aa-a526a83c98bc" isOneWay="false" action="urn:nhs-itk:services:201005:getNHSNumber-v1-0" name="getNHSNumber-v1-0" bindingOperationName="getNHSNumber-v1-0" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a5722aef-360a-48a9-b464-0c8da6f90ed6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getNHSNumber-v1-0</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:nhs-itk:ns:201005">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DistributionEnvelope>
+         <urn:header trackingid="?" service="?">
+            <!--Optional:-->
+            <urn:addresslist>
+               <!--1 or more repetitions:-->
+               <urn:address type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            </urn:addresslist>
+            <!--Optional:-->
+            <urn:auditIdentity>
+               <!--1 to 4 repetitions:-->
+               <urn:id type="2.16.840.1.113883.2.1.3.2.4.18.27" uri="?"/>
+            </urn:auditIdentity>
+            <urn:manifest count="?">
+               <!--1 or more repetitions:-->
+               <urn:manifestitem id="?" mimetype="?" profileid="?" metadata="false" compressed="false" base64="false" encrypted="false"/>
+            </urn:manifest>
+            <!--Optional:-->
+            <urn:senderAddress type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            <!--Optional:-->
+            <urn:handlingSpecification>
+               <!--1 or more repetitions:-->
+               <urn:spec key="?" value="?"/>
+            </urn:handlingSpecification>
+         </urn:header>
+         <urn:payloads count="?">
+            <!--1 or more repetitions:-->
+            <urn:payload id="?" filename="?">
+               e
+               <!--You may enter ANY elements at this point-->
+               gero
+            </urn:payload>
+         </urn:payloads>
+      </urn:DistributionEnvelope>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:nhs-itk:services:201005:getNHSNumber-v1-0"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="7d9afcd4-1c54-498c-9384-1caa288cf55b" wsaVersion="NONE" name="verifyNHSNumber-v1-0_pttBinding" type="wsdl" bindingName="{urn:nhs-itk:ns:201005}verifyNHSNumber-v1-0_pttBinding" soapVersion="1_1" anonymous="optional" definition="Requirements Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl"><con:part><con:url>file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/wsdl/PDSMiniServices-v1-0.wsdl</con:url><con:content><![CDATA[<!--*****************************************************************************************************************
+* 
+* 	Copyright (c) 2010 NHS Connecting For Health. All rights reserved.
+*   
+*  	Redistribution and use in source and binary forms, with or without
+*  	modification, are permitted provided that the following conditions
+*  	are met:
+*  		1. Redistributions of source code must retain the above copyright
+*     		notice, this list of conditions and the following disclaimer.
+*  		2. Redistributions in binary form must reproduce the above copyright
+*     		notice, this list of conditions and the following disclaimer in the
+*     		documentation and/or other materials provided with the distribution.
+*  		3. All advertising materials mentioning features or use of this software
+*     		must display the following acknowledgement:
+*       This product includes software developed by Health Level Seven.
+*  	THIS SOFTWARE IS PROVIDED BY NHS Connecting For Health. AND CONTRIBUTORS "AS IS" AND
+*  	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+*  	IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+*  	ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+*  	FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+*  	DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+*  	OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+*  	HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+*  	LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+*  	OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+*  	SUCH DAMAGE.
+*
+* CHANGE HISTORY:
+*
+* VERSION   DATE            AUTHOR                                 DESCRIPTION
+* =======   ========== ======================    ===========================================================
+* 1.0            25-03-2001   Interoperability Team               Created this WSDL
+* 1.0.1			07-04-2011	D Murphy, NIC							Fixed soapAction attribute values to correct namespace
+*
+********************************************************************************************************************-->
+<wsdl:definitions name="test" targetNamespace="urn:nhs-itk:ns:201005" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:itk="urn:nhs-itk:ns:201005" xmlns:hl7v3="urn:hl7-org:v3" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns="xhtml:NPfIT:PresentationText">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:nhs-itk:ns:201005" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:include schemaLocation="../ITKMessageTypes-2010-05.xsd"/>
+      <xsd:include schemaLocation="../distributionEnvelope-v2-0.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="verifyNHSNumberRequest-v1-0">
+    <wsdl:part name="verifyNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="verifyNHSNumberResponse-v1-0">
+    <wsdl:part name="verifyNHSNumberResponse-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getNHSNumberRequest-v1-0">
+    <wsdl:part name="getNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getNHSNumberResponse-v1-0">
+    <wsdl:part name="getNHSNumberResponse-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientDetailsByNHSNumberRequest-v1-0">
+    <wsdl:part name="getPatientDetailsByNHSNumberRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientDetailsResponse-v1-0">
+    <wsdl:part name="getPatientDetailsResponse-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientDetailsBySearchRequest-v1-0">
+    <wsdl:part name="getPatientDetailsBySearchRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientDetailsRequest-v1-0">
+    <wsdl:part name="getPatientDetailsRequest-v1-0" element="itk:DistributionEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="faultResponse">
+    <wsdl:part name="faultResponse" element="itk:ToolkitErrorInfo"/>
+  </wsdl:message>
+  <wsdl:portType name="verifyNHSNumber-v1-0_ptt">
+    <wsdl:operation name="verifyNHSNumber-v1-0">
+      <wsdl:input message="itk:verifyNHSNumberRequest-v1-0"/>
+      <wsdl:output message="itk:verifyNHSNumberResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getNHSNumber-v1-0_ptt">
+    <wsdl:operation name="getNHSNumber-v1-0">
+      <wsdl:input message="itk:getNHSNumberRequest-v1-0"/>
+      <wsdl:output message="itk:getNHSNumberResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getPatientDetailsByNHSNumber-v1-0_ptt">
+    <wsdl:operation name="getPatientDetailsByNHSNumber-v1-0">
+      <wsdl:input message="itk:getPatientDetailsByNHSNumberRequest-v1-0"/>
+      <wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getPatientDetailsBySearch-v1-0_ptt">
+    <wsdl:operation name="getPatientDetailsBySearch-v1-0">
+      <wsdl:input message="itk:getPatientDetailsBySearchRequest-v1-0"/>
+      <wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="getPatientDetails-v1-0_ptt">
+    <wsdl:operation name="getPatientDetails-v1-0">
+      <wsdl:input message="itk:getPatientDetailsRequest-v1-0"/>
+      <wsdl:output message="itk:getPatientDetailsResponse-v1-0"/>
+      <wsdl:fault name="standardFault" message="itk:faultResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="verifyNHSNumber-v1-0_pttBinding" type="itk:verifyNHSNumber-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="verifyNHSNumber-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:verifyNHSNumber-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="verifyNHSNumberRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="verifyNHSNumberResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getNHSNumber-v1-0_pttBinding" type="itk:getNHSNumber-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getNHSNumber-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:getNHSNumber-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="getNHSNumberRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="getNHSNumberResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getPatientDetailsByNHSNumber-v1-0_pttBinding" type="itk:getPatientDetailsByNHSNumber-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getPatientDetailsByNHSNumber-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="getPatientDetailsByNHSNumberRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getPatientDetailsBySearch-v1-0_pttBinding" type="itk:getPatientDetailsBySearch-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getPatientDetailsBySearch-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="getPatientDetailsBySearchRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="getPatientDetails-v1-0_pttBinding" type="itk:getPatientDetails-v1-0_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getPatientDetails-v1-0">
+      <soap:operation soapAction="urn:nhs-itk:services:201005:getPatientDetails-v1-0" style="document"/>
+      <wsdl:input>
+        <soap:body parts="getPatientDetailsRequest-v1-0" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="getPatientDetailsResponse-v1-0" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="standardFault"/>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="verifyNHSNumber-v1-0">
+    <wsdl:port name="verifyNHSNumber-v1-0_pttPort" binding="itk:verifyNHSNumber-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/verifyNHSNumber-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="getNHSNumber-v1-0">
+    <wsdl:port name="getNHSNumber-v1-0_pttPort" binding="itk:getNHSNumber-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/getNHSNumber-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="getPatientDetailsByNHSNumber-v1-0">
+    <wsdl:port name="getPatientDetailsByNHSNumber-v1-0_pttPort" binding="itk:getPatientDetailsByNHSNumber-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsByNHSNumber-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="getPatientDetailsBySearch-v1-0">
+    <wsdl:port name="getPatientDetailsBySearch-v1-0_pttPort" binding="itk:getPatientDetailsBySearch-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsBySearch-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:service name="getPatientDetails-v1-0">
+    <wsdl:port name="getPatientDetails-v1-0_pttPort" binding="itk:getPatientDetails-v1-0_pttBinding">
+      <soap:address location="http://server:80/interoperability.toolkit/HL7v3/getPatientDetails-v1-0"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/ITKMessageTypes-2010-05.xsd</con:url><con:content><![CDATA[<!--*****************************************************************************************************************
+*   	Description: Schema containing common ITK message types to be used in ITK WSDL
+* 
+* 	Copyright (c) 2010 NHS Conneccting For Health. All rights reserved.
+*   
+*  	Redistribution and use in source and binary forms, with or without
+*  	modification, are permitted provided that the following conditions
+*  	are met:
+*  		1. Redistributions of source code must retain the above copyright
+*     		notice, this list of conditions and the following disclaimer.
+*  		2. Redistributions in binary form must reproduce the above copyright
+*     		notice, this list of conditions and the following disclaimer in the
+*     		documentation and/or other materials provided with the distribution.
+*  		3. All advertising materials mentioning features or use of this software
+*     		must display the following acknowledgement:
+*       This product includes software developed by Health Level Seven.
+*  	THIS SOFTWARE IS PROVIDED BY NHS Conneccting For Health. AND CONTRIBUTORS "AS IS" AND
+*  	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+*  	IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+*  	ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+*  	FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+*  	DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+*  	OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+*  	HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+*  	LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+*  	OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+*  	SUCH DAMAGE.
+*
+* CHANGE HISTORY:
+*
+* VERSION   DATE       AUTHOR                   LABEL   DESCRIPTION
+* =======   ========== ======================   ======  ===========================================================
+* 1.0       31-03-2010 Cord Oestmann                    Created this XSD
+*
+********************************************************************************************************************-->
+<xsd:schema targetNamespace="urn:nhs-itk:ns:201005" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:itk="urn:nhs-itk:ns:201005" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="ITKDatatypes-2010-05.xsd"/>
+  <xsd:element name="ToolkitErrorInfo" type="itk:ToolkitErrorInfoStruct"/>
+  <xsd:element name="HL7Content" type="xsd:string"/>
+  <xsd:element name="VersionID" type="xsd:string">
+    <!--It is a requirement that the HL7v2 |^ string is base 64 encoded to ensure that XML reserved 
+             characters do not invalidate the structure of the payload.-->
+  </xsd:element>
+  <xsd:element name="SimpleMessageResponse" type="xsd:string"/>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/ITKDatatypes-2010-05.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:nhs-itk:ns:201005" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:itk="urn:nhs-itk:ns:201005" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="ToolkitErrorInfoStruct">
+    <xsd:sequence>
+      <xsd:element name="ErrorID" type="xsd:anyURI"/>
+      <xsd:element name="ErrorCode">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="codeSystem" type="xsd:string" default="2.16.840.1.113883.2.1.3.2.4.17.268"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ErrorText" type="xsd:string"/>
+      <xsd:element name="ErrorDiagnosticText" type="xsd:string" minOccurs="0"/>
+      <xsd:any namespace="##local" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="NHSNumberType">
+    <xsd:restriction base="xsd:string">
+      <xsd:length value="10" fixed="true"/>
+      <xsd:pattern value="[0-9]{10}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="DCRConsentFlagType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Explicit Consent"/>
+      <xsd:enumeration value="Explicit Dissent"/>
+      <xsd:enumeration value="Not Specified"/>
+      <xsd:enumeration value=""/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/tim/pdsStub/Requirements%20Pack/PDSMiniServices/Schemas/distributionEnvelope-v2-0.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="urn:nhs-itk:ns:201005" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:itk="urn:nhs-itk:ns:201005">
+  <!--ITK Distribution Envelope v2.0
+		Damian Murphy (damian.murphy@nhs.net), CfH National Integration Centre
+		16 March 2011-->
+  <xs:element name="DistributionEnvelope" type="itk:distributionEnvelopeType"/>
+  <xs:complexType name="distributionEnvelopeType">
+    <xs:sequence>
+      <xs:element name="header" type="itk:distributionHeaderType"/>
+      <xs:element name="payloads" type="itk:payloadsType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="distributionHeaderType">
+    <xs:sequence>
+      <xs:element name="addresslist" type="itk:addressListType" minOccurs="0"/>
+      <xs:element name="auditIdentity" type="itk:auditIdentityType" minOccurs="0"/>
+      <xs:element name="manifest" type="itk:manifestType"/>
+      <xs:element name="senderAddress" type="itk:addressType" minOccurs="0"/>
+      <xs:element name="handlingSpecification" type="itk:handlingType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="trackingid" type="itk:uuid" use="required"/>
+    <xs:attribute name="service" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="handlingType">
+    <xs:sequence>
+      <xs:element name="spec" type="itk:handlingSpecType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="handlingSpecType">
+    <xs:attribute name="key" type="xs:anyURI" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:simpleType name="uuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="addressListType">
+    <xs:sequence>
+      <xs:element name="address" type="itk:addressType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addressType">
+    <xs:attribute name="type" type="xs:string" use="optional" default="2.16.840.1.113883.2.1.3.2.4.18.22"/>
+    <xs:attribute name="uri" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="identityType">
+    <xs:attribute name="type" type="xs:string" use="optional" default="2.16.840.1.113883.2.1.3.2.4.18.27"/>
+    <xs:attribute name="uri" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="manifestType">
+    <xs:sequence>
+      <xs:element name="manifestitem" type="itk:manifestItemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="count" type="xs:integer" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="auditIdentityType">
+    <xs:sequence>
+      <xs:element name="id" type="itk:identityType" maxOccurs="4"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="manifestItemType">
+    <xs:attribute name="id" type="xs:IDREF" use="required"/>
+    <xs:attribute name="mimetype" type="xs:string" use="required"/>
+    <xs:attribute name="profileid" type="xs:anyURI" use="optional"/>
+    <xs:attribute name="metadata" type="xs:boolean" use="optional" default="false"/>
+    <xs:attribute name="compressed" type="xs:boolean" use="optional" default="false"/>
+    <xs:attribute name="base64" type="xs:boolean" use="optional" default="false"/>
+    <xs:attribute name="encrypted" type="xs:boolean" use="optional" default="false"/>
+    <xs:anyAttribute namespace="##targetNamespace"/>
+  </xs:complexType>
+  <xs:complexType name="payloadsType">
+    <xs:sequence>
+      <xs:element name="payload" type="itk:payloadType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="count" type="xs:integer" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="payloadType" mixed="true">
+    <xs:sequence>
+      <xs:any namespace="##any" processContents="lax" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="filename" type="xs:string" use="optional"/>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/verifyNHSNumber-v1-0</con:endpoint></con:endpoints><con:operation id="72dd7a21-3996-4ccb-83d3-fecb065367da" isOneWay="false" action="urn:nhs-itk:services:201005:verifyNHSNumber-v1-0" name="verifyNHSNumber-v1-0" bindingOperationName="verifyNHSNumber-v1-0" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="22ca4f8f-4768-4848-87e8-6a6e10991fd2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/verifyNHSNumber-v1-0</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:nhs-itk:ns:201005">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DistributionEnvelope>
+         <urn:header trackingid="?" service="?">
+            <!--Optional:-->
+            <urn:addresslist>
+               <!--1 or more repetitions:-->
+               <urn:address type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            </urn:addresslist>
+            <!--Optional:-->
+            <urn:auditIdentity>
+               <!--1 to 4 repetitions:-->
+               <urn:id type="2.16.840.1.113883.2.1.3.2.4.18.27" uri="?"/>
+            </urn:auditIdentity>
+            <urn:manifest count="?">
+               <!--1 or more repetitions:-->
+               <urn:manifestitem id="?" mimetype="?" profileid="?" metadata="false" compressed="false" base64="false" encrypted="false"/>
+            </urn:manifest>
+            <!--Optional:-->
+            <urn:senderAddress type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            <!--Optional:-->
+            <urn:handlingSpecification>
+               <!--1 or more repetitions:-->
+               <urn:spec key="?" value="?"/>
+            </urn:handlingSpecification>
+         </urn:header>
+         <urn:payloads count="?">
+            <!--1 or more repetitions:-->
+            <urn:payload id="?" filename="?">
+               e
+               <!--You may enter ANY elements at this point-->
+               gero
+            </urn:payload>
+         </urn:payloads>
+      </urn:DistributionEnvelope>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:nhs-itk:services:201005:verifyNHSNumber-v1-0"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="e431d8fc-bed5-43bf-a8b8-23afd0d808fd" name="getPatientDetails-v1-0_pttBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1ced45d6-e5e2-48fc-a511-87b22e389f9a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Test suite" searchProperties="true"><con:settings/><con:testStep type="request" id="55836bbe-e9a8-486e-9c52-3be20cd4fb1d" name="Partial match"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>getPatientDetails-v1-0_pttBinding</con:interface><con:operation>getPatientDetails-v1-0</con:operation><con:request name="Partial match" id="ef35e2d1-e64e-4a14-90eb-1000a0f6e18a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint/><con:request><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:itk="urn:nhs-itk:ns:201005">
+	<soap:Header>
+		<wsa:MessageID>B72F7785-534C-11E6-ADCA-29C651A3BE61</wsa:MessageID>
+		<wsa:Action>urn:nhs-itk:services:201005:getNHSNumber-v1-0</wsa:Action>
+		<wsa:To>https://192.168.54.6/smsp/pds</wsa:To>
+		<wsa:From>
+			<wsa:Address>192.168.54.7</wsa:Address>
+		</wsa:From>
+		<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+			<wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="D6CD5232-14CF-11DF-9423-1F9A910D4703">
+				<wsu:Created>2016-07-27T11:10:23Z</wsu:Created>
+				<wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>
+			</wsu:Timestamp>
+			<wsse:UsernameToken>
+				<wsse:Username>TKS Server test</wsse:Username>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</soap:Header>
+	<soap:Body>
+		<itk:DistributionEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<itk:header service="urn:nhs-itk:services:201005:getNHSNumber-v1-0" trackingid="B72F9E96-534C-11E6-ADCA-29C651A3BE6F">
+				<itk:auditIdentity>
+					<itk:id type="1.2.826.0.1285.0.2.0.107" uri="868000003114"/>
+				</itk:auditIdentity>
+				<itk:manifest count="1">
+					<itk:manifestitem id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7" mimetype="text/xml" profileid="urn:nhs-en:profile:getNHSNumberRequest-v1-0" base64="false" compressed="false" encrypted="false"/>
+				</itk:manifest>
+				<itk:senderAddress uri="urn:nhs-uk:addressing:ods:rhm:team1:C"/>
+			</itk:header>
+			<itk:payloads count="1">
+				<itk:payload id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7">
+                <getPatientDetails-v1-0 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" moodCode="EVN" classCode="CACT">
+                    <id root="{{ guidManifestItem }}"/>
+                    <code codeSystem="2.16.840.1.113883.2.1.3.2.4.17.284" code="getPatientDetailsRequest-v1-0"/>
+                    <queryEvent>
+                        <Person.DateOfBirth>
+                            <value value="20101010"/>
+                            <semanticsText>Person.DateOfBirth</semanticsText>
+                        </Person.DateOfBirth>
+                        <Person.NHSNumber>
+                            <value root="2.16.840.1.113883.2.1.4.1" extension="1231231234"/>
+                            <semanticsText>Person.NHSNumber</semanticsText>
+                        </Person.NHSNumber>
+                        <Person.Name>
+                            <value>
+                                <given>Fred</given>
+                                <family>Bloggs</family>
+                            </value>
+                            <semanticsText>Person.Name</semanticsText>
+                        </Person.Name>
+                        <Person.Postcode>
+                            <value>
+                                <postalCode>LS1 4HR</postalCode>
+                            </value>
+                            <semanticsText>Person.Postcode</semanticsText>
+                        </Person.Postcode>
+                    </queryEvent>
+                </getPatientDetails-v1-0>
+				</itk:payload>
+			</itk:payloads>
+		</itk:DistributionEnvelope>
+	</soap:Body>
+</soap:Envelope>]]></con:request><con:assertion type="Simple Contains" id="c2c5bb6c-33ad-4738-8450-7a81e3dbb758" name="Contains SMSP-9999"><con:configuration><token>DEMOG-9999</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="f8790902-3be8-4f33-85f3-e7e864c0d7e4" name="Contains ACTION TYPE"><con:configuration><token>getPatientDetailsResponse-v1-0</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="urn:nhs-itk:services:201005:getPatientDetails-v1-0" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="173aaa65-125b-4bfd-9ca1-89f30ce051dc" name="Full match"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>getPatientDetails-v1-0_pttBinding</con:interface><con:operation>getPatientDetails-v1-0</con:operation><con:request name="Full match" id="ef35e2d1-e64e-4a14-90eb-1000a0f6e18a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint/><con:request><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:itk="urn:nhs-itk:ns:201005">
+	<soap:Header>
+		<wsa:MessageID>B72F7785-534C-11E6-ADCA-29C651A3BE62</wsa:MessageID>
+		<wsa:Action>urn:nhs-itk:services:201005:getNHSNumber-v1-0</wsa:Action>
+		<wsa:To>https://192.168.54.6/smsp/pds</wsa:To>
+		<wsa:From>
+			<wsa:Address>192.168.54.7</wsa:Address>
+		</wsa:From>
+		<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+			<wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="D6CD5232-14CF-11DF-9423-1F9A910D4703">
+				<wsu:Created>2016-07-27T11:10:23Z</wsu:Created>
+				<wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>
+			</wsu:Timestamp>
+			<wsse:UsernameToken>
+				<wsse:Username>TKS Server test</wsse:Username>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</soap:Header>
+	<soap:Body>
+		<itk:DistributionEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<itk:header service="urn:nhs-itk:services:201005:getNHSNumber-v1-0" trackingid="B72F9E96-534C-11E6-ADCA-29C651A3BE6F">
+				<itk:auditIdentity>
+					<itk:id type="1.2.826.0.1285.0.2.0.107" uri="868000003114"/>
+				</itk:auditIdentity>
+				<itk:manifest count="1">
+					<itk:manifestitem id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7" mimetype="text/xml" profileid="urn:nhs-en:profile:getNHSNumberRequest-v1-0" base64="false" compressed="false" encrypted="false"/>
+				</itk:manifest>
+				<itk:senderAddress uri="urn:nhs-uk:addressing:ods:rhm:team1:C"/>
+			</itk:header>
+			<itk:payloads count="1">
+				<itk:payload id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7">
+                <getPatientDetails-v1-0 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" moodCode="EVN" classCode="CACT">
+                    <id root="{{ guidManifestItem }}"/>
+                    <code codeSystem="2.16.840.1.113883.2.1.3.2.4.17.284" code="getPatientDetailsRequest-v1-0"/>
+                    <queryEvent>
+                        <Person.DateOfBirth>
+                            <value value="19600101"/>
+                            <semanticsText>Person.DateOfBirth</semanticsText>
+                        </Person.DateOfBirth>
+                        <Person.NHSNumber>
+                            <value root="2.16.840.1.113883.2.1.4.1" extension="1231231234"/>
+                            <semanticsText>Person.NHSNumber</semanticsText>
+                        </Person.NHSNumber>
+                        <Person.Name>
+                            <value>
+                                <given>Fred</given>
+                                <family>Bloggs</family>
+                            </value>
+                            <semanticsText>Person.Name</semanticsText>
+                        </Person.Name>
+                        <Person.Postcode>
+                            <value>
+                                <postalCode>LS1 4HR</postalCode>
+                            </value>
+                            <semanticsText>Person.Postcode</semanticsText>
+                        </Person.Postcode>
+                    </queryEvent>
+                </getPatientDetails-v1-0>
+				</itk:payload>
+			</itk:payloads>
+		</itk:DistributionEnvelope>
+	</soap:Body>
+</soap:Envelope>]]></con:request><con:assertion type="Simple Contains" id="d00323e1-a4c1-4f8a-a8e5-b5d0b1c02d52" name="Contains SMSP-0000"><con:configuration><token>SMSP-0000</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="ae2bcf28-7b0b-45e9-878e-7cc74b46791b" name="Contains Name"><con:configuration><token>Alice</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="urn:nhs-itk:services:201005:getPatientDetails-v1-0" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="a06013dd-83ed-45b8-9744-a8925fd4f554" name="Fail to match"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>getPatientDetails-v1-0_pttBinding</con:interface><con:operation>getPatientDetails-v1-0</con:operation><con:request name="Fail to match" id="ef35e2d1-e64e-4a14-90eb-1000a0f6e18a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint/><con:request><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:itk="urn:nhs-itk:ns:201005">
+	<soap:Header>
+		<wsa:MessageID>B72F7785-534C-11E6-ADCA-29C651A3BE63</wsa:MessageID>
+		<wsa:Action>urn:nhs-itk:services:201005:getNHSNumber-v1-0</wsa:Action>
+		<wsa:To>https://192.168.54.6/smsp/pds</wsa:To>
+		<wsa:From>
+			<wsa:Address>192.168.54.7</wsa:Address>
+		</wsa:From>
+		<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+			<wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="D6CD5232-14CF-11DF-9423-1F9A910D4703">
+				<wsu:Created>2016-07-27T11:10:23Z</wsu:Created>
+				<wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>
+			</wsu:Timestamp>
+			<wsse:UsernameToken>
+				<wsse:Username>TKS Server test</wsse:Username>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</soap:Header>
+	<soap:Body>
+		<itk:DistributionEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<itk:header service="urn:nhs-itk:services:201005:getNHSNumber-v1-0" trackingid="B72F9E96-534C-11E6-ADCA-29C651A3BE6F">
+				<itk:auditIdentity>
+					<itk:id type="1.2.826.0.1285.0.2.0.107" uri="868000003114"/>
+				</itk:auditIdentity>
+				<itk:manifest count="1">
+					<itk:manifestitem id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7" mimetype="text/xml" profileid="urn:nhs-en:profile:getNHSNumberRequest-v1-0" base64="false" compressed="false" encrypted="false"/>
+				</itk:manifest>
+				<itk:senderAddress uri="urn:nhs-uk:addressing:ods:rhm:team1:C"/>
+			</itk:header>
+			<itk:payloads count="1">
+				<itk:payload id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7">
+                <getPatientDetails-v1-0 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" moodCode="EVN" classCode="CACT">
+                    <id root="{{ guidManifestItem }}"/>
+                    <code codeSystem="2.16.840.1.113883.2.1.3.2.4.17.284" code="getPatientDetailsRequest-v1-0"/>
+                    <queryEvent>
+                        <Person.DateOfBirth>
+                            <value value="20101010"/>
+                            <semanticsText>Person.DateOfBirth</semanticsText>
+                        </Person.DateOfBirth>
+                        <Person.NHSNumber>
+                            <value root="2.16.840.1.113883.2.1.4.1" extension="1111111111"/>
+                            <semanticsText>Person.NHSNumber</semanticsText>
+                        </Person.NHSNumber>
+                        <Person.Name>
+                            <value>
+                                <given>Fred</given>
+                                <family>Bloggs</family>
+                            </value>
+                            <semanticsText>Person.Name</semanticsText>
+                        </Person.Name>
+                        <Person.Postcode>
+                            <value>
+                                <postalCode>LS1 4HR</postalCode>
+                            </value>
+                            <semanticsText>Person.Postcode</semanticsText>
+                        </Person.Postcode>
+                    </queryEvent>
+                </getPatientDetails-v1-0>
+				</itk:payload>
+			</itk:payloads>
+		</itk:DistributionEnvelope>
+	</soap:Body>
+</soap:Envelope>]]></con:request><con:assertion type="Simple Contains" id="59e8ae56-84e2-4fb7-9770-a778b1e437d5" name="Contains"><con:configuration><token>DEMOG-9999</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="urn:nhs-itk:services:201005:getPatientDetails-v1-0" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="bd051e97-089e-447e-8c07-ac6b4a3f32b6" name="getPatientDetailsBySearch-v1-0_pttBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="e105603f-6d19-43fb-8e4e-3d8c5f8f80c0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getPatientDetailsBySearch-v1-0 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="0fe29a65-24c9-4758-a719-11c16aa0f15a" name="getPatientDetailsBySearch-v1-0"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>getPatientDetailsBySearch-v1-0_pttBinding</con:interface><con:operation>getPatientDetailsBySearch-v1-0</con:operation><con:request name="getPatientDetailsBySearch-v1-0" id="cde8aa44-9c73-45a4-9417-1a366dafe227"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://9cnccrh9ye.execute-api.eu-west-2.amazonaws.com/prod/service</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:itk="urn:nhs-itk:ns:201005">
+  <soap:Header>
+    <wsa:MessageID>B72F7785-534C-11E6-ADCA-29C651A3BE62</wsa:MessageID>
+    <wsa:Action>urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0</wsa:Action>
+    <wsa:To>https://192.168.54.6/smsp/pds</wsa:To>
+    <wsa:From>
+      <wsa:Address>192.168.54.7</wsa:Address>
+    </wsa:From>
+    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+      <wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="D6CD5232-14CF-11DF-9423-1F9A910D4703">
+        <wsu:Created>2016-07-27T11:10:23Z</wsu:Created>
+        <wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>
+      </wsu:Timestamp>
+      <wsse:UsernameToken>
+        <wsse:Username>TKS Server test</wsse:Username>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <itk:DistributionEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <itk:header service="urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0" trackingid="B72F9E96-534C-11E6-ADCA-29C651A3BE6F">
+        <itk:auditIdentity>
+          <itk:id type="1.2.826.0.1285.0.2.0.107" uri="868000003114"/>
+        </itk:auditIdentity>
+        <itk:manifest count="1">
+          <itk:manifestitem id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7" mimetype="text/xml" profileid="urn:nhs-en:profile:getPatientDetailsBySearch-v1-0" base64="false" compressed="false" encrypted="false"/>
+        </itk:manifest>
+        <itk:senderAddress uri="urn:nhs-uk:addressing:ods:rhm:team1:C"/>
+      </itk:header>
+      <itk:payloads count="1">
+        <itk:payload id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7">
+                <getPatientDetailsBySearch-v1-0 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" moodCode="EVN" classCode="CACT">
+                    <id root="{{ guidManifestItem }}"/>
+                    <code codeSystem="2.16.840.1.113883.2.1.3.2.4.17.284" code="getPatientDetailsRequest-v1-0"/>
+                    <queryEvent>
+                        <Person.DateOfBirth>
+                            <value value="20080616"/>
+                            <semanticsText>Person.DateOfBirth</semanticsText>
+                        </Person.DateOfBirth>
+                        <Person.Name>
+                            <value>
+                                <family>HADCROFT</family>
+                            </value>
+                            <semanticsText>Person.Name</semanticsText>
+                        </Person.Name>
+                        <Person.Gender>
+              <value code="2" codeSystem="2.16.840.1.113883.2.1.3.2.4.16.25" />
+              <semanticsText>Person.Gender</semanticsText>
+            </Person.Gender>
+                    </queryEvent>
+                </getPatientDetailsBySearch-v1-0>
+        </itk:payload>
+      </itk:payloads>
+    </itk:DistributionEnvelope>
+  </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="8ac23db6-dd3b-4691-8a27-2e65698154fa" name="getPatientDetailsByNHSNumber-v1-0_pttBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="4f8ee392-5061-41d9-afdf-8c87e4098358" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getPatientDetailsByNHSNumber-v1-0 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="e16cc7e3-89fc-4009-bb2b-3857be612f63" name="getPatientDetailsByNHSNumber-v1-0"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>getPatientDetailsByNHSNumber-v1-0_pttBinding</con:interface><con:operation>getPatientDetailsByNHSNumber-v1-0</con:operation><con:request name="getPatientDetailsByNHSNumber-v1-0" id="f9f1f8b5-ecdc-4333-a0af-338769fb0f1d"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getPatientDetailsByNHSNumber-v1-0</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:nhs-itk:ns:201005">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DistributionEnvelope>
+         <urn:header trackingid="?" service="?">
+            <!--Optional:-->
+            <urn:addresslist>
+               <!--1 or more repetitions:-->
+               <urn:address type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            </urn:addresslist>
+            <!--Optional:-->
+            <urn:auditIdentity>
+               <!--1 to 4 repetitions:-->
+               <urn:id type="2.16.840.1.113883.2.1.3.2.4.18.27" uri="?"/>
+            </urn:auditIdentity>
+            <urn:manifest count="?">
+               <!--1 or more repetitions:-->
+               <urn:manifestitem id="?" mimetype="?" profileid="?" metadata="false" compressed="false" base64="false" encrypted="false"/>
+            </urn:manifest>
+            <!--Optional:-->
+            <urn:senderAddress type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            <!--Optional:-->
+            <urn:handlingSpecification>
+               <!--1 or more repetitions:-->
+               <urn:spec key="?" value="?"/>
+            </urn:handlingSpecification>
+         </urn:header>
+         <urn:payloads count="?">
+            <!--1 or more repetitions:-->
+            <urn:payload id="?" filename="?">
+               e
+               <!--You may enter ANY elements at this point-->
+               gero
+            </urn:payload>
+         </urn:payloads>
+      </urn:DistributionEnvelope>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig action="urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0" mustUnderstand="NONE" version="200508"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="873e7a47-bcdf-4863-a23e-5d40b9be6fc8" name="getNHSNumber-v1-0_pttBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="53c473db-289d-4acf-bcea-cc5131fa3d71" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getNHSNumber-v1-0 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="684e01c0-93e2-44ff-84c1-89c5820e9ad3" name="getNHSNumber-v1-0"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>getNHSNumber-v1-0_pttBinding</con:interface><con:operation>getNHSNumber-v1-0</con:operation><con:request name="getNHSNumber-v1-0" id="fc21c64f-b4c5-4b11-8bfd-cfda3069c1a8"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://server:80/interoperability.toolkit/HL7v3/getNHSNumber-v1-0</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:nhs-itk:ns:201005">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:DistributionEnvelope>
+         <urn:header trackingid="?" service="?">
+            <!--Optional:-->
+            <urn:addresslist>
+               <!--1 or more repetitions:-->
+               <urn:address type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            </urn:addresslist>
+            <!--Optional:-->
+            <urn:auditIdentity>
+               <!--1 to 4 repetitions:-->
+               <urn:id type="2.16.840.1.113883.2.1.3.2.4.18.27" uri="?"/>
+            </urn:auditIdentity>
+            <urn:manifest count="?">
+               <!--1 or more repetitions:-->
+               <urn:manifestitem id="?" mimetype="?" profileid="?" metadata="false" compressed="false" base64="false" encrypted="false"/>
+            </urn:manifest>
+            <!--Optional:-->
+            <urn:senderAddress type="2.16.840.1.113883.2.1.3.2.4.18.22" uri="?"/>
+            <!--Optional:-->
+            <urn:handlingSpecification>
+               <!--1 or more repetitions:-->
+               <urn:spec key="?" value="?"/>
+            </urn:handlingSpecification>
+         </urn:header>
+         <urn:payloads count="?">
+            <!--1 or more repetitions:-->
+            <urn:payload id="?" filename="?">
+               e
+               <!--You may enter ANY elements at this point-->
+               gero
+            </urn:payload>
+         </urn:payloads>
+      </urn:DistributionEnvelope>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig action="urn:nhs-itk:services:201005:getNHSNumber-v1-0" mustUnderstand="NONE" version="200508"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="f4aa85bb-d1ae-44d7-82de-3cfd3f52e17a" name="verifyNHSNumber-v1-0_pttBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="d19cd922-d76e-4e15-9f5e-cf7bf8c64875" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="verifyNHSNumber-v1-0 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="2b415947-ef55-4e64-97e6-18670caec9e1" name="verifyNHSNumber-v1-0"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>verifyNHSNumber-v1-0_pttBinding</con:interface><con:operation>verifyNHSNumber-v1-0</con:operation><con:request name="verifyNHSNumber-v1-0" id="df8d006a-ce27-4b58-9d6f-a5e8f9f7df96"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://eid2pttkh0.execute-api.eu-west-2.amazonaws.com/prod/service</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:itk="urn:nhs-itk:ns:201005">
+  <soap:Header>
+    <wsa:MessageID>af1954a3-1244-4f6b-bf00-1c2131d29efb</wsa:MessageID>
+    <wsa:Action>urn:nhs-itk:services:201005:getNHSNumber-v1-0</wsa:Action>
+    <wsa:To>https://192.168.54.6/smsp/pds</wsa:To>
+    <wsa:From>
+      <wsa:Address>192.168.54.7</wsa:Address>
+    </wsa:From>
+    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+      <wsu:Timestamp xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="D6CD5232-14CF-11DF-9423-1F9A910D4703">
+        <wsu:Created>2016-07-27T11:10:23Z</wsu:Created>
+        <wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>
+      </wsu:Timestamp>
+      <wsse:UsernameToken>
+        <wsse:Username>TKS Server test</wsse:Username>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <itk:DistributionEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <itk:header service="urn:nhs-itk:services:201005:verifyNHSNumberRequest-v1-0" trackingid="B72F9E96-534C-11E6-ADCA-29C651A3BE6F">
+        <itk:auditIdentity>
+          <itk:id type="1.2.826.0.1285.0.2.0.107" uri="868000003114"/>
+        </itk:auditIdentity>
+        <itk:manifest count="1">
+          <itk:manifestitem id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7" mimetype="text/xml" profileid="urn:nhs-itk:services:201005:verifyNHSNumber-v1-0" base64="false" compressed="false" encrypted="false"/>
+        </itk:manifest>
+        <itk:senderAddress uri="urn:nhs-uk:addressing:ods:rhm:team1:C"/>
+      </itk:header>
+      <itk:payloads count="1">
+        <itk:payload id="uuid_808A9678-49B2-498B-AD75-1D7A0F1262D7">
+<verifyNHSNumberRequest-v1-0 xsi:schemaLocation="urn:hl7-org:v3 ../../Schemas/QUPA_MT000001GB01.xsd" moodCode="EVN" classCode="CACT" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<id root="16C2662F-1C6E-4F38-9B3F-5084F46CE3E1"/>
+<code codeSystem="2.16.840.1.113883.2.1.3.2.4.17.284" code="verifyNHSNumberRequest-v1-0"/>
+<queryEvent>
+<Person.DateOfBirth>
+<value value="20110509"/>
+<semanticsText>Person.DateOfBirth</semanticsText>
+</Person.DateOfBirth>
+<Person.NHSNumber>
+<value root="2.16.840.1.113883.2.1.4.1" extension="9449306621"/>
+<semanticsText>Person.NHSNumber</semanticsText>
+</Person.NHSNumber>
+</queryEvent>
+</verifyNHSNumberRequest-v1-0>
+        </itk:payload>
+      </itk:payloads>
+    </itk:DistributionEnvelope>
+  </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="urn:nhs-itk:services:201005:verifyNHSNumber-v1-0" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties><con:property><con:name>ServerBaseURL</con:name><con:value>http://server:80</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

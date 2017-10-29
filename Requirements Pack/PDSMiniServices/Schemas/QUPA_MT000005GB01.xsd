@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="urn:hl7-org:v3" elementFormDefault="qualified" targetNamespace="urn:hl7-org:v3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--
+***************************************************************************
+* XML schema for message type QUPA_MT000005GB01
+* Source information:
+* 
+* Rendered by: 	Static Model Designer
+* Rendered on: 	Tue Jun 14 15:02:29 BST 2011
+* Version : 	01
+* 
+* 
+* Generated for  XMLITS version NHS CFH XSD ITS Transform 1.0.0
+* 
+* 
+* Copyright (c) 2008,2009,2010  .
+*  All rights reserved.Redistribution and use in source and binary forms,
+*  with or without modification, are permitted provided that the following conditions
+*  are met:
+*  1. Redistributions of source code must retain the above copyright
+*     notice, this list of conditions and the following disclaimer.
+*  2. Redistributions in binary form must reproduce the above copyright
+*     notice, this list of conditions and the following disclaimer in the
+*     documentation and/or other materials provided with the distribution.
+*  3. All advertising materials mentioning features or use of this software
+*     must display the following acknowledgement:
+*       This product includes software developed by .
+*  THIS SOFTWARE IS PROVIDED BY . AND CONTRIBUTORS "AS IS" AND
+*  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+*  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+*  ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+*  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+*  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+*  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+*  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+*  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+*  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+*  SUCH DAMAGE.
+* 
+***************************************************************************
+-->
+    <xs:annotation>
+        <xs:documentation>
+            <p>RIM :DEFN=UK=RIM=0229R1</p>
+            <p>DATATYPE :DEFN=UV=DT=1.0;DEFN=UK=DT=3.6;</p>
+            <p>VOCABULARY :DEFN=UV=VO=913-20091020;DEFN=UK=VO=7.6;</p>
+        </xs:documentation>
+    </xs:annotation>
+    <xs:include schemaLocation="../dt/infrastructureRoot.xsd"/>
+    <xs:include schemaLocation="../dt/datatypeflavours.xsd"/>
+    <xs:element name="getPatientDetails-v1-0" type="QUPA_MT000005GB01.getPatientDetails-v1-0"/>
+    <xs:complexType name="QUPA_MT000005GB01.getPatientDetails-v1-0">
+        <xs:sequence>
+            <xs:group ref="InfrastructureRootElementsGroupAll"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="id" type="II.NHS.IdentifierType2"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="code">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:restriction base="CV.NHS.CodedValueType1">
+                            <xs:attribute fixed="getPatientDetailsRequest-v1-0" name="code" type="cs" use="required"/>
+                            <xs:attribute fixed="2.16.840.1.113883.2.1.3.2.4.17.284" name="codeSystem" type="uid" use="required"/>
+                        </xs:restriction>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="queryEvent" type="QUPA_MT000005GB01.getPatientDetailsRequest-v1-0Grouper"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="InfrastructureRootAttributes"/>
+        <xs:attribute fixed="CACT" name="classCode" type="cs" use="required"/>
+        <xs:attribute fixed="EVN" name="moodCode" type="cs" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="QUPA_MT000005GB01.getPatientDetailsRequest-v1-0Grouper">
+        <xs:sequence>
+            <xs:group ref="InfrastructureRootElementsGroupAll"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="Person.DateOfBirth" type="QUPA_MT000005GB01.Person.DateOfBirth"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="Person.Gender" nillable="true" type="QUPA_MT000005GB01.Person.Gender"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="Person.LocalIdentifier" nillable="true" type="QUPA_MT000005GB01.Person.LocalIdentifier"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="Person.NHSNumber" nillable="true" type="QUPA_MT000005GB01.Person.NHSNumber"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="Person.Name" nillable="true" type="QUPA_MT000005GB01.Person.Name"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="Person.Postcode" nillable="true" type="QUPA_MT000005GB01.Person.Postcode"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="InfrastructureRootAttributes"/>
+    </xs:complexType>
+    <xs:complexType name="QUPA_MT000005GB01.Person.DateOfBirth">
+        <xs:sequence>
+            <xs:group ref="InfrastructureRootElementsGroupAll"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="value" type="TS.NHS.TimestampType1"/>
+            <xs:element fixed="Person.DateOfBirth" maxOccurs="1" minOccurs="1" name="semanticsText" type="ST"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="InfrastructureRootAttributes"/>
+    </xs:complexType>
+    <xs:complexType name="QUPA_MT000005GB01.Person.Gender">
+        <xs:sequence>
+            <xs:group ref="InfrastructureRootElementsGroupAll"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="value">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:restriction base="CV.NHS.CodedValueType1">
+                            <xs:attribute name="code" use="required">
+                                <xs:simpleType>
+                                    <xs:restriction base="cs">
+                                        <xs:enumeration value="2"/>
+                                        <xs:enumeration value="1"/>
+                                        <xs:enumeration value="0"/>
+                                        <xs:enumeration value="9"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>
+                            <xs:attribute fixed="2.16.840.1.113883.2.1.3.2.4.16.25" name="codeSystem" type="uid" use="required"/>
+                        </xs:restriction>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element fixed="Person.Gender" maxOccurs="1" minOccurs="1" name="semanticsText" type="ST"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="InfrastructureRootAttributes"/>
+    </xs:complexType>
+    <xs:complexType name="QUPA_MT000005GB01.Person.LocalIdentifier">
+        <xs:sequence>
+            <xs:group ref="InfrastructureRootElementsGroupAll"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="value" type="II.NHS.IdentifierType3"/>
+            <xs:element fixed="Person.LocalIdentifier" maxOccurs="1" minOccurs="1" name="semanticsText" type="ST"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="InfrastructureRootAttributes"/>
+    </xs:complexType>
+    <xs:complexType name="QUPA_MT000005GB01.Person.Name">
+        <xs:sequence>
+            <xs:group ref="InfrastructureRootElementsGroupAll"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="value" type="PN.NHS.PersonNameType1"/>
+            <xs:element fixed="Person.Name" maxOccurs="1" minOccurs="1" name="semanticsText" type="ST"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="InfrastructureRootAttributes"/>
+    </xs:complexType>
+    <xs:complexType name="QUPA_MT000005GB01.Person.NHSNumber">
+        <xs:sequence>
+            <xs:group ref="InfrastructureRootElementsGroupAll"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="value" type="II.NHS.IdentifierType1"/>
+            <xs:element fixed="Person.NHSNumber" maxOccurs="1" minOccurs="1" name="semanticsText" type="ST"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="InfrastructureRootAttributes"/>
+    </xs:complexType>
+    <xs:complexType name="QUPA_MT000005GB01.Person.Postcode">
+        <xs:sequence>
+            <xs:group ref="InfrastructureRootElementsGroupAll"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="value" type="AD.NHS.AddressType1"/>
+            <xs:element fixed="Person.Postcode" maxOccurs="1" minOccurs="1" name="semanticsText" type="ST"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="InfrastructureRootAttributes"/>
+    </xs:complexType>
+</xs:schema>
