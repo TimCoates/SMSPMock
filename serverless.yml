@@ -67,6 +67,18 @@ functions:
           path: /Logs
           integration: lambda-proxy
 
+  Test:
+    handler: Test.entrypoint
+    description: Shows the Test form, allowing us to exercide the SOAP service
+    memorySize: 128
+    timeout: 2
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: get
+          path: /Test
+          integration: lambda-proxy
+
   logdata:
     handler: logdata.entrypoint
     description: Returns items from ${self:provider.stage}-pds-messages table, and details of one log entry
