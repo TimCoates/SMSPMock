@@ -46,10 +46,13 @@ module.exports.entrypoint = (event, context, callback) => {
 			"Go here to see patients in the synthetic data.<br /></div>" +
 			"<div class=\"col\"><h2>Logs</h2>" +
 			"Go here to view detailed logs of interactions with this service.<br /></div>" +
+			"<div class=\"col\"><h2>Test</h2>" +
+			"Go here to submit calls to the SOAP service.<br /></div>" +
 			"</div><div class=\"row\">" +
 			"<div class=\"col\"><a class=\"btn btn-secondary\" href=\"LoadData\" role=\"button\">Load data &raquo;</a></div>" +
 			"<div class=\"col\"><a class=\"btn btn-secondary\" href=\"Patient\" role=\"button\">Patients &raquo;</a></div>" +
 			"<div class=\"col\"><a class=\"btn btn-secondary\" href=\"Logs\" role=\"button\">View logs &raquo;</a></div>" +
+			"<div class=\"col\"><a class=\"btn btn-secondary\" href=\"Test\" role=\"button\">Submit tests &raquo;</a></div>" +
 			"</div>" +
 		    "</div></body></html>";
 

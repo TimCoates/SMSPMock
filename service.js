@@ -251,7 +251,7 @@ function findPerson(SOAPAction, message_id, persontoFind, callback) {
 
         // Based on what fields, populate params object appropriately...
         if((nhsNFlag == true) && (dobFlag == true)) {
-                params.KeyConditionExpression = "#nhsn = :nhs_number",
+                params.KeyConditionExpression = "#nhsn = :nhs_number",,
                 params.ExpressionAttributeValues = { ":nhsn": nhsNumberToFind }
         } else {
             if((fNameFlag == true) && (genderFlag == true) && (dobFlag == true)) {
