@@ -56,8 +56,8 @@ module.exports.entrypoint = (event, context, callback) => {
             " <div class='row'><form id='myForm' action='#'>\n" +
             "  <div class='col' style='width:80%'>\n" +
             // Here we have a code window
-            "   <figure class='highlight'><pre id='reqBody' class='.pre-scrollable'>" +
-            "   </pre></figure>" +
+            "   <textarea id='reqBody' rows='20' cols='80'>" +
+            "   </textarea>" +
             "  </div>" + // Ends the wide column
             "  <div class='col' style='width:20%'>\n" +
             // Here we have a list of radio buttons, plus a Submit button
@@ -79,20 +79,47 @@ module.exports.entrypoint = (event, context, callback) => {
             "</body>\n" +
             "<script>\n" +
             "$('#myForm input').on('change', function() {\n" +
-//            "   alert($('input[name=request]:checked', '#myForm').val());\n" +
             "   var id = $('input[name=request]:checked', '#myForm').val()\n;" + 
             "   var theUrl = window.location.href + '?id=' + id;\n" +
-//            "   console.log(theUrl);\n" +
-//            "   $.ajax({\n" +
-//            "       method: 'GET',\n" +
-//            "       url: theUrl\n" +
-//            "   })\n" +
-//            "   .done(function(msg) {\n" +
-//            "       console.log('Message: ' + msg);" +
-//            "       $('#reqBody').html = msg;\n" +
-//            "   });\n" +
             "   $('#reqBody').load(theUrl);" +
             "});\n" +
+            "\n" +
+            "$('#selectRequest').click(function() {\n" +
+            "    alert( \"Handler for .click() called.\" );\n" +
+            "    var id = $('input[name=request]:checked', '#myForm').val()\n;" + 
+            "    var SOAPAction = null;\n" +
+            "    switch(id) {\n" +
+            "        case 0:\n" +
+            "        case 1:\n" +
+            "        case 2:\n" +
+            "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetails-v1-0';\n" +
+            "            break;\n\n" +
+            "        case 3:\n" +
+            "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0';\n" +
+            "            break;\n\n" +
+            "        case 4:\n" +
+            "        case 5:\n" +
+            "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0';\n" +
+            "            break;\n\n" +
+            "        case 6:\n" +
+            "            SOAPAction = 'urn:nhs-itk:services:201005:getNHSNumber-v1-0';\n" +
+            "            break;\n\n" +
+            "        case 7:\n" +
+            "            SOAPAction = 'urn:nhs-itk:services:201005:verifyNHSNumber-v1-0';\n" +
+            "            break;\n" +
+            "    }\n" +
+            "    $.ajax({\n" +
+            "        url: \"service\",\n" +
+            "        data: $('textarea#reqBody').val(),\n" +
+            "        type: \"POST\",\n" +
+            "        beforeSend: function(xhr){xhr.setRequestHeader('SOAPAction', SOAPAction);},\n" +
+            "        success: function() {\n" +
+            "            alert('Success!');" +
+            "        }\n" +
+            "    });\n" +
+            "});\n" +
+            //See https://stackoverflow.com/questions/3258645/pass-request-headers-in-a-jquery-ajax-get-call
+            // for setting SOAPAction header
             "</script>" +
             "</html>";
 

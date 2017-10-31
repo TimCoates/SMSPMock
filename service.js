@@ -251,8 +251,8 @@ function findPerson(SOAPAction, message_id, persontoFind, callback) {
 
         // Based on what fields, populate params object appropriately...
         if((nhsNFlag == true) && (dobFlag == true)) {
-                params.KeyConditionExpression = "#nhsn = :nhs_number",,
-                params.ExpressionAttributeValues = { ":nhsn": nhsNumberToFind }
+                params.KeyConditionExpression = "nhs_number = :nhsn";
+                params.ExpressionAttributeValues = { ":nhsn": nhsNumberToFind };
         } else {
             if((fNameFlag == true) && (genderFlag == true) && (dobFlag == true)) {
                 params.IndexName = "name",
@@ -277,10 +277,20 @@ function findPerson(SOAPAction, message_id, persontoFind, callback) {
                 if(data.Items.length == 1) {
                         person = data.Items[0];
                         console.log("Found one match");
-                        if(person.gender == genderToFind) {
-                            callback(null, SOAPAction, message_id, person);
+
+                        // Here we need to determine whether we can clarify on gender or on dob...
+                        if(genderFlag == true) {
+                            if(person.gender == genderToFind) {
+                                callback(null, SOAPAction, message_id, person);
+                            } else {
+                                callback(null, SOAPAction, message_id, null);
+                            }
                         } else {
-                            callback(null, SOAPAction, message_id, null);
+                            if(person.dob == dobToFind) {
+                                callback(null, SOAPAction, message_id, person);
+                            } else {
+                                callback(null, SOAPAction, message_id, null);
+                            }
                         }
                 } else {
                     if(data.Items.length == 0) {
