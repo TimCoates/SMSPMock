@@ -189,14 +189,14 @@ requestTemplates[0] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 "					<itk:id type=\"1.2.826.0.1285.0.2.0.107\" uri=\"868000003114\"/>\n" +
 "				</itk:auditIdentity>\n" +
 "				<itk:manifest count=\"1\">\n" +
-"					<itk:manifestitem id=\"uuid_{{msgID}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getNHSNumberRequest-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
+"					<itk:manifestitem id=\"uuid_{{manifest_id}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getNHSNumberRequest-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
 "				</itk:manifest>\n" +
 "				<itk:senderAddress uri=\"urn:nhs-uk:addressing:ods:rhm:team1:C\"/>\n" +
 "			</itk:header>\n" +
 "			<itk:payloads count=\"1\">\n" +
-"				<itk:payload id=\"uuid_{{msgID}}\">\n" +
+"				<itk:payload id=\"uuid_{{manifest_id}}\">\n" +
 "                <getPatientDetails-v1-0 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" moodCode=\"EVN\" classCode=\"CACT\">\n" +
-"                    <id root=\"{{ guidManifestItem }}\"/>\n" +
+"                    <id root=\"{{manifest_id}}\"/>\n" +
 "                    <code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsRequest-v1-0\"/>\n" +
 "                    <queryEvent>\n" +
 "                        <Person.DateOfBirth>\n" +
@@ -253,14 +253,14 @@ requestTemplates[1] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 "					<itk:id type=\"1.2.826.0.1285.0.2.0.107\" uri=\"868000003114\"/>\n" +
 "				</itk:auditIdentity>\n" +
 "				<itk:manifest count=\"1\">\n" +
-"					<itk:manifestitem id=\"uuid_{{msgID}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getNHSNumberRequest-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
+"					<itk:manifestitem id=\"uuid_{{manifest_id}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getNHSNumberRequest-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
 "				</itk:manifest>\n" +
 "				<itk:senderAddress uri=\"urn:nhs-uk:addressing:ods:rhm:team1:C\"/>\n" +
 "			</itk:header>\n" +
 "			<itk:payloads count=\"1\">\n" +
-"				<itk:payload id=\"uuid_{{msgID}}\">\n" +
+"				<itk:payload id=\"uuid_{{manifest_id}}\">\n" +
 "                <getPatientDetails-v1-0 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" moodCode=\"EVN\" classCode=\"CACT\">\n" +
-"                    <id root=\"{{ guidManifestItem }}\"/>\n" +
+"                    <id root=\"{{ manifest_id }}\"/>\n" +
 "                    <code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsRequest-v1-0\"/>\n" +
 "                    <queryEvent>\n" +
 "                        <Person.DateOfBirth>\n" +
@@ -318,14 +318,14 @@ requestTemplates[2] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 "					<itk:id type=\"1.2.826.0.1285.0.2.0.107\" uri=\"868000003114\"/>\n" +
 "				</itk:auditIdentity>\n" +
 "				<itk:manifest count=\"1\">\n" +
-"					<itk:manifestitem id=\"uuid_{{msgID}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getNHSNumberRequest-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
+"					<itk:manifestitem id=\"uuid_{{manifest_id}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getNHSNumberRequest-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
 "				</itk:manifest>\n" +
 "				<itk:senderAddress uri=\"urn:nhs-uk:addressing:ods:rhm:team1:C\"/>\n" +
 "			</itk:header>\n" +
 "			<itk:payloads count=\"1\">\n" +
-"				<itk:payload id=\"uuid_{{msgID}}\">\n" +
+"				<itk:payload id=\"uuid_{{manifest_id}}\">\n" +
 "                <getPatientDetails-v1-0 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" moodCode=\"EVN\" classCode=\"CACT\">\n" +
-"                    <id root=\"{{ guidManifestItem }}\"/>\n" +
+"                    <id root=\"{{manifest_id}}\"/>\n" +
 "                    <code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsRequest-v1-0\"/>\n" +
 "                    <queryEvent>\n" +
 "                        <Person.DateOfBirth>\n" +
@@ -356,7 +356,66 @@ requestTemplates[2] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 "		</itk:DistributionEnvelope>\n" +
 "	</soap:Body>\n" +
 "</soap:Envelope>";
-requestTemplates[3] = "Req 3";
+// Request for getPatientDetailsBySearch MATCHES
+requestTemplates[3] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:itk=\"urn:nhs-itk:ns:201005\">" +
+"  <soap:Header>" +
+"    <wsa:MessageID>B72F7785-534C-11E6-ADCA-29C651A3BE62</wsa:MessageID>" +
+"    <wsa:Action>urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0</wsa:Action>" +
+"    <wsa:To>https://192.168.54.6/smsp/pds</wsa:To>" +
+"    <wsa:From>" +
+"      <wsa:Address>192.168.54.7</wsa:Address>" +
+"    </wsa:From>" +
+"    <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">" +
+"      <wsu:Timestamp xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\" wsu:Id=\"D6CD5232-14CF-11DF-9423-1F9A910D4703\">" +
+"        <wsu:Created>2016-07-27T11:10:23Z</wsu:Created>" +
+"        <wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>" +
+"      </wsu:Timestamp>" +
+"      <wsse:UsernameToken>" +
+"        <wsse:Username>TKS Server test</wsse:Username>" +
+"      </wsse:UsernameToken>" +
+"    </wsse:Security>" +
+"  </soap:Header>" +
+"  <soap:Body>" +
+"    <itk:DistributionEnvelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" +
+"      <itk:header service=\"urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0\" trackingid=\"B72F9E96-534C-11E6-ADCA-29C651A3BE6F\">" +
+"        <itk:auditIdentity>" +
+"          <itk:id type=\"1.2.826.0.1285.0.2.0.107\" uri=\"868000003114\"/>" +
+"        </itk:auditIdentity>" +
+"        <itk:manifest count=\"1\">" +
+"          <itk:manifestitem id=\"uuid_{{manifest_id}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getPatientDetailsBySearch-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>" +
+"        </itk:manifest>" +
+"        <itk:senderAddress uri=\"urn:nhs-uk:addressing:ods:rhm:team1:C\"/>" +
+"      </itk:header>" +
+"      <itk:payloads count=\"1\">" +
+"        <itk:payload id=\"uuid_{{manifest_id}}\">" +
+"                <getPatientDetailsBySearch-v1-0 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" moodCode=\"EVN\" classCode=\"CACT\">" +
+"                    <id root=\"{{manifest_id}}\"/>" +
+"                    <code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsRequest-v1-0\"/>" +
+"                    <queryEvent>" +
+"                        <Person.DateOfBirth>" +
+"                            <value value=\"20080616\"/>" +
+"                            <semanticsText>Person.DateOfBirth</semanticsText>" +
+"                        </Person.DateOfBirth>" +
+"                        <Person.Name>" +
+"                            <value>" +
+"                                <family>HADCROFT</family>" +
+"                            </value>" +
+"                            <semanticsText>Person.Name</semanticsText>" +
+"                        </Person.Name>" +
+"                        <Person.Gender>" +
+"              <value code=\"2\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.16.25\" />" +
+"              <semanticsText>Person.Gender</semanticsText>" +
+"            </Person.Gender>" +
+"                    </queryEvent>" +
+"                </getPatientDetailsBySearch-v1-0>" +
+"        </itk:payload>" +
+"      </itk:payloads>" +
+"    </itk:DistributionEnvelope>" +
+"  </soap:Body>" +
+"</soap:Envelope>";
+
+
+
 requestTemplates[4] = "Req 4";
 requestTemplates[5] = "Req 5";
 requestTemplates[6] = "Req 6";

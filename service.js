@@ -294,7 +294,7 @@ function findPerson(SOAPAction, message_id, persontoFind, callback) {
                         }
                 } else {
                     if(data.Items.length == 0) {
-                        console.log("Found no match");
+                        console.log("Found no match: " + JSON.stringify(data));
                         callback(null, SOAPAction, message_id, null);
                     } else {
                         console.log("Found more than one match");

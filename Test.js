@@ -133,8 +133,10 @@ module.exports.entrypoint = (event, context, callback) => {
             var tpl = templates.requestTemplates[id];
 
             var msg_id = uuidv4();
+            var manifest_id = uuidv4();
             var dataToWrap = {
-                msgID: msg_id
+                msgID: msg_id,
+                manifest_id
             };
 
             var body = mustache.render(tpl, dataToWrap);
