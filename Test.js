@@ -52,32 +52,54 @@ module.exports.entrypoint = (event, context, callback) => {
             "<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js\"></script>" +
         	"<title>SMSP Mock - Send tests</title></head><body>" +
         	"<div class=\"container\">\n" +
+            " <form id='myForm' action='#'>\n" +
         	" <div class=\"jumbotron\"><h1><a href=\"Homepage\">Send tests</a></h1></div>\n" +
-            " <div class='row'><form id='myForm' action='#'>\n" +
-            "  <div class='col' style='width:80%'>\n" +
+        	" <div class=\"py-5\">\n" +
+            "  <div class='row'>\n" +
+            "   <div class='col-xs-9'>\n" +
             // Here we have a code window
-            "   <textarea id='reqBody' rows='20' cols='80'>" +
-            "   </textarea>" +
-            "  </div>" + // Ends the wide column
-            "  <div class='col' style='width:20%'>\n" +
+            "    <textarea style='font-size: x-small; background-color: #e0e0e0;' id='reqBody' rows='30' cols='80'></textarea>\n" +
+            "   </div>\n" + // Ends the wide column
+            "   <div class='col-xs-3' style='padding-left: 30px;'>\n" + // The narrow column for options
             // Here we have a list of radio buttons, plus a Submit button
-            "   <div>\n" +
-            "    <input type='radio' name='request' id='request' value='0'>getPatientDetails Partial match<br />\n" +
-            "    <input type='radio' name='request' id='request' value='1'>getPatientDetails Full match<br />\n" +
-            "    <input type='radio' name='request' id='request' value='2'>getPatientDetails No match<br />\n" +
-            "    <input type='radio' name='request' id='request' value='3'>getPatientDetailsBySearch Match<br />\n" +
-            "    <input type='radio' name='request' id='request' value='4'>getPatientDetailsByNHSNumber Match<br />\n" +
-            "    <input type='radio' name='request' id='request' value='5'>getPatientDetailsByNHSNumber No match<br />\n" +
-            "    <input type='radio' name='request' id='request' value='6'>getNHSNumber Match<br />\n" +
-            "    <input type='radio' name='request' id='request' value='7'>verifyNHSNumber Match<br />\n" +
-            "</div>\n" +
-            "   <div><button id='selectRequest' type='button'>Submit!</button></div>\n" +
-            "   </form>\n" +
-            "  </div>\n" + // Ends the narrow column
-            " </div>\n" + // Ends row
-            " <div class='row'>\n" + // New row
-            "   <textarea id='response' name='response' rows='20' cols='80'></textarea>" +
-            " </div>\n" + // Ends row
+            "    <div>\n" +
+            "     <div><input type='radio' name='request' id='request' value='0'>" +
+            "<label for='0' style='font-size: x-small;'>getPatientDetails Partial match</label></div>\n" +
+            "     <div><hr></div>\n" +
+            "     <div><input type='radio' name='request' id='request' value='1'>" +
+            "<label for='0' style='font-size: x-small;'>getPatientDetails Full match</label></div>\n" +
+            "     <div><hr></div>\n" +
+            "     <div><input type='radio' name='request' id='request' value='2'>" +
+            "<label for='0' style='font-size: x-small;'>getPatientDetails No match</label></div>\n" +
+            "     <div><hr></div>\n" +
+            "     <div><input type='radio' name='request' id='request' value='3'>" +
+            "<label for='0' style='font-size: x-small;'>getPatientDetailsBySearch Match</label></div>\n" +
+            "     <div><hr></div>\n" +
+            "     <div><input type='radio' name='request' id='request' value='4'>" +
+            "<label for='0' style='font-size: x-small;'>getPatientDetailsByNHSNumber Match</label></div>\n" +
+            "     <div><hr></div>\n" +
+            "     <div><input type='radio' name='request' id='request' value='5'>" +
+            "<label for='0' style='font-size: x-small;'>getPatientDetailsByNHSNumber No match</label></div>\n" +
+            "     <div><hr></div>\n" +
+            "     <div><input type='radio' name='request' id='request' value='6'>" +
+            "<label for='0' style='font-size: x-small;'>getNHSNumber Match</label></div>\n" +
+            "     <div><hr></div>\n" +
+            "     <div><input type='radio' name='request' id='request' value='7'>" +
+            "<label for='0' style='font-size: x-small;'>verifyNHSNumber Match</label></div>\n" +
+            "     <div><hr></div>\n" +
+            "    </div>\n" +
+            "   </div>\n" + // Ends the narrow column
+            "   <div class='col-xs-3'>\n" +
+            "    <div><button id='selectRequest' type='button'>Submit!</button></div>\n" +
+            "   </div>\n" + // Ends the narrow column
+            "  </div>\n" + // Ends row
+            "  <div class='row'>\n" + // New row
+            "    <div class='col-xs-9'>\n" +
+            "     <textarea style='font-size: x-small; background-color: #e0e0e0;' id='response' name='response' rows='20' cols='80'></textarea>" +
+            "   </div>\n" + // Ends the wide column
+            "  </div>\n" + // Ends row
+            " </div>\n" + // Ends py-5
+            " </form>\n" +
         	"</div>\n" + // Ends Container
             "</body>\n" +
             "<script>\n" +
