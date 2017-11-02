@@ -75,6 +75,9 @@ module.exports.entrypoint = (event, context, callback) => {
             "   </form>\n" +
             "  </div>\n" + // Ends the narrow column
             " </div>\n" + // Ends row
+            " <div class='row'>\n" + // New row
+            "   <textarea id='response' name='response' rows='20' cols='80'></textarea>" +
+            " </div>\n" + // Ends row
         	"</div>\n" + // Ends Container
             "</body>\n" +
             "<script>\n" +
@@ -86,7 +89,6 @@ module.exports.entrypoint = (event, context, callback) => {
             "});\n" +
             "\n" +
             "$('#selectRequest').click(function() {\n" +
-            "    alert( \"Handler for .click() called.\" );\n" +
             "    var SOAPAction = null;\n" +
             "    switch(id) {\n" +
             "        case \"0\":\n" +
@@ -117,8 +119,8 @@ module.exports.entrypoint = (event, context, callback) => {
             "        data: $('textarea#reqBody').val(),\n" +
             "        type: \"POST\",\n" +
             "        headers: { 'SOAPAction': SOAPAction }," +
-            "        success: function() {\n" +
-            "            alert('Success!');" +
+            "        success: function(xml) {\n" +
+            "            $(\"textarea[name='response']\").val(xml);" +
             "        }\n" +
             "    });\n" +
             "});\n" +
@@ -138,7 +140,7 @@ module.exports.entrypoint = (event, context, callback) => {
             var manifest_id = uuidv4();
             var dataToWrap = {
                 msgID: msg_id,
-                manifest_id
+                manifest_id: manifest_id
             };
 
             var body = mustache.render(tpl, dataToWrap);

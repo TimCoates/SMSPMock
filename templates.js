@@ -417,7 +417,57 @@ requestTemplates[3] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 
 
 
-requestTemplates[4] = "Req 4";
+requestTemplates[4] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:itk=\"urn:nhs-itk:ns:201005\">" +
+"  <soap:Header>" +
+"    <wsa:MessageID>{{msgID}}</wsa:MessageID>" +
+"    <wsa:Action>urn:nhs-itk:services:201005:getPatientDetailsByNHSNumberRequest-v1-0</wsa:Action>" +
+"    <wsa:To>https://192.168.54.6/smsp/pds</wsa:To>" +
+"    <wsa:From>" +
+"      <wsa:Address>192.168.54.7</wsa:Address>" +
+"    </wsa:From>" +
+"    <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">" +
+"      <wsu:Timestamp xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\" wsu:Id=\"{{msgID}}\">" +
+"        <wsu:Created>2016-07-27T11:10:23Z</wsu:Created>" +
+"        <wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>" +
+"      </wsu:Timestamp>" +
+"      <wsse:UsernameToken>" +
+"        <wsse:Username>TKS Server test</wsse:Username>" +
+"      </wsse:UsernameToken>" +
+"    </wsse:Security>" +
+"  </soap:Header>" +
+"  <soap:Body>" +
+"    <itk:DistributionEnvelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" +
+"      <itk:header service=\"urn:nhs-itk:services:201005:getPatientDetailsByNHSNumberRequest-v1-0\" trackingid=\"{{msgID}}\">" +
+"        <itk:auditIdentity>" +
+"          <itk:id type=\"1.2.826.0.1285.0.2.0.107\" uri=\"868000003114\"/>" +
+"        </itk:auditIdentity>" +
+"        <itk:manifest count=\"1\">" +
+"          <itk:manifestitem id=\"uuid_{{manifest_id}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getPatientDetailsBySearch-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>" +
+"        </itk:manifest>" +
+"        <itk:senderAddress uri=\"urn:nhs-uk:addressing:ods:rhm:team1:C\"/>" +
+"      </itk:header>" +
+"      <itk:payloads count=\"1\">" +
+"        <itk:payload id=\"{{manifest_id}}\">" +
+"		   <getPatientDetailsByNHSNumberRequest-v1-0 xsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/QUPA_MT000003GB01.xsd\" moodCode=\"EVN\" classCode=\"CACT\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" +
+"			 <id root=\"{{msgID}}\"/>" +
+"			 <code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsByNHSNumberRequest-v1-0\"/>" +
+"			 <queryEvent>" +
+"			   <Person.DateOfBirth>" +
+"				 <value value=\"19960530\"/>" +
+"				 <semanticsText>Person.DateOfBirth</semanticsText>" +
+"			   </Person.DateOfBirth>" +
+"			   <Person.NHSNumber>" +
+"				 <value root=\"2.16.840.1.113883.2.1.4.1\" extension=\"9449310580\"/>" +
+"				 <semanticsText>Person.NHSNumber</semanticsText>" +
+"			   </Person.NHSNumber>" +
+"			 </queryEvent>" +
+"		   </getPatientDetailsByNHSNumberRequest-v1-0>" +
+"        </itk:payload>" +
+"      </itk:payloads>" +
+"    </itk:DistributionEnvelope>" +
+"  </soap:Body>" +
+"</soap:Envelope>";
+
 requestTemplates[5] = "Req 5";
 requestTemplates[6] = "Req 6";
 requestTemplates[7] = "Req 7";
