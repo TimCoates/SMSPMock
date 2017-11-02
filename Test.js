@@ -122,8 +122,6 @@ module.exports.entrypoint = (event, context, callback) => {
             "        }\n" +
             "    });\n" +
             "});\n" +
-            //See https://stackoverflow.com/questions/3258645/pass-request-headers-in-a-jquery-ajax-get-call
-            // for setting SOAPAction header
             "</script>" +
             "</html>";
 
