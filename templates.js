@@ -471,7 +471,58 @@ requestTemplates[4] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 
 requestTemplates[5] = "Req 5";
 requestTemplates[6] = "Req 6";
-requestTemplates[7] = "Req 7";
+
+// Request for verifyNHSNumber MATCH
+requestTemplates[7] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:itk=\"urn:nhs-itk:ns:201005\">\n" +
+"  <soap:Header>\n" +
+"    <wsa:MessageID>{{msgID}}</wsa:MessageID>\n" +
+"    <wsa:Action>urn:nhs-itk:services:201005:getNHSNumber-v1-0</wsa:Action>\n" +
+"    <wsa:To>https://192.168.54.6/smsp/pds</wsa:To>\n" +
+"    <wsa:From>\n" +
+"      <wsa:Address>192.168.54.7</wsa:Address>\n" +
+"    </wsa:From>\n" +
+"    <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\n" +
+"      <wsu:Timestamp xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\" wsu:Id=\"D6CD5232-14CF-11DF-9423-1F9A910D4703\">\n" +
+"        <wsu:Created>{{created}}</wsu:Created>\n" +
+"        <wsu:Expires>{{expires}}</wsu:Expires>\n" +
+"      </wsu:Timestamp>\n" +
+"      <wsse:UsernameToken>\n" +
+"        <wsse:Username>TKS Server test</wsse:Username>\n" +
+"      </wsse:UsernameToken>\n" +
+"    </wsse:Security>\n" +
+"  </soap:Header>\n" +
+"  <soap:Body>\n" +
+"    <itk:DistributionEnvelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+"      <itk:header service=\"urn:nhs-itk:services:201005:verifyNHSNumberRequest-v1-0\" trackingid=\"{{msgID}}\">\n" +
+"        <itk:auditIdentity>\n" +
+"          <itk:id type=\"1.2.826.0.1285.0.2.0.107\" uri=\"868000003114\"/>\n" +
+"        </itk:auditIdentity>\n" +
+"        <itk:manifest count="1">\n" +
+"          <itk:manifestitem id="uuid_{{manifest_id}}" mimetype=\"text/xml\" profileid=\"urn:nhs-itk:services:201005:verifyNHSNumber-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
+"        </itk:manifest>\n" +
+"        <itk:senderAddress uri=\"urn:nhs-uk:addressing:ods:rhm:team1:C\"/>\n" +
+"      </itk:header>\n" +
+"      <itk:payloads count=\"1\">\n" +
+"        <itk:payload id=\"uuid_{{manifest_id}}\">\n" +
+"			<verifyNHSNumberRequest-v1-0 xsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/QUPA_MT000001GB01.xsd\" moodCode=\"EVN\" classCode=\"CACT\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+"				<id root=\"{{manifest_id}}\"/>\n" +
+"				<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"verifyNHSNumberRequest-v1-0\"/>\n" +
+"				<queryEvent>\n" +
+"					<Person.DateOfBirth>\n" +
+"						<value value=\"20081216\"/>\n" +
+"						<semanticsText>Person.DateOfBirth</semanticsText>\n" +
+"					</Person.DateOfBirth>\n" +
+"					<Person.NHSNumber>\n" +
+"						<value root=\"2.16.840.1.113883.2.1.4.1\" extension=\"9449307342\"/>\n" +
+"						<semanticsText>Person.NHSNumber</semanticsText>\n" +
+"					</Person.NHSNumber>\n" +
+"				</queryEvent>\n" +
+"			</verifyNHSNumberRequest-v1-0>\n" +
+"        </itk:payload>\n" +
+"      </itk:payloads>\n" +
+"    </itk:DistributionEnvelope>\n" +
+"  </soap:Body>\n" +
+"</soap:Envelope>";
 
 module.exports = {
 	responseTemplates:responseTemplates,
