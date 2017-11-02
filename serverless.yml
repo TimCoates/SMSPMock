@@ -152,6 +152,12 @@ resources:
       Properties:
         RetentionInDays: "1"
 
+    TestLogGroup:  # Log group for the pdsdata function
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+
     AwakenQ:  # SNS Topic, where we send wakey wakey messages to other lambdas when homepage is run.
       Type: AWS::SNS::Topic
       Properties:

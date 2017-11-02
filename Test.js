@@ -81,11 +81,12 @@ module.exports.entrypoint = (event, context, callback) => {
         	"</div>\n" + // Ends Container
             "</body>\n" +
             "<script>\n" +
-            "var id = 0;" +
+            "var id = 0;\n\n" +
             "$('#myForm input').on('change', function() {\n" +
             "   id = $('input[name=request]:checked', '#myForm').val()\n;" + 
             "   var theUrl = window.location.href + '?id=' + id;\n" +
-            "   $('#reqBody').load(theUrl);" +
+            "   console.log('Fetching: ' + window.location.href + '?id=' + id);\n" +
+            "   $('#reqBody').load(theUrl);\n" +
             "});\n" +
             "\n" +
             "$('#selectRequest').click(function() {\n" +
@@ -110,22 +111,25 @@ module.exports.entrypoint = (event, context, callback) => {
             "            SOAPAction = 'urn:nhs-itk:services:201005:verifyNHSNumber-v1-0';\n" +
             "            break;\n" +
             "    }\n" +
-            "    console.log(\"Adding SOAPAction header: \" + SOAPAction);" +
-            "    $.ajaxSetup({" +
-            "        headers: { 'SOAPAction': SOAPAction }" +
-            "    });" +
+            "    console.log(\"Adding SOAPAction header: \" + SOAPAction);\n" +
+            "    $.ajaxSetup({\n" +
+            "        headers: { 'SOAPAction': SOAPAction }\n" +
+            "    });\n\n" +
+            "    var svcURL = 'https://' + window.location.hostname + '/" + process.env.stageName + "/service'; \n" +
+            "    console.log('POSTing to: ' + svcURL);\n" +
             "    $.ajax({\n" +
-            "        url: \"service\",\n" +
+            "        url: svcURL,\n" +
             "        data: $('textarea#reqBody').val(),\n" +
+            "        dataType: \"xml\", \n" +
             "        type: \"POST\",\n" +
-            "        headers: { 'SOAPAction': SOAPAction }," +
             "        success: function(xml) {\n" +
-            "            $(\"textarea[name='response']\").val(xml);" +
+            "            $(\"textarea[name='response']\").val(xml.firstChild.outerHTML);\n" +
+            "            console.log(JSON.stringify(xml.firstChild.outerHTML));\n" +
             "        }\n" +
             "    });\n" +
             "});\n" +
-            "</script>" +
-            "</html>";
+            "</script>\n" +
+            "</html>\n";
 
             var reply = {
                 "statusCode": 200,
@@ -138,9 +142,19 @@ module.exports.entrypoint = (event, context, callback) => {
 
             var msg_id = uuidv4();
             var manifest_id = uuidv4();
+
+            var d = new Date();
+            var created = d.toISOString();
+
+            var days = 2;
+            var newDate = new Date(d.setTime( d.getTime() + days * 86400000 ));
+            var expires = newDate.toISOString();
+
             var dataToWrap = {
                 msgID: msg_id,
-                manifest_id: manifest_id
+                manifest_id: manifest_id,
+                created: created,
+                expires: expires
             };
 
             var body = mustache.render(tpl, dataToWrap);
