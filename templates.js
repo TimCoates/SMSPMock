@@ -228,6 +228,7 @@ requestTemplates[0] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 "	</soap:Body>\n" +
 "</soap:Envelope>";
 
+// Request for getPatientDetails FULL MATCH
 requestTemplates[1] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:itk=\"urn:nhs-itk:ns:201005\">\n" +
 "	<soap:Header>\n" +
 "		<wsa:MessageID>{{msgID}}</wsa:MessageID>\n" +

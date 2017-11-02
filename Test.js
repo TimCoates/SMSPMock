@@ -78,41 +78,45 @@ module.exports.entrypoint = (event, context, callback) => {
         	"</div>\n" + // Ends Container
             "</body>\n" +
             "<script>\n" +
+            "var id = 0;" +
             "$('#myForm input').on('change', function() {\n" +
-            "   var id = $('input[name=request]:checked', '#myForm').val()\n;" + 
+            "   id = $('input[name=request]:checked', '#myForm').val()\n;" + 
             "   var theUrl = window.location.href + '?id=' + id;\n" +
             "   $('#reqBody').load(theUrl);" +
             "});\n" +
             "\n" +
             "$('#selectRequest').click(function() {\n" +
             "    alert( \"Handler for .click() called.\" );\n" +
-            "    var id = $('input[name=request]:checked', '#myForm').val()\n;" + 
             "    var SOAPAction = null;\n" +
             "    switch(id) {\n" +
-            "        case 0:\n" +
-            "        case 1:\n" +
-            "        case 2:\n" +
+            "        case \"0\":\n" +
+            "        case \"1\":\n" +
+            "        case \"2\":\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetails-v1-0';\n" +
             "            break;\n\n" +
-            "        case 3:\n" +
+            "        case \"3\":\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0';\n" +
             "            break;\n\n" +
-            "        case 4:\n" +
-            "        case 5:\n" +
+            "        case \"4\":\n" +
+            "        case \"5\":\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0';\n" +
             "            break;\n\n" +
-            "        case 6:\n" +
+            "        case \"6\":\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:getNHSNumber-v1-0';\n" +
             "            break;\n\n" +
-            "        case 7:\n" +
+            "        case \"7\":\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:verifyNHSNumber-v1-0';\n" +
             "            break;\n" +
             "    }\n" +
+            "    console.log(\"Adding SOAPAction header: \" + SOAPAction);" +
+            "    $.ajaxSetup({" +
+            "        headers: { 'SOAPAction': SOAPAction }" +
+            "    });" +
             "    $.ajax({\n" +
             "        url: \"service\",\n" +
             "        data: $('textarea#reqBody').val(),\n" +
             "        type: \"POST\",\n" +
-            "        beforeSend: function(xhr){xhr.setRequestHeader('SOAPAction', SOAPAction);},\n" +
+            "        headers: { 'SOAPAction': SOAPAction }," +
             "        success: function() {\n" +
             "            alert('Success!');" +
             "        }\n" +
