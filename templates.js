@@ -200,23 +200,23 @@ requestTemplates[0] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 "                    <code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsRequest-v1-0\"/>\n" +
 "                    <queryEvent>\n" +
 "                        <Person.DateOfBirth>\n" +
-"                            <value value=\"20101010\"/>\n" +
+"                            <value value=\"19551103\"/>\n" +
 "                            <semanticsText>Person.DateOfBirth</semanticsText>\n" +
 "                        </Person.DateOfBirth>\n" +
 "                        <Person.NHSNumber>\n" +
-"                            <value root=\"2.16.840.1.113883.2.1.4.1\" extension=\"1231231234\"/>\n" +
+"                            <value root=\"2.16.840.1.113883.2.1.4.1\" extension=\"9449304718\"/>\n" +
 "                            <semanticsText>Person.NHSNumber</semanticsText>\n" +
 "                        </Person.NHSNumber>\n" +
 "                        <Person.Name>\n" +
 "                            <value>\n" +
-"                                <given>Fred</given>\n" +
-"                                <family>Bloggs</family>\n" +
+"                                <given>CHINA</given>\n" +
+"                                <family>BOOMSA</family>\n" +
 "                            </value>\n" +
 "                            <semanticsText>Person.Name</semanticsText>\n" +
 "                        </Person.Name>\n" +
 "                        <Person.Postcode>\n" +
 "                            <value>\n" +
-"                                <postalCode>LS1 4HR</postalCode>\n" +
+"                                <postalCode>KT17 2QN</postalCode>\n" +
 "                            </value>\n" +
 "                            <semanticsText>Person.Postcode</semanticsText>\n" +
 "                        </Person.Postcode>\n" +
@@ -228,8 +228,134 @@ requestTemplates[0] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/so
 "	</soap:Body>\n" +
 "</soap:Envelope>";
 
-requestTemplates[1] = "Req 1";
-requestTemplates[2] = "Req 2";
+requestTemplates[1] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:itk=\"urn:nhs-itk:ns:201005\">\n" +
+"	<soap:Header>\n" +
+"		<wsa:MessageID>{{msgID}}</wsa:MessageID>\n" +
+"		<wsa:Action>urn:nhs-itk:services:201005:getNHSNumber-v1-0</wsa:Action>\n" +
+"		<wsa:To>https://192.168.54.6/smsp/pds</wsa:To>\n" +
+"		<wsa:From>\n" +
+"			<wsa:Address>192.168.54.7</wsa:Address>\n" +
+"		</wsa:From>\n" +
+"		<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\n" +
+"			<wsu:Timestamp xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\" wsu:Id=\"{{msgID}}\">\n" +
+"				<wsu:Created>2016-07-27T11:10:23Z</wsu:Created>\n" +
+"				<wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>\n" +
+"			</wsu:Timestamp>\n" +
+"			<wsse:UsernameToken>\n" +
+"				<wsse:Username>TKS Server test</wsse:Username>\n" +
+"			</wsse:UsernameToken>\n" +
+"		</wsse:Security>\n" +
+"	</soap:Header>\n" +
+"	<soap:Body>\n" +
+"		<itk:DistributionEnvelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+"			<itk:header service=\"urn:nhs-itk:services:201005:getNHSNumber-v1-0\" trackingid=\"{{msgID}}\">\n" +
+"				<itk:auditIdentity>\n" +
+"					<itk:id type=\"1.2.826.0.1285.0.2.0.107\" uri=\"868000003114\"/>\n" +
+"				</itk:auditIdentity>\n" +
+"				<itk:manifest count=\"1\">\n" +
+"					<itk:manifestitem id=\"uuid_{{msgID}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getNHSNumberRequest-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
+"				</itk:manifest>\n" +
+"				<itk:senderAddress uri=\"urn:nhs-uk:addressing:ods:rhm:team1:C\"/>\n" +
+"			</itk:header>\n" +
+"			<itk:payloads count=\"1\">\n" +
+"				<itk:payload id=\"uuid_{{msgID}}\">\n" +
+"                <getPatientDetails-v1-0 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" moodCode=\"EVN\" classCode=\"CACT\">\n" +
+"                    <id root=\"{{ guidManifestItem }}\"/>\n" +
+"                    <code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsRequest-v1-0\"/>\n" +
+"                    <queryEvent>\n" +
+"                        <Person.DateOfBirth>\n" +
+"                            <value value=\"20010801\"/>\n" +
+"                            <semanticsText>Person.DateOfBirth</semanticsText>\n" +
+"                        </Person.DateOfBirth>\n" +
+"                        <Person.NHSNumber>\n" +
+"                            <value root=\"2.16.840.1.113883.2.1.4.1\" extension=\"9449305277\"/>\n" +
+"                            <semanticsText>Person.NHSNumber</semanticsText>\n" +
+"                        </Person.NHSNumber>\n" +
+"                        <Person.Name>\n" +
+"                            <value>\n" +
+"                                <given>BARRIE</given>\n" +
+"                                <family>KELSALL</family>\n" +
+"                            </value>\n" +
+"                            <semanticsText>Person.Name</semanticsText>\n" +
+"                        </Person.Name>\n" +
+"                        <Person.Postcode>\n" +
+"                            <value>\n" +
+"                                <postalCode>KT18 6PP</postalCode>\n" +
+"                            </value>\n" +
+"                            <semanticsText>Person.Postcode</semanticsText>\n" +
+"                        </Person.Postcode>\n" +
+"                    </queryEvent>\n" +
+"                </getPatientDetails-v1-0>\n" +
+"				</itk:payload>\n" +
+"			</itk:payloads>\n" +
+"		</itk:DistributionEnvelope>\n" +
+"	</soap:Body>\n" +
+"</soap:Envelope>";
+
+// Request for getPatientDetails No match
+requestTemplates[2] = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:itk=\"urn:nhs-itk:ns:201005\">\n" +
+"	<soap:Header>\n" +
+"		<wsa:MessageID>{{msgID}}</wsa:MessageID>\n" +
+"		<wsa:Action>urn:nhs-itk:services:201005:getNHSNumber-v1-0</wsa:Action>\n" +
+"		<wsa:To>https://192.168.54.6/smsp/pds</wsa:To>\n" +
+"		<wsa:From>\n" +
+"			<wsa:Address>192.168.54.7</wsa:Address>\n" +
+"		</wsa:From>\n" +
+"		<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\n" +
+"			<wsu:Timestamp xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\" wsu:Id=\"{{msgID}}\">\n" +
+"				<wsu:Created>2016-07-27T11:10:23Z</wsu:Created>\n" +
+"				<wsu:Expires>2020-07-27T11:20:23Z</wsu:Expires>\n" +
+"			</wsu:Timestamp>\n" +
+"			<wsse:UsernameToken>\n" +
+"				<wsse:Username>TKS Server test</wsse:Username>\n" +
+"			</wsse:UsernameToken>\n" +
+"		</wsse:Security>\n" +
+"	</soap:Header>\n" +
+"	<soap:Body>\n" +
+"		<itk:DistributionEnvelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+"			<itk:header service=\"urn:nhs-itk:services:201005:getNHSNumber-v1-0\" trackingid=\"{{msgID}}\">\n" +
+"				<itk:auditIdentity>\n" +
+"					<itk:id type=\"1.2.826.0.1285.0.2.0.107\" uri=\"868000003114\"/>\n" +
+"				</itk:auditIdentity>\n" +
+"				<itk:manifest count=\"1\">\n" +
+"					<itk:manifestitem id=\"uuid_{{msgID}}\" mimetype=\"text/xml\" profileid=\"urn:nhs-en:profile:getNHSNumberRequest-v1-0\" base64=\"false\" compressed=\"false\" encrypted=\"false\"/>\n" +
+"				</itk:manifest>\n" +
+"				<itk:senderAddress uri=\"urn:nhs-uk:addressing:ods:rhm:team1:C\"/>\n" +
+"			</itk:header>\n" +
+"			<itk:payloads count=\"1\">\n" +
+"				<itk:payload id=\"uuid_{{msgID}}\">\n" +
+"                <getPatientDetails-v1-0 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" moodCode=\"EVN\" classCode=\"CACT\">\n" +
+"                    <id root=\"{{ guidManifestItem }}\"/>\n" +
+"                    <code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsRequest-v1-0\"/>\n" +
+"                    <queryEvent>\n" +
+"                        <Person.DateOfBirth>\n" +
+"                            <value value=\"20010101\"/>\n" +
+"                            <semanticsText>Person.DateOfBirth</semanticsText>\n" +
+"                        </Person.DateOfBirth>\n" +
+"                        <Person.NHSNumber>\n" +
+"                            <value root=\"2.16.840.1.113883.2.1.4.1\" extension=\"9449305276\"/>\n" +
+"                            <semanticsText>Person.NHSNumber</semanticsText>\n" +
+"                        </Person.NHSNumber>\n" +
+"                        <Person.Name>\n" +
+"                            <value>\n" +
+"                                <given>ADAM</given>\n" +
+"                                <family>FINDLESS</family>\n" +
+"                            </value>\n" +
+"                            <semanticsText>Person.Name</semanticsText>\n" +
+"                        </Person.Name>\n" +
+"                        <Person.Postcode>\n" +
+"                            <value>\n" +
+"                                <postalCode>KT18 6PP</postalCode>\n" +
+"                            </value>\n" +
+"                            <semanticsText>Person.Postcode</semanticsText>\n" +
+"                        </Person.Postcode>\n" +
+"                    </queryEvent>\n" +
+"                </getPatientDetails-v1-0>\n" +
+"				</itk:payload>\n" +
+"			</itk:payloads>\n" +
+"		</itk:DistributionEnvelope>\n" +
+"	</soap:Body>\n" +
+"</soap:Envelope>";
 requestTemplates[3] = "Req 3";
 requestTemplates[4] = "Req 4";
 requestTemplates[5] = "Req 5";
