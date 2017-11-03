@@ -18,13 +18,14 @@ var tblName = null;
 
 module.exports.entrypoint = (event, context, callback) => {
 
+	// Set things up...
 	setup();
 
-	console.log("Starting");
 	console.log("Event: " + JSON.stringify(event));
 
 	if(event.queryStringParameters == null) {
-// Here we've been asked for all the data, as JSON
+
+		// Here we've been asked for all the data, as JSON
 		var params = {
 			TableName: tblName,
 			ProjectionExpression: "nhs_number, family_name, given_name",
@@ -52,16 +53,12 @@ module.exports.entrypoint = (event, context, callback) => {
 			}
 		});
 	} else {
-// Here we're detailing one log item...
 
-// Here we need to go a getItem rather than a scan
+// Here we're detailing one log item, so we need to go a getItem rather than a scan
 		var params = {
 			TableName: tblName,
-			Key:{
-		        "nhs_number": event.queryStringParameters.nhs_number
-		    }
+			Key:{ "nhs_number": event.queryStringParameters.nhs_number }
 		};
-		console.log("queryStringParameters: " + JSON.stringify(event.queryStringParameters.nhs_number));
 		console.log("Params: " + JSON.stringify(params));
 
 		docClient.get(params, function(err, data) {
@@ -71,25 +68,33 @@ module.exports.entrypoint = (event, context, callback) => {
 		    } else {
 		        console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
 
-				var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgERERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
-				var body = "<html><head>" +
-"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">" +
-"<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css\" " +
-"integrity=\"sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M\" crossorigin=\"anonymous\">" +
-"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>" +
-"<link rel=\"stylesheet\" href=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css\">" +
-"<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js\"></script>" +
-"<link id=\"favicon\" rel=\"shortcut icon\" type=\"image/png\" href=\"data:​image/png;base64," + b64Data + "\">" +
-"<title>SMSP Mock - Patient: " + data.Item.nhs_number + "</title></head><body>" +
-"<div class=\"container\">" +
-"<div class=\"jumbotron\"><h1><a href=\"Homepage\">Patient details: " + data.Item.nhs_number + "</a></h1></div>" +
-"<div><h2>NHS Number</h2>" + data.Item.nhs_number + "</div>" +
-"<div><h2>Name</h2>" + data.Item.given_name + " " + data.Item.family_name + "</div>" +
-"<div><h2>Address</h2>" + makeAddress(data) + "</div>" +
+			// This is the favicon
+				var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/"+
+"4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAA"+
+"EREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgE"+
+"RERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
+
+
+				var body = "<html>\n<head>\n" +
+" <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>\n" +
+" <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css' " +
+"integrity='sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M' crossorigin='anonymous'>" +
+" <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>" +
+" <link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css'>" +
+" <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>" +
+" <link id='favicon' rel='shortcut icon' type='image/png' href='data:​image/png;base64," + b64Data + "'>" +
+" <title>SMSP Mock - Patient: " + data.Item.nhs_number + "</title>\n"+
+"</head>\n<body>\n" +
+"<div class='container'>\n" +
+" <div class='jumbotron'><h1><a href='Homepage'>Patient details: " + data.Item.nhs_number + "</a></h1></div>\n" +
+" <div><h2>NHS Number</h2>" + data.Item.nhs_number + "</div>\n" +
+" <div><h2>Name</h2>" + data.Item.given_name + " " + data.Item.family_name + "</div>\n" +
+" <div><h2>Address</h2>\n" + makeAddress(data) + "</div>\n" +
 makeDOB(data) +
 gender(data) + 
 makeContacts(data) +
-"</div></body>" +
+"</div>\n"+
+"</body>\n" +
 "</html>";
 
 				var reply = {
@@ -108,45 +113,57 @@ makeContacts(data) +
 }
 
 // Function to parse the input into a json object
-function parseQuery(qstr) {
-    console.log("parseQuery called on: " + qstr);
-    var query = {};
-    var a = qstr.substr(0).split('&');
-    for (var i = 0; i < a.length; i++) {
-        var b = a[i].split('=');
-        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
-    }
-    return query;
-}
+//function parseQuery(qstr) {
+///    console.log("parseQuery called on: " + qstr);
+//    var query = {};
+//    var a = qstr.substr(0).split('&');
+//    for (var i = 0; i < a.length; i++) {
+//        var b = a[i].split('=');
+//        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+//    }
+//    return query;
+//}
 
 function makeAddress(data) {
 	var reply = "";
 	if(typeof data.Item.address1 != 'undefined') {
-		reply = reply + "<div>" + data.Item.address1 +"</div>\n";
+		if(data.Item.address1 != "") {
+			reply = reply + "  <div>" + data.Item.address1 +"</div>\n";
+		}
 	}
 	if(typeof data.Item.address2 != 'undefined') {
-		reply = reply + "<div>" + data.Item.address2 +"</div>\n";
+		if(data.Item.address2 != "") {
+			reply = reply + "  <div>" + data.Item.address2 +"</div>\n";
+		}
 	}
 	if(typeof data.Item.address3 != 'undefined') {
-		reply = reply + "<div>" + data.Item.address3 +"</div>\n";
+		if(data.Item.address3 != "") {
+			reply = reply + "  <div>" + data.Item.address3 +"</div>\n";
+		}
 	}
 	if(typeof data.Item.address4 != 'undefined') {
-		reply = reply + "<div>" + data.Item.address4 +"</div>\n";
+		if(data.Item.address4 != "") {
+			reply = reply + "  <div>" + data.Item.address4 +"</div>\n";
+		}
 	}
 	if(typeof data.Item.address5 != 'undefined') {
-		reply = reply + "<div>" + data.Item.address5 +"</div>\n";
+		if(data.Item.address5 != "") {
+			reply = reply + "  <div>" + data.Item.address5 +"</div>\n";
+		}
 	}
 	if(typeof data.Item.postcode != 'undefined') {
-		reply = reply + "<div>" + data.Item.postcode +"</div>\n";
+		if(data.Item.postcode != "") {
+			reply = reply + "  <div>" + data.Item.postcode +"</div>\n";
+		}
 	}
 	return reply;
 }
 
+// Function to show the Gender of the patient passed in
 function gender(data) {
-	console.log("In gender() with: " + JSON.stringify(data));
 	var gender = "";
 	if(typeof data.Item.gender != 'undefined') {
-		gender = "<div><h2>Gender</h2>";
+		gender = "  <div><h2>Gender</h2>\n";
 		switch(data.Item.gender) {
 			case 0:
 			gender = gender + "Not known";
@@ -165,30 +182,31 @@ function gender(data) {
 			break;
 		}
 		
-		gender = gender + "</div>";
+		gender = gender + "</div>\n";
 	}
 	return gender;
 }
 
+// Function to show the DOB of the person
 function makeDOB(data) {
-	console.log("In makeDOB() with: " + JSON.stringify(data));
 	var dob = "";
 	if(typeof data.Item.dob != 'undefined') {
-		dob = "<div><h2>DOB</h2>";
+		dob = "  <div><h2>DOB</h2>\n";
 		dob = dob + data.Item.dob.substr(6, 2) + "/";
 		dob = dob + data.Item.dob.substr(4, 2) + "/";
 		dob = dob + data.Item.dob.substr(0, 4);
-		dob = dob + "</div>";
+		dob = dob + "</div>\n";
 	}
 	return dob;
 }
 
+// Function to show the person's contact details
 function makeContacts(data) {
 	console.log("In makeContacts() with: " + JSON.stringify(data));
 	var contacts = "";
 
 	if(typeof data.Item.telecom != 'undefined') {
-		contacts = "<div><h2>Contacts</h2>";
+		contacts = "  <div><h2>Contacts</h2>\n";
 		for(var i = 0; i < data.Item.telecom.length; i++) {
 			var type = "";
 			switch(data.Item.telecom[i].use) {
@@ -257,7 +275,7 @@ function makeContacts(data) {
 				break;
 
 			}
-			contacts = contacts + "<div><strong>Type: </strong>" + type + "&nbsp;&nbsp;";
+			contacts = contacts + "  <div><strong>Type: </strong>" + type + "&nbsp;&nbsp;";
 
 			var value = "";
 			if(data.Item.telecom[i].value.substr(0, 4) == "tel:") {
@@ -270,13 +288,14 @@ function makeContacts(data) {
 				value = "Email: " + data.Item.telecom[i].value.substr(7, data.Item.telecom[i].value.length);
 			}
 
-			contacts = contacts + "<strong>Value: </strong>" + value + "</div>";
+			contacts = contacts + "<strong>Value: </strong>" + value + "</div>\n";
 		}
-		contacts = contacts + "</div>";
+		contacts = contacts + "</div>\n";
 	}
 	return contacts;
 }
 
+// Instantiate any potentially cacheable and slow items, to get better warm performance.
 function setup() {
 	if(docClient == null) {
 		docClient = new AWS.DynamoDB.DocumentClient();

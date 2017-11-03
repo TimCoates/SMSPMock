@@ -75,6 +75,7 @@ Suggestions, complaints, issues, contributions and pull requests are all welcome
 
 * Not all searches are properly implemented by the service.
 * Incomplete rendering of Patient data.
+* Better handling of different failure responses, eg multiple matches found etc.
 * DONE ~~Better presentation of the XML when viewing logs. At the moment it's very basic.~~
 * DONE ~~More details of how to send (or ideally the ability to send) in requests from the UI itself.~~
 

@@ -57,15 +57,12 @@ module.exports.entrypoint = (event, context, callback) => {
 // Gets the incoming message_id we'll correlate everything against
 // Returns: error(null), message_id, event
 function getMessageID(event, callback) {
-	// Here we need to get the message_id
-	// First we get the http body we had passed in, should be an XML document as a string
-	var XMLString = event.body;
+
+	//var XMLString = event.body;
 
 	// Now we call the function in makeTemplate.js which does all of the necessary XPath stuff.
-	var message_id = templater.getMsgID(XMLString);
+	var message_id = templater.getMsgID(event.body);
     console.log("Got message: " + message_id);
-
-	// Then save incoming message against the message_id
 
 	// And return it in args...
 	callback(null, message_id, event);
@@ -94,6 +91,7 @@ function getSOAPAction(message_id, event, callback) {
         SOAPAction = SOAPAction.replace("\"","");
         console.log("SOAPAction: " + SOAPAction);
 
+        // This is the set of valid SOAP ACtions...
         var actions = [
             "urn:nhs-itk:services:201005:verifyNHSNumber-v1-0",
             "urn:nhs-itk:services:201005:getNHSNumber-v1-0",
@@ -141,6 +139,7 @@ function saveRequest(SOAPAction, message_id, event, callback) {
         }
     };
 
+    // Defensively we do an update, just in case the message id has been re-used
     docClient.update(params, function(err, data) {
     	if(err) {
     		callback(err, SOAPAction, message_id, event);
@@ -173,13 +172,13 @@ function findPerson(SOAPAction, message_id, persontoFind, callback) {
 
     var person = null;
 
-    // Here decide whether we're searching or getting...
-
+    // These ones mean we will have NHS Number, so we can do a direct key lookup
     var getActions = [
-            "urn:nhs-itk:services:201005:verifyNHSNumber-v1-0",
-            "urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0"
+        "urn:nhs-itk:services:201005:verifyNHSNumber-v1-0",
+        "urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0"
     ];
 
+    // Here decide whether we're searching or getting...
     // So we have should have both DOB and NHS Number    
     if(getActions.indexOf(SOAPAction) != -1) {
         console.log("We should be doing a GET not a SEARCH...");
@@ -327,7 +326,6 @@ function findPerson(SOAPAction, message_id, persontoFind, callback) {
 // Returns: error(null), SOAPAction, message_id, responsebody
 function makeResponse(SOAPAction, message_id, person, callback) {
 	var responseBody = templater.makeResponse(person, SOAPAction);
-	// Here we need to save the response against the key message_id
 	callback(null, SOAPAction, message_id, responseBody);
 }
 
@@ -353,6 +351,7 @@ function saveResponse(SOAPAction, message_id, message, callback) {
         }
     };
 
+    // We do an update to ensure we're adding data to the correlating request we saved a moment ago.
     docClient.update(params, function(err, data) {
     	if(err) {
     		callback(err, "ERROR saving response message");
@@ -363,6 +362,7 @@ function saveResponse(SOAPAction, message_id, message, callback) {
 }
 
 // Gets an expiry date 2 days from now, to allow log entries to be expired
+// Used when writing log items, as they naturally expire (using DynamoDB TTL feature) at 2 days.
 function getExpiryDate() {
     // Set when records added now will expire (2 days)
     var dt = new Date();
@@ -372,7 +372,7 @@ function getExpiryDate() {
     return parseInt(ep2);
 }
 
-
+// This instantiates costly items, to improve warm performance.
 function setup() {
     if(docClient == null) {
         docClient = new AWS.DynamoDB.DocumentClient();
