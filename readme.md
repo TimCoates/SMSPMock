@@ -1,6 +1,6 @@
 ## SMSP Mock
 
-## Synopsis
+### Synopsis
 
 This project provides a MOCK version of the NHS Digital Spine Mini Services Provider (SMSP) as described [here](https://developer.nhs.uk/library/systems/nhs-digital-smsp-pds/).
 
@@ -10,17 +10,17 @@ The service provides both a Web UI, where Patients can be loaded, and browsed, a
 
 ***NB:*** The embedded Requirements Pack also describes a lot more details of the SMSP interface.
 
-## Code Example
+### Code Example
 
 Once deployed, the service provides a Web homepage at e.g. https://something.something/prod/Homepage as well as offering a SOAP interface at e.g. https://something.something/prod/service
 
 Standard SMSP SOAP requests can be made against the interface [some details here.](https://developer.nhs.uk/library/systems/nhs-digital-smsp-pds/).
 
-## Motivation
+### Motivation
 
 Motivation was simply an interest in Lambdas and the Serverless Framework, and a challenge to provide an easier to use mock service than signing up for ['OpenTest'](https://digital.nhs.uk/spine/opentest) which can be deployed in minutes for zero or minimal cost, and removed with no overhead.
 
-## Installation and use
+### Installation and use
 
 Nothing is really required in order to install, simply:
 * Clone the repo `git clone git@github.com:TimCoates/SMSPMock.git`.
@@ -46,7 +46,7 @@ Click ***View logs>>*** to see a record of each request and response which was p
 
 Running `sls remove` will delete all data from DynamoDB and remove all Lambdas etc, leaving no trace of the service.
 
-## Dependencies
+### Dependencies
 NB: Requires an AWS account, and the Account ID to be in a file named ***account.yml*** placed in the project root.
 
 Requires an AWS AIM Role named ***LambdaRole*** (though this can be changed at line 12 in serverless.yml)
@@ -59,25 +59,25 @@ Requires the following node modules (as identified in ***package.json***):
 * uuid
 * xmldom
 
-## API Reference
+### API Reference
 
 See the [NHS Developer Network](https://developer.nhs.uk/library/systems/nhs-digital-smsp-pds/) for details of the SOAP API exposed by this service.
 
-## Tests
+### Tests
 
 None yet.
 
-## Contributions
+### Contributions
 
 Suggestions, complaints, issues, contributions and pull requests are all welcomed, response may be either slow or very slow, apologies in advance for this.
 
-## TODO
+### TODO
 
 * Not all searches are properly implemented by the service.
 * Incomplete rendering of Patient data.
-* Better presentation of the XML when viewing logs. At the moment it's very basic.
-* More details of how to send (or ideally the ability to send) in requests from the UI itself. 
+* DONE ~~Better presentation of the XML when viewing logs. At the moment it's very basic.~~
+* DONE ~~More details of how to send (or ideally the ability to send) in requests from the UI itself.~~
 
-## License
+### License
 
 Licensed under the [Apache V2 License](https://www.apache.org/licenses/LICENSE-2.0)
