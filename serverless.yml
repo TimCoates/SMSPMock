@@ -1,5 +1,13 @@
 service: SMSPMock
 
+package:
+  exclude:
+    - Requirements Pack/**
+    - readme.md
+    - SMSP-StubTester-soapui-project.xml
+    - license.txt
+    - LICENSE
+
 custom:
   accountID: ${file(./account.yml):accountID}
   regionName: ${self:provider.region}
