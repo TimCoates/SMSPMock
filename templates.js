@@ -18,22 +18,23 @@ var requestTemplates = [];
 // message_id
 // validity (true/false)
 // nhs_number
-responseTemplates["urn:nhs-itk:services:201005:verifyNHSNumber-v1-0"] = "<verifyNHSNumberResponse-v1-0 \nxmlns=\"urn:hl7-org:v3\" \nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
+responseTemplates["urn:nhs-itk:services:201005:verifyNHSNumber-v1-0"] = "<verifyNHSNumberResponse-v1-0 \nxmlns=\"urn:hl7-org:v3\" "+
+"\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
 " \nxsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/COMT_MT000013GB01.xsd\" \nmoodCode=\"EVN\" classCode=\"OBS\">\n" +
-"<id root=\"{{message_id}}\"/>\n" +
-"<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"verifyNHSNumberResponse-v1-0\"/>\n" +
-"<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"SMSP-0000\"/>\n" +
-"<component typeCode=\"COMP\">\n" +
-"<validIdentifier moodCode=\"EVN\" classCode=\"OBS\">\n" +
-"<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.287\" code=\"VI\"/>\n" +
-"<value value=\"{{validity}}\"/>\n" +
-"<subject typeCode=\"SBJ\">\n" +
-"<patient classCode=\"PAT\">\n" +
-"<id root=\"2.16.840.1.113883.2.1.4.1\" extension=\"{{nhs_number}}\"/>\n" +
-"</patient>\n" +
-"</subject>\n" +
-"</validIdentifier>\n" +
-"</component>\n" +
+"	<id root=\"{{message_id}}\"/>\n" +
+"	<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"verifyNHSNumberResponse-v1-0\"/>\n" +
+"	<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"SMSP-0000\"/>\n" +
+"	<component typeCode=\"COMP\">\n" +
+"		<validIdentifier moodCode=\"EVN\" classCode=\"OBS\">\n" +
+"		<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.287\" code=\"VI\"/>\n" +
+"		<value value=\"{{validity}}\"/>\n" +
+"			<subject typeCode=\"SBJ\">\n" +
+"				<patient classCode=\"PAT\">\n" +
+"					<id root=\"2.16.840.1.113883.2.1.4.1\" extension=\"{{nhs_number}}\"/>\n" +
+"				</patient>\n" +
+"			</subject>\n" +
+"		</validIdentifier>\n" +
+"	</component>\n" +
 "</verifyNHSNumberResponse-v1-0>\n";
 
 // Requires:
@@ -42,14 +43,14 @@ responseTemplates["urn:nhs-itk:services:201005:verifyNHSNumber-v1-0"] = "<verify
 responseTemplates["urn:nhs-itk:services:201005:getNHSNumber-v1-0"] = "<getNHSNumberResponse-v1-0 xmlns=\"urn:hl7-org:v3\"" +
 " \nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
 " \nxsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/COMT_MT000014GB01.xsd\" \nmoodCode=\"EVN\" classCode=\"OBS\">\n" +
-"<id root=\"{{message_id}}\"/>\n" +
-"<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getNHSNumberResponse-v1-0\"/>\n" +
-"<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"SMSP-0000\"/>\n" +
-"<subject typeCode=\"SBJ\">\n" +
-"<patient classCode=\"PAT\">\n" +
-"<id root=\"2.16.840.1.113883.2.1.4.1\" extension=\"{{nhs_number}}\"/>\n" +
-"</patient>\n" +
-"</subject>\n" +
+"	<id root=\"{{message_id}}\"/>\n" +
+"	<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getNHSNumberResponse-v1-0\"/>\n" +
+"	<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"SMSP-0000\"/>\n" +
+"	<subject typeCode=\"SBJ\">\n" +
+"		<patient classCode=\"PAT\">\n" +
+"			<id root=\"2.16.840.1.113883.2.1.4.1\" extension=\"{{nhs_number}}\"/>\n" +
+"		</patient>\n" +
+"	</subject>\n" +
 "</getNHSNumberResponse-v1-0>\n";
 
 // Template for a response, insert the values:
@@ -61,31 +62,40 @@ responseTemplates["urn:nhs-itk:services:201005:getNHSNumber-v1-0"] = "<getNHSNum
 // nhs_number
 // postcode
 responseTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"] = "<getPatientDetailsResponse-v1-0 xmlns=\"urn:hl7-org:v3\" \nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \nxsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/COMT_MT000016GB01.xsd\" \nmoodCode=\"EVN\" classCode=\"OBS\">" +
-"<id root=\"{{message_id}}\"/>\n" +
-"<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsResponse-v1-0\"/>\n" +
-"<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"SMSP-0000\"/>\n" +
-"<subject typeCode=\"SBJ\">\n" +
-"<patient classCode=\"PAT\">\n<id root=\"2.16.840.1.113883.2.1.4.1\" extension=\"{{nhs_number}}\"/>\n" +
-"<name>\n<given>{{given_name}}</given>\n<family>{{family_name}}</family>\n</name>\n" +
-"<addr use=\"H\">\n<postalCode>{{postcode}}</postalCode>\n" +
-"<streetAddressLine>{{address1}}</streetAddressLine>\n" +
-"<streetAddressLine>{{address2}}</streetAddressLine>\n" +
-"<streetAddressLine>{{address3}}</streetAddressLine>\n" +
-"<streetAddressLine>{{address4}}</streetAddressLine>\n" +
-"<streetAddressLine>{{address5}}</streetAddressLine>\n</addr>\n" +
-"<patientPerson determinerCode=\"INSTANCE\" classCode=\"PSN\">\n" +
-"<administrativeGenderCode code=\"{{gender}}\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.16.25\"/>\n" +
-"<birthTime value=\"{{dob}}\"/>\n" +
-"<gPPractice classCode=\"SDLOC\">\n" +
-"<addr>\n<postalCode></postalCode>\n" +
-"<streetAddressLine></streetAddressLine>\n" +
-"<streetAddressLine></streetAddressLine>\n" +
-"<streetAddressLine></streetAddressLine>\n" +
-"<streetAddressLine/><streetAddressLine/>\n</addr>\n" +
-"<locationOrganization determinerCode=\"INSTANCE\" classCode=\"ORG\">\n" +
-"<id root=\"2.16.840.1.113883.2.1.3.2.4.19.2\" extension=\"{{primary_care_code}}\"/>\n" +
-"<name></name>\n</locationOrganization>\n</gPPractice>\n" +
-"</patientPerson>\n</patient>\n</subject>\n</getPatientDetailsResponse-v1-0>\n";
+"		<id root=\"{{message_id}}\"/>\n" +
+"			<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsResponse-v1-0\"/>\n" +
+"			<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"SMSP-0000\"/>\n" +
+"			<subject typeCode=\"SBJ\">\n" +
+"				<patient classCode=\"PAT\">\n<id root=\"2.16.840.1.113883.2.1.4.1\" extension=\"{{nhs_number}}\"/>\n" +
+"				<name>\n<given>{{given_name}}</given>\n<family>{{family_name}}</family>\n</name>\n" +
+"				<addr use=\"H\">\n"+
+"					<postalCode>{{postcode}}</postalCode>\n" +
+"					<streetAddressLine>{{address1}}</streetAddressLine>\n" +
+"					<streetAddressLine>{{address2}}</streetAddressLine>\n" +
+"					<streetAddressLine>{{address3}}</streetAddressLine>\n" +
+"					<streetAddressLine>{{address4}}</streetAddressLine>\n" +
+"					<streetAddressLine>{{address5}}</streetAddressLine>\n"+
+"				</addr>\n" +
+"				<patientPerson determinerCode=\"INSTANCE\" classCode=\"PSN\">\n" +
+"				<administrativeGenderCode code=\"{{gender}}\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.16.25\"/>\n" +
+"				<birthTime value=\"{{dob}}\"/>\n" +
+"				<gPPractice classCode=\"SDLOC\">\n" +
+"				<addr>\n"+
+"					<postalCode></postalCode>\n" +
+"					<streetAddressLine></streetAddressLine>\n" +
+"					<streetAddressLine></streetAddressLine>\n" +
+"					<streetAddressLine></streetAddressLine>\n" +
+"					<streetAddressLine/><streetAddressLine/>\n"+
+"				</addr>\n" +
+"					<locationOrganization determinerCode=\"INSTANCE\" classCode=\"ORG\">\n" +
+"						<id root=\"2.16.840.1.113883.2.1.3.2.4.19.2\" extension=\"{{primary_care_code}}\"/>\n" +
+"						<name></name>\n"+
+"					</locationOrganization>\n"+
+"				</gPPractice>\n" +
+"			</patientPerson>\n"+
+"		</patient>\n"+
+"	</subject>\n"+
+"</getPatientDetailsResponse-v1-0>\n";
 
 responseTemplates["urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0"] = responseTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"];
 responseTemplates["urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0"] = responseTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"];
@@ -97,9 +107,9 @@ responseTemplates["urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0"] 
 var errorTemplates = [];
 errorTemplates["urn:nhs-itk:services:201005:verifyNHSNumber-v1-0"] = "<verifyNHSNumberResponse-v1-0 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
 " xsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/COMT_MT000013GB01.xsd\" moodCode=\"EVN\" classCode=\"OBS\">\n" +
-"<id root=\"{{message_id}}\"/>\n" +
-"<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"verifyNHSNumberResponse-v1-0\"/>\n" +
-"<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"{{error_code}}\"/>\n" +
+"	<id root=\"{{message_id}}\"/>\n" +
+"	<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"verifyNHSNumberResponse-v1-0\"/>\n" +
+"	<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"{{error_code}}\"/>\n" +
 "</verifyNHSNumberResponse-v1-0>\n";
 
 // Requires:
@@ -108,9 +118,9 @@ errorTemplates["urn:nhs-itk:services:201005:verifyNHSNumber-v1-0"] = "<verifyNHS
 errorTemplates["urn:nhs-itk:services:201005:getNHSNumber-v1-0"] = "<getNHSNumberResponse-v1-0 xmlns=\"urn:hl7-org:v3\"" +
 " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
 " xsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/COMT_MT000014GB01.xsd\" moodCode=\"EVN\" classCode=\"OBS\">\n" +
-"<id root=\"{{message_id}}\"/>\n" +
-"<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getNHSNumberResponse-v1-0\"/>\n" +
-"<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"{{error_code}}\"/>\n" +
+"	<id root=\"{{message_id}}\"/>\n" +
+"	<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getNHSNumberResponse-v1-0\"/>\n" +
+"	<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"{{error_code}}\"/>\n" +
 "</getNHSNumberResponse-v1-0>\n";
 
 // Template for an error response, insert the values:
@@ -118,11 +128,12 @@ errorTemplates["urn:nhs-itk:services:201005:getNHSNumber-v1-0"] = "<getNHSNumber
 // error_code (eg SMSP-0000 or others)
 errorTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"] = "<getPatientDetailsResponse-v1-0 xmlns=\"urn:hl7-org:v3\"" +
 " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-" xsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/COMT_MT000016GB01.xsd\"" +
-" moodCode=\"EVN\" classCode=\"OBS\">\n" +
-"<id root=\"{{message_id}}\"/>\n<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsResponse-v1-0\"/>\n" +
-"<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"{{error_code}}\"/>\n" +
+"	xsi:schemaLocation=\"urn:hl7-org:v3 ../../Schemas/COMT_MT000016GB01.xsd\"" +
+"	moodCode=\"EVN\" classCode=\"OBS\">\n" +
+"	<id root=\"{{message_id}}\"/>\n<code codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.284\" code=\"getPatientDetailsResponse-v1-0\"/>\n" +
+"	<value codeSystem=\"2.16.840.1.113883.2.1.3.2.4.17.285\" code=\"{{error_code}}\"/>\n" +
 "</getPatientDetailsResponse-v1-0>\n";
+
 errorTemplates["urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0"] = errorTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"];
 errorTemplates["urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0"] = errorTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"];
 

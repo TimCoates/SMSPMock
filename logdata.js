@@ -97,9 +97,9 @@ module.exports.entrypoint = (event, context, callback) => {
 " <div class='jumbotron'><h1><a href='Homepage'>Log Item: " + data.Item.id + "</a></h1></div>\n" +
 " <div><h2>ID:</h2>" + data.Item.id + "</div>\n" +
 " <div><h2>SOAP Action:</h2>" + data.Item.SOAPAction + "</div>\n" +
-" <div><h2>Request time:</h2>" + data.Item.request_time + "</div>\n" +
+" <div><h2>Request time:</h2>" + new Date(Date.parse(data.Item.request_time)).toLocaleString() + "</div>\n" +
 " <div><h2>Request:</h2><figure class='highlight'><pre class='.pre-scrollable' style='font-size: x-small;'>" + htmlEntities(data.Item.request) + "</pre></figure></div>\n" +
-" <div><h2>Response time:</h2>" + data.Item.response_time + "</div>\n" +
+" <div><h2>Response time:</h2>" + new Date(Date.parse(data.Item.response_time)).toLocaleString() + "</div>\n" +
 " <div><h2>Response:</h2><figure class='highlight'><pre class='.pre-scrollable' style='font-size: x-small;'>" + htmlEntities(data.Item.response) + "</pre></figure></div>\n" +
 "</div>\n"+
 "</body>\n" +
