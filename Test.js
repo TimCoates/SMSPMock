@@ -19,13 +19,17 @@ const uuidv4 = require('uuid/v4');
 module.exports.entrypoint = (event, context, callback) => {
 
     context.callbackWaitsForEmptyEventLoop = false;
-
     console.log("Event: ", JSON.stringify(event));
     
+    // Check if this was just a wakeup SNS trigger...
     if(typeof event.Records != 'undefined') {
         callback(null, null);
     } else {
 
+        // No, so assume it was a real request
+
+
+        // If we had query parameter of ?id=xyz then this will fetch that template request, otherwise it shows the page
         var id = null;
 
         if(typeof event.queryStringParameters != 'undefined') {
@@ -36,25 +40,33 @@ module.exports.entrypoint = (event, context, callback) => {
             }
         }
 
+
+        // Determine which we're doing
         console.log("Requesting ID: " + id);
-
         if(id == null) {
+            // We're showing the test page
 
-            var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgERERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
+            // This is the favicon
+            var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/"+
+"4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAA"+
+"EREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgE"+
+"RERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
 
-        	var body = "<html><head>" +
-        	"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">" +
-        	"<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css\" " +
-            "integrity=\"sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M\" crossorigin=\"anonymous\">" +
-            "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>" +
-            "<link id=\"favicon\" rel=\"shortcut icon\" type=\"image/png\" href=\"data:​image/png;base64," + b64Data + "\">" +
-            "<link rel=\"stylesheet\" href=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css\">" +
-            "<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js\"></script>" +
-        	"<title>SMSP Mock - Send tests</title></head><body>" +
-        	"<div class=\"container\">\n" +
+            // Here's the page html
+        	var body = "<html><head>\n" +
+        	"<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>\n" +
+        	"<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css' " +
+            "integrity='sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M' crossorigin='anonymous'>\n" +
+            "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>\n" +
+            "<link id='favicon' rel='shortcut icon' type='image/png' href='data:​image/png;base64," + b64Data + "'>\n" +
+            "<link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css'>\n" +
+            "<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>\n" +
+        	"<title>SMSP Mock - Send tests</title>\n</head>\n"+
+            "<body>\n" +
+        	"<div class='container'>\n" +
             " <form id='myForm' action='#'>\n" +
-        	" <div class=\"jumbotron\"><h1><a href=\"Homepage\">Send tests</a></h1></div>\n" +
-        	" <div class=\"py-5\">\n" +
+        	" <div class='jumbotron'><h1><a href='Homepage'>Send tests</a></h1></div>\n" +
+        	" <div class='py-5'>\n" +
             "  <div class='row'>\n" +
             "   <div class='col-xs-9'>\n" +
             // Here we have a code window
@@ -114,26 +126,26 @@ module.exports.entrypoint = (event, context, callback) => {
             "$('#selectRequest').click(function() {\n" +
             "    var SOAPAction = null;\n" +
             "    switch(id) {\n" +
-            "        case \"0\":\n" +
-            "        case \"1\":\n" +
-            "        case \"2\":\n" +
+            "        case '0':\n" +
+            "        case '1':\n" +
+            "        case '2':\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetails-v1-0';\n" +
             "            break;\n\n" +
-            "        case \"3\":\n" +
+            "        case '3':\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0';\n" +
             "            break;\n\n" +
-            "        case \"4\":\n" +
-            "        case \"5\":\n" +
+            "        case '4':\n" +
+            "        case '5':\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0';\n" +
             "            break;\n\n" +
-            "        case \"6\":\n" +
+            "        case '6':\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:getNHSNumber-v1-0';\n" +
             "            break;\n\n" +
-            "        case \"7\":\n" +
+            "        case '7':\n" +
             "            SOAPAction = 'urn:nhs-itk:services:201005:verifyNHSNumber-v1-0';\n" +
             "            break;\n" +
             "    }\n" +
-            "    console.log(\"Adding SOAPAction header: \" + SOAPAction);\n" +
+            "    console.log('Adding SOAPAction header: ' + SOAPAction);\n" +
             "    $.ajaxSetup({\n" +
             "        headers: { 'SOAPAction': SOAPAction }\n" +
             "    });\n\n" +
@@ -142,10 +154,10 @@ module.exports.entrypoint = (event, context, callback) => {
             "    $.ajax({\n" +
             "        url: svcURL,\n" +
             "        data: $('textarea#reqBody').val(),\n" +
-            "        dataType: \"xml\", \n" +
-            "        type: \"POST\",\n" +
+            "        dataType: 'xml', \n" +
+            "        type: 'POST',\n" +
             "        success: function(xml) {\n" +
-            "            $(\"textarea[name='response']\").val(xml.firstChild.outerHTML);\n" +
+            "            $('textarea[name=\"response\"]').val(xml.firstChild.outerHTML);\n" +
             "            console.log(JSON.stringify(xml.firstChild.outerHTML));\n" +
             "        }\n" +
             "    });\n" +

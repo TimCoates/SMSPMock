@@ -1,5 +1,5 @@
 {
-  "name": "ndop",
+  "name": "smspmock",
   "version": "1.0.0",
   "description": "Lambda functions to run a fake synchronous ndop service.",
   "main": "start.js",
@@ -14,5 +14,18 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tim.Coates@gmail.com",
-  "license": "ISC"
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimCoates/SMSPMock.git"
+  },
+  "keywords": [
+    "pds",
+    "smsp",
+    "nhs"
+  ],
+  "bugs": {
+    "url": "https://github.com/TimCoates/SMSPMock/issues"
+  },
+  "homepage": "https://github.com/TimCoates/SMSPMock#readme"
 }

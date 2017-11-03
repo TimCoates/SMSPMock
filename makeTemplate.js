@@ -16,8 +16,6 @@ const uuidv4 = require('uuid/v4');
 var dom = require('xmldom').DOMParser;
 var templates = require ('./templates.js');
 
-// Array of templates, one per SOAPAction
-
 // Pulls out the message_id from the soap:Envelope
 function getMsgID(xmlString) {
     var doc = new dom().parseFromString(xmlString, "application/xml");
@@ -72,9 +70,6 @@ function getPerson(xmlString, SOAPAction) {
         if(typeof node != 'undefined') {
             person.gender = doc.getElementsByTagName("Person.Gender").item(0).getElementsByTagName("value").item(0).getAttribute("code");
         }
-
-
-
     } else {
         console.log("doc == undefined!");
     }
@@ -90,21 +85,24 @@ function makeResponse(person, SOAPAction) {
     //console.log(JSON.stringify(person));
     var response;
     var msg_id = uuidv4();
-    if(person == null) {
-        console.log("Person was null, so we have an empty response value...");
-        //Person wasn't found, so we have an empty response value...
-        var obj = {
-            message_id: msg_id,
-            error_code: "DEMOG-9999"
-        };
-        response = mustache.render(templates.errorTemplates[SOAPAction], obj);
-    } else {
-        // Person has been found, generate a response...
-        person.message_id = msg_id;
-        response = mustache.render(templates.responseTemplates[SOAPAction], person);
-    }
-    console.log("Response; [" + response + "]");
+    var msgTemplate = templates.responseTemplates[SOAPAction];
 
+    if(person == null) {
+        // Person is null, so wasn't found
+        // TODO: Need to handle other error scenarios better! eg multiple matches.
+        // See DEMOG-0007 in doc: https://nhsconnect.github.io/spine-smsp/demographics_reqs.html)
+        person = {};
+        person.error_code = "DEMOG-9999";
+        msgTemplate = templates.errorTemplates[SOAPAction];
+    }
+
+    // It's not the person's ID, it's the ID we'll give the message
+    person.message_id = msg_id;
+
+    // Stick the person details into the message
+    response = mustache.render(msgTemplate, person);
+
+    // Data to be populated into our wrapper template...
     var dataToWrap = {
         tracking_id: uuidv4(),
         message_id: msg_id,
@@ -112,8 +110,10 @@ function makeResponse(person, SOAPAction) {
         profile_urn: templates.profiles[SOAPAction]
     };
 
+    // Now we wrap it in the Envelope...
     var wrappedResponse = mustache.render(templates.envelopeTemplate, dataToWrap);
 
+    // Generate a response object
     var reply = {
         "statusCode": 200,
         "headers": { "Content-Type": "application/soap+xml" },
@@ -122,7 +122,7 @@ function makeResponse(person, SOAPAction) {
     return reply;
 }
 
-
+// These are the externally available bits...
 module.exports = {
     getPerson: getPerson,
     makeResponse: makeResponse,
