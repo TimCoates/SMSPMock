@@ -45,7 +45,7 @@ module.exports.entrypoint = (event, context, callback) => {
 			"<div class=\"container\">\n" +
 			" <div class=\"jumbotron\"><h1>SMSP Mock</h1></div>\n" +
 			" <div class=\"row\">\n" +
-			"  <h4>Available from <a href='https://github.com/TimCoates/SMSPMock'>https://github.com/TimCoates/SMSPMock</a></h4>\n" +
+			"  <h4>Available from <a href='https://github.com/TimCoates/SMSPMock#readme'>https://github.com/TimCoates/SMSPMock</a></h4>\n" +
 			" </div>\n" +
 			" <div class=\"row\">\n" +
 			"  <div class=\"col\">\n"+
