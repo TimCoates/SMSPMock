@@ -12,6 +12,8 @@
 //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and
 //limitations under the License.
+
+// This file has patients in JSON
 var data_file = require('./PDS_Full_Data.json');
 var AWS = require("aws-sdk");
 var docClient = null;
@@ -29,17 +31,31 @@ module.exports.entrypoint = (event, context, callback) => {
 	} else {
 
 		doLoad();
-		var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgERERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
 
-		var body = "<html><head>" +
-		"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">" +
+			// This is the favicon
+			var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/"+
+"4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAA"+
+"EREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgE"+
+"RERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
+
+		// The html page
+		var body = "<html>\n<head>\n" +
+		"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n" +
 		"<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css\" " +
-		"integrity=\"sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M\" crossorigin=\"anonymous\">" +
-		"<link id=\"favicon\" rel=\"shortcut icon\" type=\"image/png\" href=\"data:​image/png;base64," + b64Data + "\">" +
-		"<title>SMSP Mock - Load data</title></head><body>" +
-		"<div class=\"container\">" +
-		"<div class=\"jumbotron\"><h1><a href=\"Homepage\">Load data</a></h1></div>Records loaded</div></body></html>";
+		"integrity=\"sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M\" crossorigin=\"anonymous\">\n" +
+		"<link id=\"favicon\" rel=\"shortcut icon\" type=\"image/png\" href=\"data:​image/png;base64," + b64Data + "\">\n" +
+		"<title>SMSP Mock - Load data</title>\n"+
+		"</head>\n"+
+		"<body>\n" +
+		"<div class=\"container\">\n" +
+		" <div class=\"jumbotron\">\n"+
+		"  <h1><a href=\"Homepage\">Load data</a></h1>\n"+
+		" </div>\n"+
+		"Records loaded\n"+
+		"</div>\n"+
+		"</body></html>";
 
+		// Generate a response object
 	    var reply = {
 	        "statusCode": 200,
 	        "headers": { "Content-Type": "text/html" },
@@ -49,15 +65,15 @@ module.exports.entrypoint = (event, context, callback) => {
 	}
 };
 
+// This is where the heavy lifting happens...
 function doLoad() {
 
 	docClient = new AWS.DynamoDB.DocumentClient();
 	tblName = process.env.stageName + "-pds-data";
 	
-	console.log("Loading data into: " + tblName);
+	console.log("Loading " + data_file.length + " items into table: " + tblName);
 
-	console.log("Got: " + data_file.length + " records to be loaded...");
-
+	// Loop through objects in the JSON file
 	data_file.forEach(function(person) {
 
 	    var params = {
@@ -86,13 +102,12 @@ function doLoad() {
 	    docClient.put(params, function(err, data) {
 	       if (err) {
 	           console.error("Unable to add person", person.nhs_number, ". Error JSON:", JSON.stringify(err, null, 2));
-	       } else {
-	           //console.log("PutItem succeeded:", person.nhs_number);
 	       }
 	    });
-	});
+	}); // End of the forEach
 }
 
+// Function to instantiate, only if we're cold, as othwise the clients are ready
 function setup() {
 	if(docClient == null) {
 		docClient = new AWS.DynamoDB.DocumentClient();

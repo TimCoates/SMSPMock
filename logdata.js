@@ -80,22 +80,22 @@ module.exports.entrypoint = (event, context, callback) => {
 					var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgERERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
 
 					var body = "<html><head>" +
-	"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">" +
-	"<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css\" " +
-	"integrity=\"sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M\" crossorigin=\"anonymous\">" +
-	"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>" +
-	"<link rel=\"stylesheet\" href=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css\">" +
-	"<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js\"></script>" +
-	"<link id=\"favicon\" rel=\"shortcut icon\" type=\"image/png\" href=\"data:​image/png;base64," + b64Data + "\">" +
+	"<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>" +
+	"<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css' " +
+	"integrity='sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M' crossorigin='anonymous'>" +
+	"<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>" +
+	"<link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css'>" +
+	"<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>" +
+	"<link id='favicon' rel='shortcut icon' type='image/png' href='data:​image/png;base64," + b64Data + "'>" +
 	"<title>SMSP Mock - Log item: " + data.Item.id + "</title></head><body>" +
-	"<div class=\"container\">" +
-	"<div class=\"jumbotron\"><h1><a href=\"Homepage\">Log Item: " + data.Item.id + "</a></h1></div>" +
+	"<div class='container'>" +
+	"<div class='jumbotron'><h1><a href='Homepage'>Log Item: " + data.Item.id + "</a></h1></div>" +
 	"<div><h2>ID:</h2>" + data.Item.id + "</div>" +
 	"<div><h2>SOAP Action:</h2>" + data.Item.SOAPAction + "</div>" +
 	"<div><h2>Request time:</h2>" + data.Item.request_time + "</div>" +
-	"<div><h2>Request:</h2><figure class='highlight'><pre class=\".pre-scrollable\">" + htmlEntities(data.Item.request) + "</pre></figure></div>" +
+	"<div><h2>Request:</h2><figure class='highlight'><pre class='.pre-scrollable' style='font-size: small;'>" + htmlEntities(data.Item.request) + "</pre></figure></div>" +
 	"<div><h2>Response time:</h2>" + data.Item.response_time + "</div>" +
-	"<div><h2>Response:</h2><figure class='highlight'><pre class=\".pre-scrollable\">" + htmlEntities(data.Item.response) + "</pre></figure></div>" +
+	"<div><h2>Response:</h2><figure class='highlight'><pre class='.pre-scrollable' style='font-size: small;'>" + htmlEntities(data.Item.response) + "</pre></figure></div>" +
 	"</div></body>" +
 	"</html>";
 

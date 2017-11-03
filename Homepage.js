@@ -14,48 +14,68 @@
 //limitations under the License.
 
 const AWS = require('aws-sdk');
+// This lives outside the lambda function, so stays here for warm starts
 var sns = null;
 
 module.exports.entrypoint = (event, context, callback) => {
 
 	context.callbackWaitsForEmptyEventLoop = false;
+
+	// For debugging help, we log the incoming event
 	console.log("Event: ", JSON.stringify(event));
 
-	var wakeUp = "Wake up sleepy head!";
-
-	putOnQueue(wakeUp, "awaken", function(err, data) {
+	// Here we instantiate SNS, (if necessary) and wake up all the other Lambdas (as they subscribe to the SNS Topic) 
+	setup(function(err, data) {
 		if(err) {
 			callback(err, "Error returned from call to SNS.");
 		} else {
-			var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgERERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
-			var body = "<html><head>" +
-			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">" +
-			"<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css\" " +
-			"integrity=\"sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M\" crossorigin=\"anonymous\">" +
-			"<link id=\"favicon\" rel=\"shortcut icon\" type=\"image/png\" href=\"data:​image/png;base64," + b64Data + "\">" +
-			"<title>SMSP Mock</title></head><body>" +
-			"<div class=\"container\">" +
-			"<div class=\"jumbotron\"><h1>SMSP Mock</h1></div>" +
-			"<div class=\"row\">" +
-			"<h4>Available from <a href='https://github.com/TimCoates/SMSPMock'>https://github.com/TimCoates/SMSPMock</a></h4>" +
-			"</div>" +
-			"<div class=\"row\">" +
-			"<div class=\"col\"><h2>Load data</h2>" +
-			"Go here to load some synthetic data into the synthetic PDS database which backs up this service.</div>" +
-			"<div class=\"col\"><h2>PDS Data</h2>" +
-			"Go here to see patients in the synthetic data.<br /></div>" +
-			"<div class=\"col\"><h2>Logs</h2>" +
-			"Go here to view detailed logs of interactions with this service.<br /></div>" +
-			"<div class=\"col\"><h2>Test</h2>" +
-			"Go here to submit calls to the SOAP service.<br /></div>" +
-			"</div><div class=\"row\">" +
-			"<div class=\"col\"><a class=\"btn btn-secondary\" href=\"LoadData\" role=\"button\">Load data &raquo;</a></div>" +
-			"<div class=\"col\"><a class=\"btn btn-secondary\" href=\"Patient\" role=\"button\">Patients &raquo;</a></div>" +
-			"<div class=\"col\"><a class=\"btn btn-secondary\" href=\"Logs\" role=\"button\">View logs &raquo;</a></div>" +
-			"<div class=\"col\"><a class=\"btn btn-secondary\" href=\"Test\" role=\"button\">Submit tests &raquo;</a></div>" +
-			"</div>" +
-		    "</div></body></html>";
+			// This is the favicon
+			var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/"+
+"4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAA"+
+"EREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgE"+
+"RERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
 
+			// The html for the page...
+			var body = "<html><head>\n" +
+			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n" +
+			"<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css\" " +
+			"integrity=\"sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M\" crossorigin=\"anonymous\">\n" +
+			"<link id=\"favicon\" rel=\"shortcut icon\" type=\"image/png\" href=\"data:​image/png;base64," + b64Data + "\">\n" +
+			"<title>SMSP Mock</title>\n</head>\n<body>\n" +
+			"<div class=\"container\">\n" +
+			" <div class=\"jumbotron\"><h1>SMSP Mock</h1></div>\n" +
+			" <div class=\"row\">\n" +
+			"  <h4>Available from <a href='https://github.com/TimCoates/SMSPMock'>https://github.com/TimCoates/SMSPMock</a></h4>\n" +
+			" </div>\n" +
+			" <div class=\"row\">\n" +
+			"  <div class=\"col\">\n"+
+			"   <h2>Load data</h2>\n" +
+			"Go here to load some synthetic data into the synthetic PDS database which backs up this service.</div>\n" +
+			"  <div class=\"col\">\n"+
+			"   <h2>PDS Data</h2>\n" +
+			"Go here to see patients in the synthetic data.<br /></div>\n" +
+			"  <div class=\"col\">\n"+
+			"   <h2>Logs</h2>\n" +
+			"Go here to view detailed logs of interactions with this service.<br /></div>\n" +
+			"  <div class=\"col\">\n"+
+			"   <h2>Test</h2>\n" +
+			"Go here to submit calls to the SOAP service.<br /></div>\n" +
+			" </div>\n"+ // End of the row
+			" <div class=\"row\">\n" +
+			"  <div class=\"col\">\n"+
+			"   <a class=\"btn btn-secondary\" href=\"LoadData\" role=\"button\">Load data &raquo;</a></div>\n" +
+			"  <div class=\"col\">\n"+
+			"   <a class=\"btn btn-secondary\" href=\"Patient\" role=\"button\">Patients &raquo;</a></div>\n" +
+			"  <div class=\"col\">\n"+
+			"   <a class=\"btn btn-secondary\" href=\"Logs\" role=\"button\">View logs &raquo;</a></div>\n" +
+			"  <div class=\"col\">\n"+
+			"   <a class=\"btn btn-secondary\" href=\"Test\" role=\"button\">Submit tests &raquo;</a></div>\n" +
+			" </div>\n" +
+		    "</div>\n"+
+		    "</body>\n"+
+		    "</html>";
+
+		    // Build a response object
 		    var reply = {
 		        "statusCode": 200,
 		        "headers": { "Content-Type": "text/html" },
@@ -66,18 +86,20 @@ module.exports.entrypoint = (event, context, callback) => {
 	});
 };
 
-function putOnQueue(data, queue, callback) {
+// Function which instantiates the SNS client if it's not already there,
+// if it's not, then we're cold, so it then sends a wake up message to an SNS topic
+function setup(callback) {
 
 	// If we haven't been recently been run...
 	if(sns == null) {
 	    sns = new AWS.SNS();
-	    var snsTopicARN = "arn:aws:sns:" + process.env.regionName + ":" + process.env.accountID + ":" + process.env.stageName + "-" + queue;
+	    var snsTopicARN = "arn:aws:sns:" + process.env.regionName + ":" + process.env.accountID + ":" + process.env.stageName + "-awaken";
 	    var SNSparams = {
-	        Message: data,
+	        Message: "Wake up sleepy head!",
 	        Subject: "SNS Wakeup mesdsage sent from homepage",
 	        TopicArn: snsTopicARN
 	    };
-	    console.log('Sending: ' + JSON.stringify(data) + ' to SNS topic: ' + snsTopicARN);
+	    console.log('Sending: Wake up sleepy head! to SNS topic: ' + snsTopicARN);
 	    sns.publish(SNSparams, callback);
 	} else {
 		callback(null, "No need to wake all Lambdas up");
