@@ -75,29 +75,29 @@ module.exports.entrypoint = (event, context, callback) => {
             "   <div class='col-xs-3' style='padding-left: 30px;'>\n" + // The narrow column for options
             // Here we have a list of radio buttons, plus a Submit button
             "    <div>\n" +
-            "     <div><input type='radio' name='request' id='request' value='0'>" +
-            "<label for='0' style='font-size: x-small;'>getPatientDetails Partial match</label></div>\n" +
+            "     <div><label for='r0' style='font-size: x-small;'><input type='radio' name='request' id='r0' value='0'>" +
+            "getPatientDetails Partial match</label></div>\n" +
             "     <div><hr></div>\n" +
-            "     <div><input type='radio' name='request' id='request' value='1'>" +
-            "<label for='0' style='font-size: x-small;'>getPatientDetails Full match</label></div>\n" +
+            "     <div><label for='r1' style='font-size: x-small;'><input type='radio' name='request' id='r1' value='1'>" +
+            "getPatientDetails Full match</label></div>\n" +
             "     <div><hr></div>\n" +
-            "     <div><input type='radio' name='request' id='request' value='2'>" +
-            "<label for='0' style='font-size: x-small;'>getPatientDetails No match</label></div>\n" +
+            "     <div><label for='r2' style='font-size: x-small;'><input type='radio' name='request' id='r2' value='2'>" +
+            "getPatientDetails No match</label></div>\n" +
             "     <div><hr></div>\n" +
-            "     <div><input type='radio' name='request' id='request' value='3'>" +
-            "<label for='0' style='font-size: x-small;'>getPatientDetailsBySearch Match</label></div>\n" +
+            "     <div><label for='r3' style='font-size: x-small;'><input type='radio' name='request' id='r3' value='3'>" +
+            "getPatientDetailsBySearch Match</label></div>\n" +
             "     <div><hr></div>\n" +
-            "     <div><input type='radio' name='request' id='request' value='4'>" +
-            "<label for='0' style='font-size: x-small;'>getPatientDetailsByNHSNumber Match</label></div>\n" +
+            "     <div><label for='r4' style='font-size: x-small;'><input type='radio' name='request' id='r4' value='4'>" +
+            "getPatientDetailsByNHSNumber Match</label></div>\n" +
             "     <div><hr></div>\n" +
-            "     <div><input type='radio' name='request' id='request' value='5'>" +
-            "<label for='0' style='font-size: x-small;'>getPatientDetailsByNHSNumber No match</label></div>\n" +
+            "     <div><label for='r5' style='font-size: x-small;'><input type='radio' name='request' id='r5' value='5'>" +
+            "getPatientDetailsByNHSNumber No match</label></div>\n" +
             "     <div><hr></div>\n" +
-            "     <div><input type='radio' name='request' id='request' value='6'>" +
-            "<label for='0' style='font-size: x-small;'>getNHSNumber Match</label></div>\n" +
+            "     <div><label for='r6' style='font-size: x-small;'><input type='radio' name='request' id='r6' value='6'>" +
+            "getNHSNumber Match</label></div>\n" +
             "     <div><hr></div>\n" +
-            "     <div><input type='radio' name='request' id='request' value='7'>" +
-            "<label for='0' style='font-size: x-small;'>verifyNHSNumber Match</label></div>\n" +
+            "     <div><label for='r7' style='font-size: x-small;'><input type='radio' name='request' id='r7' value='7'>" +
+            "verifyNHSNumber Match</label></div>\n" +
             "     <div><hr></div>\n" +
             "    </div>\n" +
             "   </div>\n" + // Ends the narrow column
