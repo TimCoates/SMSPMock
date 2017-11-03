@@ -172,11 +172,21 @@ module.exports.entrypoint = (event, context, callback) => {
             var newDate = new Date(d.setTime( d.getTime() + days * 86400000 ));
             var expires = newDate.toISOString();
 
+            var from_addr = null;
+            var to_addr = null;
+            if(typeof event.headers['Referer'] != 'undefined') {
+                from_addr = event.headers['Referer'];
+                var posn = from_addr.indexOf("/Test");
+                to_addr = from_addr.substring(0, posn) + "/service"; 
+            }
+
             var dataToWrap = {
                 msgID: msg_id,
                 manifest_id: manifest_id,
                 created: created,
-                expires: expires
+                expires: expires,
+                from: from_addr,
+                to:to_addr
             };
 
             var body = mustache.render(tpl, dataToWrap);
