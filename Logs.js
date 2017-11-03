@@ -36,7 +36,7 @@ module.exports.entrypoint = (event, context, callback) => {
     	"<div class=\"container\">" +
     	"<div class=\"jumbotron\"><h1><a href=\"Homepage\">Logs<a/></h1></div>" +
         
-    	"<table class=\"display table table-bordered table-condensed\">" +
+    	"<table class=\"display table table-bordered table-condensed\" style='font-size: small;'>" +
     	"    <thead>" +
     	"        <tr>" +
     	"            <th data-field=\"id\">id</th>" +
