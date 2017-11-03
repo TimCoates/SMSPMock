@@ -1,5 +1,6 @@
 service: SMSPMock
 
+# Files we don't need to deploy to AWS
 package:
   exclude:
     - Requirements Pack/**
@@ -43,7 +44,7 @@ functions:
   LoadData:
     handler: LoadData.entrypoint
     description: Loads data into DynamoDB to play (test) with
-    memorySize: 512
+    memorySize: 1024
     timeout: 30
     events:
       - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
