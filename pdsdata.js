@@ -13,6 +13,7 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 var AWS = require("aws-sdk");
+var favicon = require ('./favicon.js');
 var docClient = null;
 var tblName = null;
 
@@ -68,12 +69,8 @@ module.exports.entrypoint = (event, context, callback) => {
 		    } else {
 		        console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
 
-			// This is the favicon
-				var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/"+
-"4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAA"+
-"EREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgE"+
-"RERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
-
+				// This is the favicon
+				var b64Data = favicon.b64Data;
 
 				var body = "<html>\n<head>\n" +
 " <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>\n" +

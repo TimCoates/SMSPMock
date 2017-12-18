@@ -14,6 +14,7 @@
 //limitations under the License.
 
 const AWS = require('aws-sdk');
+var favicon = require ('./favicon.js');
 // This lives outside the lambda function, so stays here for warm starts
 var sns = null;
 
@@ -30,10 +31,7 @@ module.exports.entrypoint = (event, context, callback) => {
 			callback(err, "Error returned from call to SNS.");
 		} else {
 			// This is the favicon
-			var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/"+
-"4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAA"+
-"EREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgE"+
-"RERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
+			var b64Data = favicon.b64Data;
 
 			// The html for the page...
 			var body = "<html><head>\n" +

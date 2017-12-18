@@ -13,6 +13,8 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
+var favicon = require ('./favicon.js');
+
 module.exports.entrypoint = (event, context, callback) => {
 
     context.callbackWaitsForEmptyEventLoop = false;
@@ -23,10 +25,7 @@ module.exports.entrypoint = (event, context, callback) => {
         callback(null, null);
     } else {
             // This is the favicon
-            var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/"+
-"4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAA"+
-"EREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgE"+
-"RERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
+        var b64Data = favicon.b64Data;
 
     	var body = "<html><head>" +
     	"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">" +
