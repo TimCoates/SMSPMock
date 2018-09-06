@@ -125,6 +125,19 @@ functions:
           path: service
           integration: lambda-proxy
 
+  FHIRGET:
+    handler: fhirget.entrypoint
+    description: Code that implements a mock SMSP service
+    memorySize: 128
+    timeout: 4
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: get
+          path: /fhir/Patient
+          integration: lambda-proxy
+
+
 resources:
   Resources:
     PdsdataLogGroup:  # Log group for the pdsdata function
