@@ -1,0 +1,38 @@
+{
+	"resourceType": "Patient",
+	"id": "{{nhs_number}}",
+	"text": {
+		"status": "generated",
+		"div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
+	},
+	"identifier": [
+		{
+			"use": "usual",
+			"type": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Id/nhs-number",
+						"code": "{{nhs_number}}"
+					}
+				]
+			}
+		}
+	],
+	"active": true,
+	"name": [
+		{
+			"use": "official",
+			"family": "{{family_name}}",
+			"given": ["{{given_name}}"],
+			"prefix": "{{title}}"
+		}
+	],
+	"telecom": ["{{telecom}}"],
+	"gender": "{{gender}}",
+	"birthDate": "{{birthdate}}",
+	"deceasedBoolean": false,
+	"address": ["{{address}}"],
+	"managingOrganization": {
+		"reference": "https://fhir.nhs.uk/"
+	}
+}

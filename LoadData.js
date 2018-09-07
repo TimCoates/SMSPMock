@@ -76,6 +76,10 @@ function doLoad() {
 	// Loop through objects in the JSON file
 	data_file.forEach(function(person) {
 
+		if('postcode' in person) {
+			person.postcodeTrimmed = person.postcode.replace(" ","");
+		}
+
 	    var params = {
 	        TableName: tblName,
 	        Item: {
@@ -95,7 +99,8 @@ function doLoad() {
 				"sensitiveflag": person.sensitiveflag,
 				"primary_care_code": person.primary_care_code,
 				"postcode": person.postcode,
-				"telecom": person.telecom
+				"telecom": person.telecom,
+				"traceindex": person.family_name + person.postcodeTrimmed + person.dob
 	        }
 	    };
 

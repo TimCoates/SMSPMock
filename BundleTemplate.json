@@ -1,0 +1,19 @@
+{
+	"resourceType": "Bundle",
+	"id": "bundle-example",
+	"meta": {
+		"lastUpdated": "{{isodate}}"
+	},
+	"type": "searchset",
+	"total": 1,
+	"entry": [
+		{
+			"fullUrl": "https://example.com/base/MedicationRequest/3123",
+			"resource": null,
+			"search": {
+				"mode": "match",
+				"score": 1
+			}
+		}
+	]
+}

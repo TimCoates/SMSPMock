@@ -13,34 +13,75 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
+var AWS = require("aws-sdk");
+var docClient = null;
+var tblName = null;
+var utility = require("./utility.js");
 module.exports = {
 	entrypoint: entrypoint
 };
 
 /**
-Function to do both a READ and a SEARCH
+Function to do a READ
  */
 function entrypoint(event, context, callback) {
-    context.callbackWaitsForEmptyEventLoop = false;
-    console.log("Event: ", JSON.stringify(event));
 
-	if(true) {
-		console.log("true");
-	} else {
-		console.log("false");
+	context.callbackWaitsForEmptyEventLoop = false;
+	console.log("Event: ", JSON.stringify(event));
+
+	var NHSNumber = null;
+
+	// Check we've got the necessary parameters...
+	if ('pathParameters' in event) {
+		if ('patID' in event.pathParameters) {
+			// Here optionally we could do some more validation
+			// e.g. check it's 10 digits long, check all numeric, check checkdigit?
+
+			NHSNumber = event.pathParameters.patID;
+		}
 	}
 
-	var obj = {
-		name: "Fred Bloggs",
-		dob: "31/12/2000"
+	var response = "404 - Resource with ID (NHS Number) of " + NHSNumber + " not found";
+
+	var reply = {
+		statusCode: 404,
+		headers: { "Content-Type": "text/plain" },
+		body: response
 	};
 
-	var str = JSON.stringify(obj);
 
-        var reply = {
-            statusCode: 200,
-            headers: { "Content-Type": "application/json" },
-            body: str
-        };
-	callback(null, reply);
+	if (NHSNumber == null) {
+		console.log("No NHS Number was provided");
+	} else {
+		console.log("NHS Number: " + NHSNumber + " was provided");
+		if (docClient == null) {
+			docClient = new AWS.DynamoDB.DocumentClient();
+		}
+		tblName = "prod-pds-data";
+
+		var params = {
+			TableName: tblName,
+			Key: { "nhs_number": NHSNumber }
+		};
+		console.log("Params: " + JSON.stringify(params));
+
+		docClient.get(params, function (err, data) {
+			if (err) {
+				console.log("Error getting record: " + JSON.stringify(err));
+			} else {
+				console.log("Got: " + JSON.stringify(data));
+				if ('Item' in data) {
+					response = utility.makePatient(data.Item);
+					console.log("Response JSON object: " + response);
+
+					reply = {
+						statusCode: 200,
+						headers: { "Content-Type": "application/json" },
+						body: response
+					};
+				}
+			}
+			callback(null, reply);
+		});
+	}
 }

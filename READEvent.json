@@ -1,0 +1,116 @@
+{
+    "resource": "/fhir/Patient/{patID}",
+    "path": "/fhir/Patient/12",
+    "httpMethod": "GET",
+    "headers": {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
+        "CloudFront-Forwarded-Proto": "https",
+        "CloudFront-Is-Desktop-Viewer": "true",
+        "CloudFront-Is-Mobile-Viewer": "false",
+        "CloudFront-Is-SmartTV-Viewer": "false",
+        "CloudFront-Is-Tablet-Viewer": "false",
+        "CloudFront-Viewer-Country": "GB",
+        "Host": "dq5w95ty0h.execute-api.eu-west-2.amazonaws.com",
+        "upgrade-insecure-requests": "1",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36",
+        "Via": "2.0 07c29031bcf407bd8f3ee7dec44a31c3.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "GumOBwc7glQx6jWlnlJt0oUwdl-20I7Bcuqnq7StgBJDBNH4XUquKQ==",
+        "X-Amzn-Trace-Id": "Root=1-5b92237c-edffa8b495a840184bdf745c",
+        "X-Forwarded-For": "80.2.50.138, 54.182.244.69",
+        "X-Forwarded-Port": "443",
+        "X-Forwarded-Proto": "https"
+    },
+    "multiValueHeaders": {
+        "Accept": [
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
+        ],
+        "Accept-Encoding": [
+            "gzip, deflate, br"
+        ],
+        "Accept-Language": [
+            "en-GB,en-US;q=0.9,en;q=0.8"
+        ],
+        "CloudFront-Forwarded-Proto": [
+            "https"
+        ],
+        "CloudFront-Is-Desktop-Viewer": [
+            "true"
+        ],
+        "CloudFront-Is-Mobile-Viewer": [
+            "false"
+        ],
+        "CloudFront-Is-SmartTV-Viewer": [
+            "false"
+        ],
+        "CloudFront-Is-Tablet-Viewer": [
+            "false"
+        ],
+        "CloudFront-Viewer-Country": [
+            "GB"
+        ],
+        "Host": [
+            "dq5w95ty0h.execute-api.eu-west-2.amazonaws.com"
+        ],
+        "upgrade-insecure-requests": [
+            "1"
+        ],
+        "User-Agent": [
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+        ],
+        "Via": [
+            "2.0 07c29031bcf407bd8f3ee7dec44a31c3.cloudfront.net (CloudFront)"
+        ],
+        "X-Amz-Cf-Id": [
+            "GumOBwc7glQx6jWlnlJt0oUwdl-20I7Bcuqnq7StgBJDBNH4XUquKQ=="
+        ],
+        "X-Amzn-Trace-Id": [
+            "Root=1-5b92237c-edffa8b495a840184bdf745c"
+        ],
+        "X-Forwarded-For": [
+            "80.2.50.138, 54.182.244.69"
+        ],
+        "X-Forwarded-Port": [
+            "443"
+        ],
+        "X-Forwarded-Proto": [
+            "https"
+        ]
+    },
+    "queryStringParameters": null,
+    "multiValueQueryStringParameters": null,
+    "pathParameters": {
+        "patID": "12"
+    },
+    "stageVariables": null,
+    "requestContext": {
+        "resourceId": "4hcxyj",
+        "resourcePath": "/fhir/Patient/{patID}",
+        "httpMethod": "GET",
+        "extendedRequestId": "M1p7YGPQrPEFnOA=",
+        "requestTime": "07/Sep/2018:07:06:36 +0000",
+        "path": "/prod/fhir/Patient/12",
+        "accountId": "276197098177",
+        "protocol": "HTTP/1.1",
+        "stage": "prod",
+        "requestTimeEpoch": 1536303996033,
+        "requestId": "8f02af2b-b26c-11e8-a476-0d6c122a7109",
+        "identity": {
+            "cognitoIdentityPoolId": null,
+            "accountId": null,
+            "cognitoIdentityId": null,
+            "caller": null,
+            "sourceIp": "80.2.50.138",
+            "accessKey": null,
+            "cognitoAuthenticationType": null,
+            "cognitoAuthenticationProvider": null,
+            "userArn": null,
+            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36",
+            "user": null
+        },
+        "apiId": "dq5w95ty0h"
+    },
+    "body": null,
+    "isBase64Encoded": false
+}

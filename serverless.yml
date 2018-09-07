@@ -45,8 +45,8 @@ functions:
   LoadData:
     handler: LoadData.entrypoint
     description: Loads data into DynamoDB to play (test) with
-    memorySize: 1024
-    timeout: 30
+    memorySize: 2048
+    timeout: 45
     events:
       - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
       - http:
@@ -128,7 +128,7 @@ functions:
 
   FHIRGET:
     handler: fhirget.entrypoint
-    description: Code that implements a mock SMSP service
+    description: Code that implements a FHIR Instance Read service
     memorySize: 128
     timeout: 4
     events:
@@ -136,6 +136,18 @@ functions:
       - http:
           method: get
           path: /fhir/Patient/{patID}
+          integration: lambda-proxy
+
+  FHIRSEARCH:
+    handler: fhirsearch.entrypoint
+    description: Code that implements a mock SMSP service
+    memorySize: 128
+    timeout: 4
+    events:
+      - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
+      - http:
+          method: get
+          path: /fhir/Patient
           integration: lambda-proxy
 
 resources:
@@ -215,12 +227,14 @@ resources:
             AttributeType: S
           - AttributeName: dob
             AttributeType: S
+          - AttributeName: traceindex
+            AttributeType: S
         KeySchema:
           - AttributeName: nhs_number
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
+          ReadCapacityUnits: 20
+          WriteCapacityUnits: 20
         GlobalSecondaryIndexes:
           - IndexName: name
             KeySchema: 
@@ -231,5 +245,14 @@ resources:
             Projection:
               ProjectionType: ALL
             ProvisionedThroughput: 
-              ReadCapacityUnits: 10
-              WriteCapacityUnits: 10
+              ReadCapacityUnits: 20
+              WriteCapacityUnits: 20
+          - IndexName: traceindex
+            KeySchema: 
+            - AttributeName: traceindex
+              KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput: 
+              ReadCapacityUnits: 20
+              WriteCapacityUnits: 20
