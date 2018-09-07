@@ -16,6 +16,7 @@
 // This file has patients in JSON
 var data_file = require('./PDS_Full_Data.json');
 var AWS = require("aws-sdk");
+var favicon = require ('./favicon.js');
 var docClient = null;
 var tblName = null;
 
@@ -33,10 +34,7 @@ module.exports.entrypoint = (event, context, callback) => {
 		doLoad();
 
 			// This is the favicon
-			var b64Data = "AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/"+
-"4QAAGM7DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIgAAAAAAARESAAAAAAABERIAAAAAAA"+
-"EREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIAAAAAAAEREgAAAAAAARESAAAAAAABERIiIiARERERERERIBEREREREREgE"+
-"RERERERESARERERERERD+HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwfAAD8HwAA/B8AAPwAAACAAAAAgAAAAIAAAACAAQAA";
+			var b64Data = favicon.b64Data;
 
 		// The html page
 		var body = "<html>\n<head>\n" +
