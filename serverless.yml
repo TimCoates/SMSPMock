@@ -24,6 +24,7 @@ provider:
   stackTags:
     STACK: "${self:service}"
     REGION: "${self:custom.regionName}"
+    SERVICE: "${self:service}"
   environment:
     accountID: ${self:custom.accountID}
     regionName: ${self:provider.region}
@@ -134,9 +135,8 @@ functions:
       - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
       - http:
           method: get
-          path: /fhir/Patient
+          path: /fhir/Patient/{patID}
           integration: lambda-proxy
-
 
 resources:
   Resources:

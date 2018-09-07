@@ -29,4 +29,18 @@ function entrypoint(event, context, callback) {
 	} else {
 		console.log("false");
 	}
+
+	var obj = {
+		name: "Fred Bloggs",
+		dob: "31/12/2000"
+	};
+
+	var str = JSON.stringify(obj);
+
+        var reply = {
+            statusCode: 200,
+            headers: { "Content-Type": "application/json" },
+            body: str
+        };
+	callback(null, reply);
 }
