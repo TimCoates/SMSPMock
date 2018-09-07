@@ -2,12 +2,16 @@ service: SMSPMock
 
 # Files we don't need to deploy to AWS
 package:
+  individually: true
   exclude:
-    - Requirements Pack/**
+    - Requirements_Pack.tar.gz
     - readme.md
     - SMSP-StubTester-soapui-project.xml
     - license.txt
     - LICENSE
+
+plugins:
+  - serverless-plugin-optimize
 
 custom:
   accountID: ${file(./account.yml):accountID}
@@ -46,7 +50,7 @@ functions:
     handler: LoadData.entrypoint
     description: Loads data into DynamoDB to play (test) with
     memorySize: 2048
-    timeout: 45
+    timeout: 30
     events:
       - sns: arn:aws:sns:${self:custom.regionName}:${self:custom.accountID}:${self:provider.stage}-awaken
       - http:
@@ -157,6 +161,17 @@ resources:
       Properties:
         RetentionInDays: "1"
 
+    FHIRSEARCHLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+    FHIRGETLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+
     LogdataLogGroup: # Log group for the logdata function
       Type: AWS::Logs::LogGroup
       Properties:
@@ -212,7 +227,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TimeToLiveSpecification: 
+        TimeToLiveSpecification:
           AttributeName: expires
           Enabled: true
 
@@ -237,22 +252,23 @@ resources:
           WriteCapacityUnits: 20
         GlobalSecondaryIndexes:
           - IndexName: name
-            KeySchema: 
+            KeySchema:
             - AttributeName: family_name
               KeyType: HASH
             - AttributeName: dob
               KeyType: RANGE
             Projection:
               ProjectionType: ALL
-            ProvisionedThroughput: 
+            ProvisionedThroughput:
               ReadCapacityUnits: 20
               WriteCapacityUnits: 20
           - IndexName: traceindex
-            KeySchema: 
+            KeySchema:
             - AttributeName: traceindex
               KeyType: HASH
             Projection:
               ProjectionType: ALL
-            ProvisionedThroughput: 
+            ProvisionedThroughput:
               ReadCapacityUnits: 20
               WriteCapacityUnits: 20
+
