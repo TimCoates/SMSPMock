@@ -7,3 +7,4 @@ jspm_packages
 
 # File with account details
 account.yml
+package-lock.json
