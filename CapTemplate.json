@@ -1,0 +1,147 @@
+{
+	"resourceType": "CapabilityStatement",
+	"id": "example",
+	"text": {
+		"status": "generated",
+		"div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
+	},
+	"url": "urn:uuid:68D043B5-9ECF-4559-A57A-396E0D452311",
+	"version": "20130510",
+	"name": "SMSPMock",
+	"title": "MOCK SMSP Server",
+	"status": "draft",
+	"experimental": true,
+	"date": "2018-09-09",
+	"publisher": "Tim Coates",
+	"contact": [
+		{
+			"name": "Me",
+			"telecom": [
+				{
+					"system": "email",
+					"value": "tim.coates@gmail.com"
+				}
+			]
+		}
+	],
+	"description": "This is the FHIR capability statement for the SMSPMock server",
+	"useContext": [
+		{
+			"code": {
+				"system": "http://hl7.org/fhir/usage-context-type",
+				"code": "focus"
+			},
+			"valueCodeableConcept": {
+				"coding": [
+					{
+						"system": "http://hl7.org/fhir/variant-state",
+						"code": "positive"
+					}
+				]
+			}
+		}
+	],
+	"jurisdiction": [
+		{
+			"coding": [
+				{
+					"system": "urn:iso:std:iso:3166",
+					"code": "US",
+					"display": "United States of America (the)"
+				}
+			]
+		}
+	],
+	"purpose": "Main EHR capability statement, published for contracting and operational support",
+	"copyright": "Copyright © Acme Healthcare and GoodCorp EHR Systems",
+	"kind": "instance",
+	"instantiates": [
+		"http://ihe.org/fhir/CapabilityStatement/pixm-client"
+	],
+	"software": {
+		"name": "EHR",
+		"version": "0.00.020.2134",
+		"releaseDate": "2012-01-04"
+	},
+	"implementation": {
+		"description": "main EHR at ACME",
+		"url": "http://10.2.3.4/fhir"
+	},
+	"fhirVersion": "1.0.0",
+	"acceptUnknown": "both",
+	"format": [
+		"xml",
+		"json"
+	],
+	"patchFormat": [
+		"application/xml-patch+xml",
+		"application/json-patch+json"
+	],
+	"implementationGuide": [
+		"http://hl7.org/fhir/us/lab"
+	],
+	"profile": [
+		{
+			"reference": "http://hl7.org/fhir/us/core/StructureDefinition/familymemberhistory-genetic"
+		}
+	],
+	"rest": [
+		{
+			"mode": "server",
+			"documentation": "Main FHIR endpoint for acem health",
+			"security": {
+				"cors": true,
+				"service": [
+					{
+						"coding": [
+							{
+								"system": "http://hl7.org/fhir/restful-security-service",
+								"code": "SMART-on-FHIR"
+							}
+						]
+					}
+				],
+				"description": "See Smart on FHIR documentation",
+				"certificate": [
+					{
+						"type": "application/jwt",
+						"blob": "IHRoaXMgYmxvYiBpcyBub3QgdmFsaWQ="
+					}
+				]
+			},
+			"resource": [
+				{
+					"type": "Patient",
+					"profile": {
+						"reference": "http://fhir.hl7.org/base/StructureDefinition/7896271d-57f6-4231-89dc-dcc91eab2416"
+					},
+					"documentation": "This server is READ ONLY.",
+					"interaction": [
+						{
+							"code": "read"
+						}
+					],
+					"updateCreate": false,
+					"conditionalCreate": false,
+					"conditionalRead": "full-support",
+					"conditionalUpdate": false,
+					"conditionalDelete": "not-supported",
+					"searchParam": [
+						{
+							"name": "nhs-number",
+							"definition": "http://hl7.org/fhir/SearchParameter/Patient-identifier",
+							"type": "token",
+							"documentation": "Supports search by NHS Number"
+						},
+						{
+							"name": "simple-trace",
+							"definition": "http://hl7.org/fhir/SearchParameter/Patient-general-practitioner",
+							"type": "reference",
+							"documentation": "Provides search by DOB, surname and postcode"
+						}
+					]
+				}
+			]
+		}
+	]
+}

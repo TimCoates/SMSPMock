@@ -154,6 +154,26 @@ functions:
           path: /fhir/Patient
           integration: lambda-proxy
 
+  FHIRCAP:
+    handler: fhircap.entrypoint
+    description: Returns a capability statement.
+    memorySize: 128
+    timeout: 2
+    events:
+      - http:
+          method: get
+          path: /fhir/metadata
+
+  FHIRCAP2:
+    handler: fhircap.entrypoint
+    description: Returns a capability statement.
+    memorySize: 128
+    timeout: 2
+    events:
+      - http:
+          method: options
+          path: /fhir
+
 resources:
   Resources:
     PdsdataLogGroup:  # Log group for the pdsdata function
@@ -207,6 +227,15 @@ resources:
       Properties:
         RetentionInDays: "1"
 
+    FHIRCAPLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
+
+    FHIRCAP2LogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "1"
 
     AwakenQ:  # SNS Topic, where we send wakey wakey messages to other lambdas when homepage is run.
       Type: AWS::SNS::Topic
