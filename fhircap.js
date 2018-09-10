@@ -13,10 +13,8 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-var AWS = require("aws-sdk");
-var docClient = null;
-var tblName = null;
-var utility = require("./utility.js");
+var capTemplate = require("./CapTemplate.json");
+
 module.exports = {
 	entrypoint: entrypoint
 };
@@ -29,9 +27,12 @@ function entrypoint(event, context, callback) {
 	context.callbackWaitsForEmptyEventLoop = false;
 	console.log("Event: ", JSON.stringify(event));
 
-	var NHSNumber = null;
+	var baseURL = event.headers["X-Forwarded-Proto"] + "://" + event.headers.Host + event.requestContext.path;
+	capTemplate.url = baseURL + "/Capability";
+	capTemplate.date = "2018-09-10";
 
-	var response = "Cap statement";
+	var response = JSON.stringify(capTemplate);
+
 
 	var reply = {
 		statusCode: 200,
