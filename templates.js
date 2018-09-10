@@ -107,6 +107,9 @@ responseTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"] = "			<g
 responseTemplates["urn:nhs-itk:services:201005:getPatientDetailsByNHSNumber-v1-0"] = responseTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"];
 responseTemplates["urn:nhs-itk:services:201005:getPatientDetailsBySearch-v1-0"] = responseTemplates["urn:nhs-itk:services:201005:getPatientDetails-v1-0"];
 
+responseTemplates["patientResource"] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Patient xmlns=\"http://hl7.org/fhir\">\n<id value=\"example\"/>\n<text><status value=\"generated\"/><div xmlns=\"http://www.w3.org/1999/xhtml\"></div></text>\n<identifier>\n<use value=\"usual\"/>\n<type><coding><system value=\"https://fhir.nhs.uk/Id/nhs-number\"/><code value=\"{{nhs_number}}\"/></coding></type></identifier><active value=\"true\"/>\n<name><use value=\"official\"/><family value=\"{{family_name}}\"/>\n<given value=\"{{given_name}}\"/>\n<prefix value=\"{{title}}\" />\n</name>\n<telecom>{{telecom}}</telecom>\n<gender value=\"{{gender}}\"/><birthDate value=\"{{birthdate}}\"/>\n<deceasedBoolean value=\"false\"/>\n<address>{{address}}</address>\n<managingOrganization><reference value=\"https://fhir.nhs.uk/\"/></managingOrganization>\n</Patient>";
+responseTemplates["bundleResource"] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Bundle xmlns=\"http://hl7.org/fhir\">\n<id value=\"bundle-example\"/>\n<meta>\n<lastUpdated value=\"{{isodate}}\"/>\n</meta><type value=\"searchset\"/><total value=\"{{count}}\"/>{{entry}}</Bundle>";
+
 // Array of error templates, one per SOAPAction
 // Requires:
 // message_id

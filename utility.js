@@ -1,8 +1,7 @@
 var mustache = require("mustache");
 var patJSONTemplate = require("./PatientTemplate.json");
-var patXMLTemplate = require("./PatientTemplate.xml");
+var templates = require("./templates.js");
 var bundleJSONTemplate = require("./BundleTemplate.json");
-var bundleXMLTemplate = require("./BundleTemplate.xml");
 
 module.exports = {
 	makePatient: makePatient,
@@ -47,8 +46,7 @@ function makePatient(patientData, mimeType) {
     var patientResource;
 
     if(mimeType == "application/xml") {
-        console.log("Templatefile: " + JSON.stringify(patXMLTemplate));
-        template = JSON.stringify(patXMLTemplate);
+        template = templates.responseTemplates["patientResource"];
         console.log("Template: " + template);
     } else {
         console.log("Templatefile: " + JSON.stringify(patJSONTemplate));
@@ -66,10 +64,13 @@ function makePatient(patientData, mimeType) {
 function makeBundle(patientData, baseURL, mimeType) {
 
     var response = "EMPTY";
+    var bundle;
+
     if(mimeType == "application/xml") {
+        bundle = template = templates.responseTemplates["bundleResource"];
 // TODO
     } else {
-        var bundle = bundleJSONTemplate;
+        bundle = bundleJSONTemplate;
 
         if(patientData != null) {
             bundle.entry[0].resource = JSON.parse(makePatient(patientData, mimeType));
@@ -93,6 +94,8 @@ function getMimeType(event) {
     // Set a default
     var mime = "application/json";
 
+    console.log("in getMimeType() Event: " + JSON.stringify(event));
+
     // Set mime type based on Accept headers...
     if(event.headers.Accept.indexOf("application/xml") > -1) {
         mime = "application/xml";
@@ -102,12 +105,16 @@ function getMimeType(event) {
     }
 
     // Override Accept header with _format querystring parameter
-    if('_format' in event.queryStringParameters) {
-        if(event.queryStringParameters._format.includes("xml")) {
-            mime = "application/xml";
-        }
-        if(event.queryStringParameters._format.includes("json")) {
-            mime = "application/json";
+    if('queryStringParameters' in event) {
+        if(event.queryStringParameters != null) {
+            if('_format' in event.queryStringParameters) {
+                if(event.queryStringParameters._format.includes("xml")) {
+                    mime = "application/xml";
+                }
+                if(event.queryStringParameters._format.includes("json")) {
+                    mime = "application/json";
+                }
+            }
         }
     }
     return mime;

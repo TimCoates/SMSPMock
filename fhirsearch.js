@@ -31,6 +31,7 @@ function entrypoint(event, context, callback) {
 	console.log("Event: ", JSON.stringify(event));
 
     var baseURL = event.headers["X-Forwarded-Proto"] + "://" + event.headers.Host + event.requestContext.path;
+
     mime = utility.getMimeType(event);
 
 	var response = JSON.stringify(event);
