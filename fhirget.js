@@ -17,6 +17,8 @@ var AWS = require("aws-sdk");
 var docClient = null;
 var tblName = null;
 var utility = require("./utility.js");
+var mime = "application/json";
+
 module.exports = {
 	entrypoint: entrypoint
 };
@@ -27,7 +29,9 @@ Function to do a READ
 function entrypoint(event, context, callback) {
 
 	context.callbackWaitsForEmptyEventLoop = false;
-	console.log("Event: ", JSON.stringify(event));
+    console.log("Event: ", JSON.stringify(event));
+
+    mime = utility.getMimeType(event);
 
 	var NHSNumber = null;
 
@@ -71,7 +75,7 @@ function entrypoint(event, context, callback) {
 			} else {
 				console.log("Got: " + JSON.stringify(data));
 				if ('Item' in data) {
-					response = utility.makePatient(data.Item);
+					response = utility.makePatient(data.Item, mime);
 					console.log("Response JSON object: " + response);
 
 					reply = {

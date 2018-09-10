@@ -14,11 +14,10 @@
 //limitations under the License.
 
 var AWS = require("aws-sdk");
-var mustache = require("mustache");
 var docClient = null;
-var tblName = null;
-var msgTemplate = require("./PatientTemplate.json");
 var utility = require("./utility.js");
+var mime = "application/json";
+
 module.exports = {
 	entrypoint: entrypoint
 };
@@ -31,7 +30,8 @@ function entrypoint(event, context, callback) {
 	context.callbackWaitsForEmptyEventLoop = false;
 	console.log("Event: ", JSON.stringify(event));
 
-	var baseURL = event.headers["X-Forwarded-Proto"] + "://" + event.headers.Host + event.requestContext.path;
+    var baseURL = event.headers["X-Forwarded-Proto"] + "://" + event.headers.Host + event.requestContext.path;
+    mime = utility.getMimeType(event);
 
 	var response = JSON.stringify(event);
 	var reply = {
@@ -79,15 +79,15 @@ function entrypoint(event, context, callback) {
 		docClient.query(params, function(err, data) {
 			if(err) {
 				console.log("err: " + JSON.stringify(err));
-				reply.body = utility.makeBundle(null, baseURL);
+				reply.body = utility.makeBundle(null, baseURL, mime);
 			} else {
 				console.log("Got some data.");
 				if(data.Count == 1) {
 					console.log("Got exactly one match.");
-					reply.body = utility.makeBundle(data.Items[0], baseURL);
+					reply.body = utility.makeBundle(data.Items[0], baseURL, mime);
 				} else {
 					console.log("Got multiple matches.");
-					reply.body = utility.makeBundle(null, baseURL);
+					reply.body = utility.makeBundle(null, baseURL, mime);
 				}
 				console.log("Response will be: " + reply.body);
 			}
@@ -95,7 +95,7 @@ function entrypoint(event, context, callback) {
 		});
 	} else {
 		// Here we'll just send a default (TBC) empty bundle.
-		reply.body = utility.makeBundle(null, baseURL);
+		reply.body = utility.makeBundle(null, baseURL, mime);
 		callback(null, reply);
-	}	
+	}
 }
