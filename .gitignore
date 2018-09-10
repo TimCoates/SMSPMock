@@ -5,5 +5,8 @@ jspm_packages
 # Serverless directories
 .serverless
 
+# Optimiser cache directory
+_optimize
+
 # File with account details
 account.yml
