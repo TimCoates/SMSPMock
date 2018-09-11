@@ -84,11 +84,11 @@ module.exports.entrypoint = (event, context, callback) => {
 "</head>\n<body>\n" +
 "<div class='container'>\n" +
 " <div class='jumbotron'><h1><a href='Homepage'>Patient details: " + data.Item.nhs_number + "</a></h1></div>\n" +
-" <div><h2>NHS Number</h2>" + data.Item.nhs_number + "</div>\n" +
+" <div><h2>NHS Number</h2><a href='/prod/fhir/Patient/" + data.Item.nhs_number + "?_format=json'>" + data.Item.nhs_number + "</a></div>\n" +
 " <div><h2>Name</h2>" + data.Item.given_name + " " + data.Item.family_name + "</div>\n" +
 " <div><h2>Address</h2>\n" + makeAddress(data) + "</div>\n" +
 makeDOB(data) +
-gender(data) + 
+gender(data) +
 makeContacts(data) +
 "</div>\n"+
 "</body>\n" +
@@ -178,7 +178,7 @@ function gender(data) {
 			gender = gender + "Not specified";
 			break;
 		}
-		
+
 		gender = gender + "</div>\n";
 	}
 	return gender;

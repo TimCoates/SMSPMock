@@ -48,12 +48,49 @@ function makePatient(patientData, mimeType) {
     if(mimeType == "application/xml") {
         template = templates.responseTemplates["patientResource"];
         console.log("Template: " + template);
+        patientResource = mustache.render(template, patientData);
     } else {
         console.log("Templatefile: " + JSON.stringify(patJSONTemplate));
-        template = JSON.stringify(patJSONTemplate);
-        console.log("Template: " + template);
+        patJSONTemplate.resource.identifier.value = patientData.nhs_number;
+        patJSONTemplate.resource.name[0].family = patientData.family_name;
+        patJSONTemplate.resource.name[0].given = [];
+        patJSONTemplate.resource.name[0].given.push(patientData.given_name);
+        if('other_given_name' in patientData) {
+            patJSONTemplate.resource.name[0].given.push(patientData.other_given_name);
+        }
+        patJSONTemplate.resource.name[0].prefix = patientData.title;
+        patJSONTemplate.resource.gender = patientData.gender;
+        patJSONTemplate.resource.birthDate = patientData.birthDate;
+
+        var address = {
+            "use": "home",
+            "line": []
+        };
+        if('postcode' in patientData) {
+            address.postalCode = patientData.postcode;
+        }
+        if('address1' in patientData) {
+            address.line.push(patientData.address1);
+        }
+        if('address2' in patientData) {
+            address.line.push(patientData.address2);
+        }
+        if('address3' in patientData) {
+            address.line.push(patientData.address3);
+        }
+        if('address4' in patientData) {
+            address.line.push(patientData.address4);
+        }
+        if('address5' in patientData) {
+            address.line.push(patientData.address5);
+        }
+
+        patJSONTemplate.resource.address = [];
+        patJSONTemplate.resource.address.push(address);
+
+        patientResource = JSON.stringify(patJSONTemplate);
     }
-    patientResource = mustache.render(template, patientData);
+
 	return patientResource;
 }
 

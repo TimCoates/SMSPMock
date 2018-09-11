@@ -75,6 +75,7 @@ function entrypoint(event, context, callback) {
 			} else {
 				console.log("Got: " + JSON.stringify(data));
 				if ('Item' in data) {
+                    console.log("Data item found was: " + JSON.stringify(data.Item));
 					response = utility.makePatient(data.Item, mime);
 					console.log("Response JSON object: " + response);
 
