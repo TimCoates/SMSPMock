@@ -51,6 +51,7 @@ function makePatient(patientData, mimeType) {
         patientResource = mustache.render(template, patientData);
     } else {
         console.log("Templatefile: " + JSON.stringify(patJSONTemplate));
+        patJSONTemplate.resource.id = patientData.nhs_number;
         patJSONTemplate.resource.identifier.value = patientData.nhs_number;
         patJSONTemplate.resource.name[0].family = patientData.family_name;
         patJSONTemplate.resource.name[0].given = [];
