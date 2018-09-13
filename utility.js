@@ -51,6 +51,10 @@ function makePatient(patientData, mimeType) {
         patientResource = mustache.render(template, patientData);
     } else {
         console.log("Templatefile: " + JSON.stringify(patJSONTemplate));
+        patJSONTemplate.text = {
+            status: "generated"
+        };
+        patJSONTemplate.text.div = maketextDIV(patientData);
         patJSONTemplate.id = patientData.nhs_number;
         patJSONTemplate.identifier.value = patientData.nhs_number;
         patJSONTemplate.name[0].family = patientData.family_name;
@@ -156,4 +160,18 @@ function getMimeType(event) {
         }
     }
     return mime;
+}
+
+function maketextDIV(patientData) {
+    var div = "";
+
+    div = div + "<h1>Patient: " + patientData.nhs_number + "</h1>\n";
+    div = div + "<h2>" + patientData.title + " " + patientData.given_name;
+    if('other_given_name' in patientData) {
+        div = div + " " + patientData.other_given_name;
+    }
+    div = div + " " + patientData.family_name + "</h2>\n";
+    div = div + "Gender: " + patientData.gender + "<br />\n";
+    div = div + "DOB: " + patientData.birthDate + "<br />\n";
+    return div;
 }

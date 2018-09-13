@@ -164,7 +164,7 @@ functions:
           method: get
           path: /fhir/metadata
 
-  FHIRCAP2:
+  FHIRBASE:
     handler: fhircap.entrypoint
     description: Returns a capability statement.
     memorySize: 128
