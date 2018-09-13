@@ -165,7 +165,7 @@ function getMimeType(event) {
 function maketextDIV(patientData) {
     var div = "";
 
-    div = div + "<h1>Patient: " + patientData.nhs_number + "</h1>\n";
+    div = div + "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h1>Patient: " + patientData.nhs_number + "</h1>\n";
     div = div + "<h2>" + patientData.title + " " + patientData.given_name;
     if('other_given_name' in patientData) {
         div = div + " " + patientData.other_given_name;
@@ -173,5 +173,6 @@ function maketextDIV(patientData) {
     div = div + " " + patientData.family_name + "</h2>\n";
     div = div + "Gender: " + patientData.gender + "<br />\n";
     div = div + "DOB: " + patientData.birthDate + "<br />\n";
+    div = div + "</div>";
     return div;
 }
