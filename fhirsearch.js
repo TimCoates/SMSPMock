@@ -47,21 +47,25 @@ function entrypoint(event, context, callback) {
 	} else {
 		console.log("queryStringParameters not here??");
 	}
-	if('Patient.birthDate' in event.queryStringParameters) {
-		dob = event.queryStringParameters["Patient.birthDate"].slice(0, 4) + event.queryStringParameters["Patient.birthDate"].slice(5, 7) + event.queryStringParameters["Patient.birthDate"].slice(8);
+	if('birthdate' in event.queryStringParameters) {
+        dob = event.queryStringParameters["birthdate"].slice(0, 4) + event.queryStringParameters["birthdate"].slice(5, 7) + event.queryStringParameters["birthdate"].slice(8);
+        console.log("Searching on DOB: " + dob);
 	}
 
 	var family_name = null;
-	if('Patient.name.family' in event.queryStringParameters) {
-		family_name = event.queryStringParameters["Patient.name.family"];
+	if('family' in event.queryStringParameters) {
+        family_name = event.queryStringParameters["family"];
+        console.log("Searching on family_name: " + family_name);
 	}
 
 	var postcode = null;
-	if('Patient.address.postalCode' in event.queryStringParameters) {
-		postcode = event.queryStringParameters["Patient.address.postalCode"].replace(" ","");
+	if('address-postalcode' in event.queryStringParameters) {
+        postcode = event.queryStringParameters["address-postalcode"].replace(" ","");
+        console.log("Searching on postcode: " + postcode);
 	}
 
 	if(dob != null && family_name != null && postcode != null) {
+        console.log("We have query params");
 		var indexval = family_name + postcode + dob;
 		var params = {
 			TableName: "prod-pds-data",
@@ -85,7 +89,9 @@ function entrypoint(event, context, callback) {
 				console.log("Got some data.");
 				if(data.Count == 1) {
 					console.log("Got exactly one match.");
-					reply.body = utility.makeBundle(data.Items[0], baseURL, mime);
+                    reply.body = utility.makeBundle(data.Items[0], baseURL, mime);
+                    reply.statusCode = 200;
+                    reply.headers = { "Content-Type": "application/json" };
 				} else {
 					console.log("Got multiple matches.");
 					reply.body = utility.makeBundle(null, baseURL, mime);
@@ -95,6 +101,7 @@ function entrypoint(event, context, callback) {
 			callback(null, reply);
 		});
 	} else {
+        console.log("We didn't get all 3 query parameteres required.");
 		// Here we'll just send a default (TBC) empty bundle.
 		reply.body = utility.makeBundle(null, baseURL, mime);
 		callback(null, reply);

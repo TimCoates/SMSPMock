@@ -40,6 +40,8 @@ Send one or more SOAP requests to the ***.../prod/service*** endpoint.
 
 NB: To assist with this, a [SOAPUI](https://www.soapui.org/) project is included, which tests SOME of the provided services.
 
+Once a Patient is selected, clicking their NHS Number will send a FHIR REST request to retrieve a FHIR Resource representing that Patient.
+
 Click ***View logs>>*** to see a record of each request and response which was passed through.
 
 ***NB*** Logs are marked for purging after 2 days, and will be deleted within 48 hours of that (using DyanoDB's intrinsic TTL feature).
@@ -78,6 +80,7 @@ Suggestions, complaints, issues, contributions and pull requests are all welcome
 * Better handling of different failure responses, eg multiple matches found etc.
 * DONE ~~Better presentation of the XML when viewing logs. At the moment it's very basic.~~
 * DONE ~~More details of how to send (or ideally the ability to send) in requests from the UI itself.~~
+* Patient data is incomplete, for example only one address is ever stored, and this is assumed to be the home address.
 
 ### License
 

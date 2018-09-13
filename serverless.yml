@@ -277,8 +277,8 @@ resources:
           - AttributeName: nhs_number
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 20
-          WriteCapacityUnits: 20
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
         GlobalSecondaryIndexes:
           - IndexName: name
             KeySchema:
@@ -289,8 +289,8 @@ resources:
             Projection:
               ProjectionType: ALL
             ProvisionedThroughput:
-              ReadCapacityUnits: 20
-              WriteCapacityUnits: 20
+              ReadCapacityUnits: 2
+              WriteCapacityUnits: 2
           - IndexName: traceindex
             KeySchema:
             - AttributeName: traceindex
@@ -298,6 +298,6 @@ resources:
             Projection:
               ProjectionType: ALL
             ProvisionedThroughput:
-              ReadCapacityUnits: 20
-              WriteCapacityUnits: 20
+              ReadCapacityUnits: 2
+              WriteCapacityUnits: 2
 

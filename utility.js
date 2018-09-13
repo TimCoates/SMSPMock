@@ -16,19 +16,19 @@ module.exports = {
 function makePatient(patientData, mimeType) {
 	switch (patientData.gender) {
 		case 0:
-			patientData.gender = "Not known";
+			patientData.gender = "unknown";
 			break;
 
 		case 1:
-			patientData.gender = "Male";
+			patientData.gender = "male";
 			break;
 
 		case 2:
-			patientData.gender = "Female";
+			patientData.gender = "female";
 			break;
 
 		case 9:
-			patientData.gender = "Not specified";
+			patientData.gender = "unknown";
 			break;
 	}
 	if (patientData.dob.length == 8) {
@@ -51,17 +51,17 @@ function makePatient(patientData, mimeType) {
         patientResource = mustache.render(template, patientData);
     } else {
         console.log("Templatefile: " + JSON.stringify(patJSONTemplate));
-        patJSONTemplate.resource.id = patientData.nhs_number;
-        patJSONTemplate.resource.identifier.value = patientData.nhs_number;
-        patJSONTemplate.resource.name[0].family = patientData.family_name;
-        patJSONTemplate.resource.name[0].given = [];
-        patJSONTemplate.resource.name[0].given.push(patientData.given_name);
+        patJSONTemplate.id = patientData.nhs_number;
+        patJSONTemplate.identifier.value = patientData.nhs_number;
+        patJSONTemplate.name[0].family = patientData.family_name;
+        patJSONTemplate.name[0].given = [];
+        patJSONTemplate.name[0].given.push(patientData.given_name);
         if('other_given_name' in patientData) {
-            patJSONTemplate.resource.name[0].given.push(patientData.other_given_name);
+            patJSONTemplate.name[0].given.push(patientData.other_given_name);
         }
-        patJSONTemplate.resource.name[0].prefix = patientData.title;
-        patJSONTemplate.resource.gender = patientData.gender;
-        patJSONTemplate.resource.birthDate = patientData.birthDate;
+        patJSONTemplate.name[0].prefix = patientData.title;
+        patJSONTemplate.gender = patientData.gender;
+        patJSONTemplate.birthDate = patientData.birthDate;
 
         var address = {
             "use": "home",
@@ -86,8 +86,8 @@ function makePatient(patientData, mimeType) {
             address.line.push(patientData.address5);
         }
 
-        patJSONTemplate.resource.address = [];
-        patJSONTemplate.resource.address.push(address);
+        patJSONTemplate.address = [];
+        patJSONTemplate.address.push(address);
 
         patientResource = JSON.stringify(patJSONTemplate);
     }
