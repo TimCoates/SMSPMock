@@ -90,7 +90,7 @@
         "httpMethod": "GET",
         "extendedRequestId": "M1p7YGPQrPEFnOA=",
         "requestTime": "07/Sep/2018:07:06:36 +0000",
-        "path": "/prod/fhir/Patient/12",
+        "path": "/fhir/Patient/12",
         "accountId": "276197098177",
         "protocol": "HTTP/1.1",
         "stage": "prod",

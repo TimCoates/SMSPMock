@@ -22,7 +22,7 @@ module.exports.entrypoint = (event, context, callback) => {
 
     context.callbackWaitsForEmptyEventLoop = false;
     console.log("Event: ", JSON.stringify(event));
-    
+
     // Check if this was just a wakeup SNS trigger...
     if(typeof event.Records != 'undefined') {
         callback(null, null);
@@ -64,7 +64,7 @@ module.exports.entrypoint = (event, context, callback) => {
             "<body>\n" +
         	"<div class='container'>\n" +
             " <form id='myForm' action='#'>\n" +
-        	" <div class='jumbotron'><h1><a href='Homepage'>Send tests</a></h1></div>\n" +
+        	" <div class='jumbotron'><h1><a href='/'>Send tests</a></h1></div>\n" +
         	" <div class='py-5'>\n" +
             "  <div class='row'>\n" +
             "   <div class='col-xs-9'>\n" +
@@ -116,7 +116,7 @@ module.exports.entrypoint = (event, context, callback) => {
             "<script>\n" +
             "var id = 0;\n\n" +
             "$('#myForm input').on('change', function() {\n" +
-            "   id = $('input[name=request]:checked', '#myForm').val()\n;" + 
+            "   id = $('input[name=request]:checked', '#myForm').val()\n;" +
             "   var theUrl = window.location.href + '?id=' + id;\n" +
             "   console.log('Fetching: ' + window.location.href + '?id=' + id);\n" +
             "   $('#reqBody').load(theUrl);\n" +
@@ -148,7 +148,7 @@ module.exports.entrypoint = (event, context, callback) => {
             "    $.ajaxSetup({\n" +
             "        headers: { 'SOAPAction': SOAPAction }\n" +
             "    });\n\n" +
-            "    var svcURL = 'https://' + window.location.hostname + '/" + process.env.stageName + "/service'; \n" +
+            "    var svcURL = 'https://' + window.location.hostname + '/service'; \n" +
             "    console.log('POSTing to: ' + svcURL);\n" +
             "    $.ajax({\n" +
             "        url: svcURL,\n" +
@@ -188,7 +188,7 @@ module.exports.entrypoint = (event, context, callback) => {
             if(typeof event.headers['Referer'] != 'undefined') {
                 from_addr = event.headers['Referer'];
                 var posn = from_addr.indexOf("/Test");
-                to_addr = from_addr.substring(0, posn) + "/service"; 
+                to_addr = from_addr.substring(0, posn) + "/service";
             }
 
             var dataToWrap = {

@@ -91,7 +91,7 @@ module.exports.entrypoint = (event, context, callback) => {
 "</head>\n"+
 "<body>\n" +
 "<div class='container'>\n" +
-" <div class='jumbotron'><h1><a href='Homepage'>Log Item: " + data.Item.id + "</a></h1></div>\n" +
+" <div class='jumbotron'><h1><a href='/'>Log Item: " + data.Item.id + "</a></h1></div>\n" +
 " <div><h2>ID:</h2>" + data.Item.id + "</div>\n" +
 " <div><h2>SOAP Action:</h2>" + data.Item.SOAPAction + "</div>\n" +
 " <div><h2>Request time:</h2>" + new Date(Date.parse(data.Item.request_time)).toLocaleString() + "</div>\n" +

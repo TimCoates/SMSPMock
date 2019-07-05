@@ -15,7 +15,7 @@ The service provides both a Web UI, where Patients can be loaded, and browsed, a
 
 ### Code Example
 
-Once deployed, the service provides a Web homepage at e.g. https://something.something/prod/ as well as offering a SOAP interface at e.g. https://something.something/prod/service
+Once deployed, the service provides a Web homepage at e.g. https://something.something/prod/ (with serverless-domain-manager the /prod/ is removed) as well as offering a SOAP interface at e.g. https://something.something/prod/service
 
 Standard SMSP SOAP requests can be made against the interface [some details here.](https://developer.nhs.uk/library/systems/nhs-digital-smsp-pds/).
 

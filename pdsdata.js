@@ -83,8 +83,8 @@ module.exports.entrypoint = (event, context, callback) => {
 " <title>SMSP Mock - Patient: " + data.Item.nhs_number + "</title>\n"+
 "</head>\n<body>\n" +
 "<div class='container'>\n" +
-" <div class='jumbotron'><h1><a href='Homepage'>Patient details: " + data.Item.nhs_number + "</a></h1></div>\n" +
-" <div><h2>NHS Number</h2><a href='/prod/fhir/Patient/" + data.Item.nhs_number + "?_format=json'>" + data.Item.nhs_number + "</a></div>\n" +
+" <div class='jumbotron'><h1><a href='/'>Patient details: " + data.Item.nhs_number + "</a></h1></div>\n" +
+" <div><h2>NHS Number</h2><a href='/fhir/Patient/" + data.Item.nhs_number + "?_format=json'>" + data.Item.nhs_number + "</a></div>\n" +
 " <div><h2>Name</h2>" + data.Item.given_name + " " + data.Item.family_name + "</div>\n" +
 " <div><h2>Address</h2>\n" + makeAddress(data) + "</div>\n" +
 makeDOB(data) +
