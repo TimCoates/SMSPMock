@@ -25,7 +25,7 @@ module.exports.entrypoint = (event, context, callback) => {
 	// For debugging help, we log the incoming event
 	console.log("Event: ", JSON.stringify(event));
 
-	// Here we instantiate SNS, (if necessary) and wake up all the other Lambdas (as they subscribe to the SNS Topic) 
+	// Here we instantiate SNS, (if necessary) and wake up all the other Lambdas (as they subscribe to the SNS Topic)
 	setup(function(err, data) {
 		if(err) {
 			callback(err, "Error returned from call to SNS.");
@@ -79,7 +79,7 @@ module.exports.entrypoint = (event, context, callback) => {
 		        "headers": { "Content-Type": "text/html" },
 		        "body": body
 		    };
-		    callback(null, reply);		
+		    callback(null, reply);
 		}
 	});
 };
@@ -94,7 +94,7 @@ function setup(callback) {
 	    var snsTopicARN = "arn:aws:sns:" + process.env.regionName + ":" + process.env.accountID + ":" + process.env.stageName + "-awaken";
 	    var SNSparams = {
 	        Message: "Wake up sleepy head!",
-	        Subject: "SNS Wakeup mesdsage sent from homepage",
+	        Subject: "SNS Wakeup message sent from homepage",
 	        TopicArn: snsTopicARN
 	    };
 	    console.log('Sending: Wake up sleepy head! to SNS topic: ' + snsTopicARN);
