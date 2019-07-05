@@ -10,9 +10,12 @@ The service provides both a Web UI, where Patients can be loaded, and browsed, a
 
 ***NB:*** The embedded Requirements Pack also describes a lot more details of the SMSP interface.
 
+
+***NB:*** The serverless.yml file included here takes advantage of serverless-domain-manager, this allows us to retain a sensible URL see [this article](https://serverless.com/blog/serverless-api-gateway-domain/) for details on how to take advantage of this.
+
 ### Code Example
 
-Once deployed, the service provides a Web homepage at e.g. https://something.something/prod/Homepage as well as offering a SOAP interface at e.g. https://something.something/prod/service
+Once deployed, the service provides a Web homepage at e.g. https://something.something/prod/ as well as offering a SOAP interface at e.g. https://something.something/prod/service
 
 Standard SMSP SOAP requests can be made against the interface [some details here.](https://developer.nhs.uk/library/systems/nhs-digital-smsp-pds/).
 
@@ -30,7 +33,7 @@ Nothing is really required in order to install, simply:
 
 Deploy as a 'normal' Serverless Framework service, i.e. run `sls deploy` from the project root, and wait a minute or so for the deployment to complete, and list the provided ***endpoints***.
 
-Open the ***.../prod/Homepage*** endpoint link in a web browser.
+Open the ***.../prod/*** endpoint link in a web browser.
 
 Click ***Load Data>>*** - this loads ~ 700 synthetic patient records.
 

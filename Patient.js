@@ -20,7 +20,7 @@ module.exports.entrypoint = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
     console.log("Event: ", JSON.stringify(event));
-    
+
     if(typeof event.Records != 'undefined') {
         callback(null, null);
     } else {
@@ -37,8 +37,8 @@ module.exports.entrypoint = (event, context, callback) => {
         "<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js\"></script>" +
     	"<title>SMSP Mock - PDS sample data</title></head><body>" +
     	"<div class=\"container\">" +
-    	"<div class=\"jumbotron\"><h1><a href=\"Homepage\">PDS Sample data</a></h1></div>" +
-        
+    	"<div class=\"jumbotron\"><h1><a href=\"/\">PDS Sample data</a></h1></div>" +
+
     	"<table class=\"display table table-bordered table-condensed\">" +
     	"    <thead>" +
     	"        <tr>" +

@@ -40,7 +40,7 @@ module.exports.entrypoint = (event, context, callback) => {
         "</head>\n"+
         "<body>\n" +
     	"<div class=\"container\">" +
-    	" <div class=\"jumbotron\"><h1><a href=\"Homepage\">Logs<a/></h1></div>\n" + 
+    	" <div class=\"jumbotron\"><h1><a href=\"/\">Logs<a/></h1></div>\n" +
     	" <table class=\"display table table-bordered table-condensed\" style='font-size: small;'>\n" +
     	"  <thead>\n" +
     	"   <tr>\n" +

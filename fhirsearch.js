@@ -86,7 +86,7 @@ function entrypoint(event, context, callback) {
 				console.log("err: " + JSON.stringify(err));
 				reply.body = utility.makeBundle(null, baseURL, mime);
 			} else {
-				console.log("Got some data.");
+				console.log("Got some data: " + JSON.stringify(data));
 				if(data.Count == 1) {
 					console.log("Got exactly one match.");
                     reply.body = utility.makeBundle(data.Items[0], baseURL, mime);

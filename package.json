@@ -10,6 +10,7 @@
     "xmldom": "^0.1.27"
   },
   "devDependencies": {
+    "serverless-domain-manager": "^3.2.6",
     "serverless-plugin-optimize": "^3.1.1-rc.1"
   },
   "scripts": {

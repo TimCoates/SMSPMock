@@ -23,7 +23,7 @@ var tblName = null;
 module.exports.entrypoint = (event, context, callback) => {
 
 	// We do this regardless, it only does anything if this Lambda is being cold started.
-	setup();	
+	setup();
 
 	console.log("Event: ", JSON.stringify(event));
     if(typeof event.Records != 'undefined') {
@@ -47,7 +47,7 @@ module.exports.entrypoint = (event, context, callback) => {
 		"<body>\n" +
 		"<div class=\"container\">\n" +
 		" <div class=\"jumbotron\">\n"+
-		"  <h1><a href=\"Homepage\">Load data</a></h1>\n"+
+		"  <h1><a href=\"/\">Load data</a></h1>\n"+
 		" </div>\n"+
 		"Records loaded\n"+
 		"</div>\n"+
@@ -68,7 +68,7 @@ function doLoad() {
 
 	docClient = new AWS.DynamoDB.DocumentClient();
 	tblName = process.env.stageName + "-pds-data";
-	
+
 	console.log("Loading " + data_file.length + " items into table: " + tblName);
 
 	// Loop through objects in the JSON file

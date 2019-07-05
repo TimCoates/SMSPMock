@@ -1,4 +1,6 @@
 service: SMSPMock
+#tenant: timcoates
+#app: SMSPMock
 
 # Files we don't need to deploy to AWS
 package:
@@ -12,16 +14,23 @@ package:
 
 plugins:
   - serverless-plugin-optimize
+  - serverless-domain-manager
 
 custom:
   accountID: ${file(./account.yml):accountID}
+  tenant: ${file(./account.yml):tenant}
   regionName: ${self:provider.region}
   stageName: ${self:provider.stage}
+  customDomain:
+    domainName: ${file(./domain.yml):domainName}
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
 
 provider:
   name: aws
   stage: prod
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   role: arn:aws:iam::${self:custom.accountID}:role/service-role/LambdaRole
   region: eu-west-2 # London
   versionFunctions: false # We don't want to retain older versions when we update a function.
@@ -43,7 +52,7 @@ functions:
     events:
       - http:
           method: get
-          path: /Homepage
+          path: /
           integration: lambda-proxy
 
   LoadData:
@@ -290,7 +299,7 @@ resources:
               ProjectionType: ALL
             ProvisionedThroughput:
               ReadCapacityUnits: 2
-              WriteCapacityUnits: 2
+              WriteCapacityUnits: 10
           - IndexName: traceindex
             KeySchema:
             - AttributeName: traceindex
@@ -299,5 +308,5 @@ resources:
               ProjectionType: ALL
             ProvisionedThroughput:
               ReadCapacityUnits: 2
-              WriteCapacityUnits: 2
+              WriteCapacityUnits: 10
 
