@@ -1,0 +1,14 @@
+image: node:11.13.0-alpine
+
+pipelines:
+  branches:
+    master:
+      - step:
+          caches:
+            - node
+          script:
+            - apk add python3
+            - npm install -g serverless
+            - serverless config credentials --stage dev --provider aws --key ${AWS_DEV_LAMBDA_KEY} --secret ${AWS_DEV_LAMBDA_SECRET}
+#            - serverless deploy --stage dev
+            - serverless remove --stage dev
