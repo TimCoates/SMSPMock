@@ -54,6 +54,7 @@ function makePatient(patientData, mimeType) {
         patJSONTemplate.text = {
             status: "generated"
         };
+
         patJSONTemplate.text.div = maketextDIV(patientData);
         patJSONTemplate.id = patientData.nhs_number;
         patJSONTemplate.identifier.value = patientData.nhs_number;
