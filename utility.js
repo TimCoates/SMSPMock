@@ -65,7 +65,7 @@ function makePatient(patientData, mimeType) {
         }
         patJSONTemplate.name[0].prefix = patientData.title;
         patJSONTemplate.gender = patientData.gender;
-        patJSONTemplate.birthDate = patientData.birthDate;
+        patJSONTemplate.birthDate = patientData.birthdate;
 
         var address = {
             "use": "home",
