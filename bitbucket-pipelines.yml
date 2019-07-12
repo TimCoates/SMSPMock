@@ -7,7 +7,6 @@ pipelines:
           caches:
             - node
           script:
-            - apk add python3
             - npm install -g serverless
             - npm install serverless-domain-manager --save-dev
             - sls plugin install -n serverless-plugin-optimize
