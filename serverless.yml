@@ -1,6 +1,4 @@
 service: SMSPMock
-#tenant: timcoates
-#app: SMSPMock
 
 # Files we don't need to deploy to AWS
 package:
@@ -17,12 +15,11 @@ plugins:
   - serverless-domain-manager
 
 custom:
-  accountID: ${file(./account.yml):accountID}
-  tenant: ${file(./account.yml):tenant}
+  accountID: ${env:AWS_ACCOUNT_ID}
   regionName: ${self:provider.region}
   stageName: ${self:provider.stage}
   customDomain:
-    domainName: ${file(./domain.yml):domainName}
+    domainName: ${env:DOMAIN_NAME}
     basePath: ''
     stage: ${self:provider.stage}
     createRoute53Record: true
