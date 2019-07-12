@@ -53,6 +53,7 @@ Running `sls remove` will delete all data from DynamoDB and remove all Lambdas e
 
 ### Dependencies
 NB: Requires an AWS account, and the Account ID to be in a file named ***account.yml*** placed in the project root.
+NB2: This value is now expected to be in an Environment Variable, to support a CD pipeline using BitBucket pipelines. This pipeline is described in bitbucket-pipelines.yml but runs in a private BitBucket repository.
 
 Requires an AWS AIM Role named ***LambdaRole*** (though this can be changed at line 12 in serverless.yml)
 
