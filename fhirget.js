@@ -24,7 +24,8 @@ module.exports = {
 };
 
 /**
-Function to do a READ
+    Function to do a READ, NB thisonly handles GET with an ID, i.e.:
+    /fhir/Patient/{patID}
  */
 function entrypoint(event, context, callback) {
 

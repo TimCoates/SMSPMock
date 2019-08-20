@@ -23,7 +23,8 @@ module.exports = {
 };
 
 /**
-Function to do a SEARCH
+    Function to do a SEARCH, called by a GET to /fhir/Patient
+    NB: See fhirget for handling calls to GET to /fhir/Patient/{patID}
  */
 function entrypoint(event, context, callback) {
 
