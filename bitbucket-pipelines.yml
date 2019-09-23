@@ -11,5 +11,5 @@ pipelines:
             - npm install serverless-domain-manager --save-dev
             - sls plugin install -n serverless-plugin-optimize
             - serverless config credentials --stage prod --provider aws --key ${AWS_DEV_LAMBDA_KEY} --secret ${AWS_DEV_LAMBDA_SECRET}
-            - serverless deploy --stage prod
-#            - serverless remove --stage prod
+#            - serverless deploy --stage prod
+            - serverless remove --stage prod
