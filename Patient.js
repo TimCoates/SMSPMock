@@ -42,7 +42,7 @@ module.exports.entrypoint = (event, context, callback) => {
     	"<table class=\"display table table-bordered table-condensed\">" +
     	"    <thead>" +
     	"        <tr>" +
-    	"            <th data-field=\"nhs_number\">NHS Number</th>" +
+    	"            <th data-field=\"nhs_number\">NHS Num</th>" +
     	"            <th data-field=\"SOAPAction\">Given name</th>" +
     	"            <th data-field=\"Timestamp\">Family name</th>" +
     	"        </tr>" +
