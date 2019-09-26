@@ -82,9 +82,9 @@ function entrypoint(event, context, callback) {
 
 					reply = {
 						statusCode: 200,
-						headers: { "Content-Type": "application/json" },
+						headers: { "Content-Type": mime },
 						body: response
-					};
+                    };
 				}
 			}
 			callback(null, reply);
