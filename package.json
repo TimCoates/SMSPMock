@@ -7,7 +7,7 @@
     "async": "^2.6.3",
     "mustache": "^2.3.2",
     "uuid": "^3.3.3",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.6.0"
   },
   "devDependencies": {
     "serverless-domain-manager": "^3.3.0",
