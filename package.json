@@ -4,7 +4,7 @@
   "description": "Lambda functions to run a fake synchronous ndop service.",
   "main": "start.js",
   "dependencies": {
-    "async": "^2.6.3",
+    "async": "^2.6.4",
     "mustache": "^2.3.2",
     "uuid": "^3.3.3",
     "xmldom": "^0.1.27"
